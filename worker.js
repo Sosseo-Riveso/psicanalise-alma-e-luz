@@ -70,7 +70,27 @@ export default {
       }
     }
 
+    // Redirecionamento 301 de www para o domínio canônico sem www (evita duplicação www vs non-www)
+    if (url.hostname === 'www.psicanalisealmaeluz.com.br') {
+      url.hostname = 'psicanalisealmaeluz.com.br';
+      return Response.redirect(url.toString(), 301);
+    }
+
     // Comportamento padrão: servir os arquivos estáticos do site
-    return env.ASSETS.fetch(request);
+    const response = await env.ASSETS.fetch(request);
+
+    // Blindagem anti-indexação para qualquer endereço provisório (*.workers.dev):
+    // Impede 100% que o Google indexe páginas ou imagens pelo subdomínio workers.dev
+    if (url.hostname.endsWith('.workers.dev')) {
+      const newHeaders = new Headers(response.headers);
+      newHeaders.set('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet');
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: newHeaders
+      });
+    }
+
+    return response;
   }
 };
