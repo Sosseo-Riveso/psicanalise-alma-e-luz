@@ -112,7 +112,7 @@ a:hover {
 .header-inner {
   display: flex;
   flex-direction: column;
-  padding: 10px 0 6px;
+  padding: 10px 0 8px;
   gap: 8px;
   transition: padding 0.22s cubic-bezier(0.4, 0, 0.2, 1),
               gap 0.22s cubic-bezier(0.4, 0, 0.2, 1);
@@ -177,22 +177,25 @@ a:hover {
               font-size 0.22s ease;
 }
 
-/* 2ª Linha do Cabeçalho: Menu de Navegação + Submenu Blog */
+/* 2ª Linha do Cabeçalho: Barra do Menu em Branco Puro (#ffffff) + Menu Centralizado */
 .header-nav-row {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
+  background-color: #ffffff;
   border-top: 1px solid rgba(4, 42, 55, 0.08);
-  padding-top: 6px;
+  padding: 7px 0;
   transition: padding 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.22s ease,
               border-color 0.22s ease;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 24px;
+  justify-content: center;
+  gap: 28px;
   flex-wrap: wrap;
   width: 100%;
   transition: gap 0.22s cubic-bezier(0.4, 0, 0.2, 1);
@@ -250,7 +253,7 @@ a:hover {
 .nav-dropdown-menu {
   position: absolute;
   top: calc(100% + 6px);
-  left: 0;
+  left: 50%;
   min-width: 580px;
   background: #ffffff;
   border: 1.5px solid var(--border-strong);
@@ -259,7 +262,7 @@ a:hover {
   box-shadow: 0 20px 48px rgba(4, 42, 55, 0.18);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px);
+  transform: translateX(-50%) translateY(8px);
   transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
   z-index: 1100;
 }
@@ -278,7 +281,7 @@ a:hover {
 .nav-dropdown.open .nav-dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
 .nav-dropdown-header {
@@ -315,8 +318,8 @@ a:hover {
   font-size: 0.86rem;
   font-weight: 600;
   color: var(--text-heading);
-  background: var(--bg-soft);
-  border: 1px solid transparent;
+  background: #ffffff;
+  border: 1px solid var(--border);
   transition: all 0.16s ease;
 }
 
@@ -350,7 +353,7 @@ a:hover {
 }
 
 .site-header.scrolled .header-inner {
-  padding: 4px 0 3px;
+  padding: 4px 0 4px;
   gap: 3px;
 }
 
@@ -379,11 +382,12 @@ a:hover {
 }
 
 .site-header.scrolled .header-nav-row {
-  padding-top: 3px;
+  padding: 4px 0;
+  background-color: #ffffff;
 }
 
 .site-header.scrolled .nav-links {
-  gap: 18px;
+  gap: 20px;
 }
 
 .site-header.scrolled .nav-links a.nav-item,
@@ -413,6 +417,9 @@ a:hover {
     padding: 8px 16px;
     font-size: 0.84rem;
   }
+  .site-header.scrolled:hover .header-nav-row {
+    padding: 7px 0;
+  }
   .site-header.scrolled:hover .nav-links a.nav-item,
   .site-header.scrolled:hover .nav-dropdown-trigger {
     font-size: 0.92rem;
@@ -423,7 +430,12 @@ a:hover {
 @media (max-width: 760px) {
   .nav-dropdown-menu {
     min-width: 92vw;
-    left: -12px;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+  }
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown.open .nav-dropdown-menu {
+    transform: translateX(-50%) translateY(0);
   }
   .nav-dropdown-grid {
     grid-template-columns: 1fr;
@@ -1519,6 +1531,94 @@ td {
   font-size: 0.96rem;
 }
 
+/* Cartão de Autora (Author Box E-E-A-T no Final dos Artigos) */
+.author-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  background: #ffffff;
+  border: 1.5px solid var(--border-strong);
+  border-left: 5px solid var(--flower);
+  border-radius: var(--radius-lg);
+  padding: 28px 30px;
+  margin: 44px 0;
+  box-shadow: var(--shadow);
+}
+
+.author-box-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--flower);
+  box-shadow: 0 6px 18px rgba(124, 98, 189, 0.25);
+  flex-shrink: 0;
+}
+
+.author-box-content {
+  flex: 1;
+}
+
+.author-box-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--flower-dark);
+  background: var(--flower-soft);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+}
+
+.author-box-content h3 {
+  font-size: 1.3rem;
+  color: var(--text-heading);
+  margin-bottom: 4px;
+}
+
+.author-box-role {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--amber);
+  margin-bottom: 10px;
+}
+
+.author-box-content p {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+.author-box-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.author-box-links a {
+  color: var(--flower-dark);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: all 0.16s ease;
+}
+
+.author-box-links a:hover {
+  background: var(--flower-soft);
+  border-color: var(--flower);
+  transform: translateY(-1px);
+}
+
 /* CTA Box Terapia Online no Final dos Artigos */
 .cta-box {
   background: linear-gradient(135deg, var(--bg-card-white) 0%, var(--flower-soft) 100%);
@@ -1629,5 +1729,14 @@ td {
   }
   .delicate-convenio-note {
     flex-direction: column;
+  }
+  .author-box {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 24px 20px;
+  }
+  .author-box-links {
+    justify-content: center;
   }
 }
