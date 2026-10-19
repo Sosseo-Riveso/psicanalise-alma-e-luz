@@ -154,7 +154,6 @@
               <span>▶</span>
               <span>Assistir ao meu vídeo sobre este tema</span>
             </div>
-            <div class="video-status-pill" id="videoStatusPill">🎥 Vídeo do meu canal Psicanálise Alma e Luz • Ao terminar, retorna automaticamente para esta capa</div>
           </div>
         </div>
       </div>
@@ -477,10 +476,6 @@
           try { ytPlayer.destroy(); } catch (e) {}
           ytPlayer = null;
         }
-        const statusMsg = finished
-          ? '✓ Vídeo concluído • Clique se quiser assistir novamente'
-          : '🎥 Vídeo do meu canal Psicanálise Alma e Luz • Clique para assistir';
-
         container.innerHTML = `
           <div class="video-thumb-cover" id="videoThumbCover" role="button" tabindex="0">
             <img src="${thumbUrl}" alt="${videoTitle}" class="video-thumb-img">
@@ -489,7 +484,6 @@
                 <span>${finished ? '↻' : '▶'}</span>
                 <span>${finished ? 'Assistir ao meu vídeo novamente' : 'Assistir ao meu vídeo sobre este tema'}</span>
               </div>
-              <div class="video-status-pill">${statusMsg}</div>
             </div>
           </div>
         `;
