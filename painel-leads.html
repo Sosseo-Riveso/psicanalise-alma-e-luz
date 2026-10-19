@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Contatos & Triagens | Psicanálise Alma e Luz — Valéria Pereira</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #eef9fb;
+            --surface: #ffffff;
+            --surface-2: #e1f4f8;
+            --border: #b8dfe7;
+            --border-strong: #96cbd6;
+            --primary: #7c62bd;
+            --primary-hover: #5d439c;
+            --amber: #f59e0b;
+            --green: #25D366;
+            --green-dark: #1da851;
+            --red: #ef4444;
+            --text: #042a37;
+            --text-muted: #366372;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+        /* TELA DE LOGIN */
+        .login-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(145deg, #dff3f7 0%, #eef9fb 55%, #ede6fa 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .login-screen.hidden { display: none; }
+        .login-card {
+            background: var(--surface);
+            border: 2px solid var(--border-strong);
+            border-radius: 20px;
+            max-width: 410px;
+            width: 100%;
+            padding: 34px 28px;
+            text-align: center;
+            box-shadow: 0 24px 60px rgba(4, 42, 55, 0.12);
+        }
+        .login-avatar {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            margin: 0 auto 12px;
+            display: block;
+        }
+        .login-badge {
+            display: inline-block;
+            background: rgba(124, 98, 189, 0.14);
+            color: var(--primary-hover);
+            border: 1px solid rgba(124, 98, 189, 0.3);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            margin-bottom: 10px;
+        }
+        .login-card h1 {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+        .login-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        .login-input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1.5px solid var(--border-strong);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 14px;
+            margin-bottom: 12px;
+            outline: none;
+            text-align: center;
+        }
+        .login-input:focus { border-color: var(--primary); background: #fff; }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 999px;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .login-btn:hover { background: var(--primary-hover); }
+        .login-error {
+            color: var(--red);
+            font-size: 12px;
+            margin-top: 10px;
+            display: none;
+            font-weight: 600;
+        }
+
+        /* LAYOUT DO PAINEL */
+        .container {
+            max-width: 1220px;
+            margin: 0 auto;
+            padding: 28px 20px 60px;
+        }
+        .topbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding-bottom: 22px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+        .brand-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .brand-row img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2.5px solid var(--primary);
+        }
+        .brand h2 {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 21px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .brand span {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 15px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 1px solid var(--border-strong);
+            background: var(--surface);
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+        .btn:hover { border-color: var(--primary); color: var(--primary-hover); transform: translateY(-1px); }
+        .btn-green { background: var(--green); border-color: var(--green); color: #fff; }
+        .btn-green:hover { background: var(--green-dark); color: #fff; }
+        .btn-flower { background: var(--primary); border-color: var(--primary); color: #fff; }
+        .btn-flower:hover { background: var(--primary-hover); color: #fff; }
+        .btn-danger { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.35); color: #b91c1c; }
+        .btn-danger:hover { background: var(--red); color: #fff; }
+
+        /* CARDS DE RESUMO */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .kpi-card {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 18px 20px;
+            box-shadow: 0 6px 18px rgba(4, 42, 55, 0.04);
+        }
+        .kpi-label {
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+        .kpi-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text);
+        }
+        .kpi-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* BARRA DE FILTRO E TABELA */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .search-input {
+            flex: 1;
+            min-width: 240px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1.5px solid var(--border-strong);
+            background: var(--surface);
+            color: var(--text);
+            font-size: 13.5px;
+            outline: none;
+        }
+        .search-input:focus { border-color: var(--primary); }
+        .retention-note {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .table-wrap {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            overflow-x: auto;
+            box-shadow: 0 8px 24px rgba(4, 42, 55, 0.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13.5px;
+        }
+        th {
+            background: var(--surface-2);
+            color: var(--text);
+            font-size: 11.5px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 13px 16px;
+            border-bottom: 1.5px solid var(--border);
+        }
+        td {
+            padding: 13px 16px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+        tbody tr.clickable-row {
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        tbody tr.clickable-row:hover {
+            background: rgba(124, 98, 189, 0.07);
+        }
+        .badge-page {
+            display: inline-block;
+            padding: 3px 9px;
+            border-radius: 999px;
+            font-size: 11.5px;
+            font-weight: 700;
+            background: rgba(124, 98, 189, 0.13);
+            color: var(--primary-hover);
+        }
+        .badge-origin {
+            display: inline-block;
+            padding: 3px 9px;
+            border-radius: 999px;
+            font-size: 11.5px;
+            font-weight: 700;
+            background: rgba(37, 211, 102, 0.14);
+            color: #0f7638;
+        }
+        .wa-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #0f7638;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .wa-action:hover { text-decoration: underline; }
+        .empty-state {
+            padding: 48px 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* MODAIS INTERNOS DO PAINEL */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 42, 55, 0.65);
+            backdrop-filter: blur(4px);
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-box {
+            background: var(--surface);
+            border: 2px solid var(--border-strong);
+            border-radius: 18px;
+            max-width: 480px;
+            width: 100%;
+            padding: 26px 24px;
+            box-shadow: 0 24px 60px rgba(4, 42, 55, 0.25);
+            position: relative;
+        }
+        .modal-box h3 {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 19px;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+        .modal-box p.sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 9px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13.5px;
+            gap: 12px;
+        }
+        .detail-row strong {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .detail-row span {
+            text-align: right;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .modal-footer-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .modal-footer-btns .btn {
+            flex: 1;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TELA DE ACESSO RESTRITO -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <img src="assets/valeria-foto.jpg" alt="Valéria Pereira" class="login-avatar">
+            <span class="login-badge">🔒 Área Administrativa</span>
+            <h1>Psicanálise Alma e Luz</h1>
+            <p>Digite a senha administrativa para visualizar os contatos e agendamentos iniciados pelo site:</p>
+            <form id="loginForm">
+                <input type="password" id="loginPass" class="login-input" placeholder="Senha de acesso" required autocomplete="current-password">
+                <button type="submit" class="login-btn">Acessar Meu Painel de Contatos</button>
+                <div class="login-error" id="loginError">Senha incorreta. Tente novamente.</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO DO PAINEL -->
+    <div class="container">
+        <div class="topbar">
+            <div class="brand-row">
+                <img src="assets/valeria-foto.jpg" alt="Valéria Pereira">
+                <div class="brand">
+                    <h2>Gestão de Contatos & Triagens — Psicanálise Alma e Luz</h2>
+                    <span>Acompanhamento de Pacientes e Contatos pelo WhatsApp • Valéria Pereira</span>
+                </div>
+            </div>
+            <div class="actions">
+                <a href="index.html" class="btn">← Voltar ao Site</a>
+                <button type="button" class="btn" id="btnGerarDemo">✨ Gerar Exemplos</button>
+                <button type="button" class="btn" id="btnAbrirConfig">⚙️ Configurações</button>
+                <button type="button" class="btn btn-green" id="btnExportarCsv">📥 Exportar Excel (CSV)</button>
+                <button type="button" class="btn btn-danger" id="btnAbrirLimpeza">🗑️ Limpeza de Histórico</button>
+            </div>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Total de Oportunidades (1 Ano)</div>
+                <div class="kpi-value" id="kpiTotal">0</div>
+                <div class="kpi-sub">Pessoas que iniciaram conversa no WhatsApp</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Contatos neste Mês</div>
+                <div class="kpi-value" id="kpiMes">0</div>
+                <div class="kpi-sub" id="kpiMesLabel">Mês atual</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Último Contato Registrado</div>
+                <div class="kpi-value" id="kpiUltimo" style="font-size:19px;">—</div>
+                <div class="kpi-sub" id="kpiUltimoSub">Aguardando novos contatos</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Página / Artigo Campeão</div>
+                <div class="kpi-value" id="kpiTopPage" style="font-size:18px;">—</div>
+                <div class="kpi-sub">Maior geração de contatos no site</div>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <input type="search" id="searchInput" class="search-input" placeholder="Buscar por nome, telefone, modalidade (Individual, Casal, Mesa Quântica) ou página...">
+            <div class="retention-note">⏱️ Retenção automática de 365 dias • Clique em qualquer linha para abrir a ficha do contato</div>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data / Hora</th>
+                        <th>Nome</th>
+                        <th>WhatsApp</th>
+                        <th>Modalidade Buscada</th>
+                        <th>Página / Artigo</th>
+                        <th>Origem</th>
+                        <th>Ação Rápida</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- MODAL 1: DETALHES DO CONTATO -->
+    <div class="modal-overlay" id="modalDetalhe">
+        <div class="modal-box">
+            <button type="button" class="modal-close-btn" id="closeModalDetalhe">&times;</button>
+            <h3>Ficha do Contato</h3>
+            <p class="sub">Informações completas registradas no momento do clique para Atendimento Online:</p>
+            <div id="detalheConteudo"></div>
+            <div class="modal-footer-btns">
+                <a href="#" target="_blank" rel="noopener" class="btn btn-green" id="btnDetalheWhatsApp" data-no-modal="true">💬 Chamar no WhatsApp</a>
+                <button type="button" class="btn btn-danger" id="btnExcluirUnico">🗑️ Excluir Registro</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: LIMPEZA DE HISTÓRICO -->
+    <div class="modal-overlay" id="modalLimpeza">
+        <div class="modal-box">
+            <button type="button" class="modal-close-btn" id="closeModalLimpeza">&times;</button>
+            <h3>Gerenciar e Limpar Histórico</h3>
+            <p class="sub">Escolha qual período de registros deseja remover deste navegador:</p>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+                <button type="button" class="btn" id="btnExpurgarAntigos" style="justify-content:space-between;padding:12px 14px;">
+                    <span>🧹 Remover apenas registros com mais de 1 ano</span>
+                    <strong>Recomendado</strong>
+                </button>
+                <div style="border:1px solid var(--border);border-radius:12px;padding:12px;">
+                    <label style="display:block;font-size:12px;color:var(--text-muted);margin-bottom:6px;font-weight:700;">Apagar contatos de um mês específico:</label>
+                    <div style="display:flex;gap:8px;">
+                        <select id="selectMesLimpeza" class="login-input" style="margin:0;flex:1;text-align:left;padding:8px 10px;"></select>
+                        <button type="button" class="btn btn-danger" id="btnApagarMes">Apagar Mês</button>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger" id="btnZerarTudo" style="justify-content:center;padding:12px;margin-top:6px;">
+                    ⚠️ Zerar Todo o Histórico de Contatos
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: CONFIGURAÇÕES -->
+    <div class="modal-overlay" id="modalConfig">
+        <div class="modal-box">
+            <button type="button" class="modal-close-btn" id="closeModalConfig">&times;</button>
+            <h3>⚙️ Configurações do Painel</h3>
+            <p class="sub">Personalize sua senha de acesso ou conecte uma Planilha Google:</p>
+            <div style="margin-bottom:16px;">
+                <label style="display:block;font-size:12px;font-weight:700;margin-bottom:5px;">Alterar Senha do Painel</label>
+                <input type="password" id="inputNovaSenha" class="login-input" placeholder="Nova senha (deixe em branco para manter)" style="text-align:left;margin-bottom:6px;">
+            </div>
+            <div style="margin-bottom:16px;">
+                <label style="display:block;font-size:12px;font-weight:700;margin-bottom:5px;">URL do Webhook Google Sheets (Opcional)</label>
+                <input type="url" id="inputWebhookUrl" class="login-input" placeholder="https://script.google.com/macros/s/.../exec" style="text-align:left;margin-bottom:4px;">
+            </div>
+            <div class="modal-footer-btns">
+                <button type="button" class="btn btn-flower" id="btnSalvarConfig">💾 Salvar Configurações</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var STORAGE_KEY = 'psicanalise_almaeluz_triagem_v1';
+            var SESSION_AUTH_KEY = 'almaeluz_crm_auth_ok';
+            var CUSTOM_PASS_KEY = 'almaeluz_crm_custom_pass';
+            var WEBHOOK_KEY = 'almaeluz_sheets_webhook_url';
+
+            function verificarSenha(digitada) {
+                var custom = localStorage.getItem(CUSTOM_PASS_KEY);
+                if (custom) return digitada === custom;
+                return digitada === 'almaeluz2026' || digitada === 'fgcar2026';
+            }
+
+            var loginScreen = document.getElementById('loginScreen');
+            var loginForm = document.getElementById('loginForm');
+            var loginPass = document.getElementById('loginPass');
+            var loginError = document.getElementById('loginError');
+
+            if (sessionStorage.getItem(SESSION_AUTH_KEY) === '1') {
+                loginScreen.classList.add('hidden');
+            }
+
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (verificarSenha(loginPass.value.trim())) {
+                    sessionStorage.setItem(SESSION_AUTH_KEY, '1');
+                    loginScreen.classList.add('hidden');
+                    renderizarPainel();
+                } else {
+                    loginError.style.display = 'block';
+                }
+            });
+
+            function getRegistros() {
+                try {
+                    var raw = localStorage.getItem(STORAGE_KEY);
+                    return raw ? JSON.parse(raw) : [];
+                } catch (e) { return []; }
+            }
+
+            function salvarRegistros(lista) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+            }
+
+            var registroSelecionadoId = null;
+
+            function renderizarPainel() {
+                var lista = getRegistros();
+                var q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+
+                var agora = new Date();
+                var anoMesAtual = agora.getFullYear() + '-' + (agora.getMonth() + 1 < 10 ? '0' + (agora.getMonth() + 1) : '' + (agora.getMonth() + 1));
+
+                document.getElementById('kpiTotal').textContent = lista.length;
+                var doMes = lista.filter(function (i) { return i.anoMes === anoMesAtual; });
+                document.getElementById('kpiMes').textContent = doMes.length;
+                document.getElementById('kpiMesLabel').textContent = 'Referência: ' + anoMesAtual;
+
+                if (lista.length > 0) {
+                    document.getElementById('kpiUltimo').textContent = lista[0].nome;
+                    document.getElementById('kpiUltimoSub').textContent = lista[0].dataHora + ' • ' + (lista[0].modalidade || 'Atendimento Online');
+
+                    var contagemPag = {};
+                    lista.forEach(function (item) {
+                        var p = item.pagina || 'index.html';
+                        contagemPag[p] = (contagemPag[p] || 0) + 1;
+                    });
+                    var topPag = Object.keys(contagemPag).sort(function (a, b) { return contagemPag[b] - contagemPag[a]; })[0];
+                    document.getElementById('kpiTopPage').textContent = topPag + ' (' + contagemPag[topPag] + ')';
+                } else {
+                    document.getElementById('kpiUltimo').textContent = '—';
+                    document.getElementById('kpiUltimoSub').textContent = 'Aguardando novos contatos';
+                    document.getElementById('kpiTopPage').textContent = '—';
+                }
+
+                var filtrada = lista.filter(function (item) {
+                    if (!q) return true;
+                    var texto = [item.nome, item.telefone, item.modalidade, item.pagina, item.tituloPagina, item.origem, item.botao, item.dataHora].join(' ').toLowerCase();
+                    return texto.indexOf(q) !== -1;
+                });
+
+                var tbody = document.getElementById('tabelaBody');
+                if (filtrada.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="empty-state">Nenhum contato encontrado. Clique em <strong>"✨ Gerar Exemplos"</strong> no topo para testar o painel ou realize um teste clicando nos botões de WhatsApp do site.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = filtrada.map(function (item) {
+                    var numLimpo = (item.telefone || '').replace(/\D/g, '');
+                    var linkWa = numLimpo.length >= 10
+                        ? 'https://wa.me/55' + numLimpo + '?text=' + encodeURIComponent('Olá ' + item.nome + ', tudo bem? Aqui é a Valéria Pereira, do espaço Psicanálise Alma e Luz. Recebi seu contato pelo site sobre ' + (item.modalidade || 'Atendimento Online') + '!')
+                        : '#';
+                    return '<tr class="clickable-row" data-id="' + (item.id || item.ts) + '">' +
+                        '<td>' + (item.dataHora || '-') + '</td>' +
+                        '<td><strong>' + (item.nome || '-') + '</strong></td>' +
+                        '<td>' + (item.telefone || '-') + '</td>' +
+                        '<td><span class="badge-page">' + (item.modalidade || 'Atendimento Online') + '</span></td>' +
+                        '<td>' + (item.pagina || 'index.html') + '</td>' +
+                        '<td><span class="badge-origin">' + (item.origem || 'Direto / Orgânico') + '</span></td>' +
+                        '<td>' + (numLimpo.length >= 10 ? '<a class="wa-action" href="' + linkWa + '" target="_blank" rel="noopener" data-no-modal="true" onclick="event.stopPropagation();">💬 Responder</a>' : '-') + '</td>' +
+                    '</tr>';
+                }).join('');
+
+                Array.prototype.forEach.call(tbody.querySelectorAll('tr.clickable-row'), function (row) {
+                    row.addEventListener('click', function () {
+                        abrirDetalheContato(row.getAttribute('data-id'));
+                    });
+                });
+            }
+
+            // FICHA DETALHADA DO CONTATO
+            var modalDetalhe = document.getElementById('modalDetalhe');
+            function abrirDetalheContato(id) {
+                var lista = getRegistros();
+                var item = lista.find(function (x) { return String(x.id || x.ts) === String(id); });
+                if (!item) return;
+                registroSelecionadoId = id;
+
+                var numLimpo = (item.telefone || '').replace(/\D/g, '');
+                var linkWa = numLimpo.length >= 10
+                    ? 'https://wa.me/55' + numLimpo + '?text=' + encodeURIComponent('Olá ' + item.nome + ', tudo bem? Aqui é a Valéria Pereira (Psicanálise Alma e Luz). Recebi seu contato pelo site!')
+                    : '#';
+
+                document.getElementById('detalheConteudo').innerHTML =
+                    '<div class="detail-row"><strong>Nome:</strong><span>' + (item.nome || '-') + '</span></div>' +
+                    '<div class="detail-row"><strong>WhatsApp:</strong><span>' + (item.telefone || '-') + '</span></div>' +
+                    '<div class="detail-row"><strong>Modalidade:</strong><span>' + (item.modalidade || 'Atendimento Online') + '</span></div>' +
+                    '<div class="detail-row"><strong>Data e Hora:</strong><span>' + (item.dataHora || '-') + '</span></div>' +
+                    '<div class="detail-row"><strong>Página de Origem:</strong><span>' + (item.pagina || 'index.html') + '</span></div>' +
+                    '<div class="detail-row"><strong>Título da Página:</strong><span>' + (item.tituloPagina || '-') + '</span></div>' +
+                    '<div class="detail-row"><strong>Botão Clicado:</strong><span>' + (item.botao || '-') + '</span></div>' +
+                    '<div class="detail-row"><strong>Canal de Aquisição:</strong><span>' + (item.origem || 'Direto / Orgânico') + '</span></div>';
+
+                var btnWa = document.getElementById('btnDetalheWhatsApp');
+                btnWa.href = linkWa;
+                modalDetalhe.classList.add('active');
+            }
+
+            document.getElementById('closeModalDetalhe').addEventListener('click', function () {
+                modalDetalhe.classList.remove('active');
+            });
+
+            document.getElementById('btnExcluirUnico').addEventListener('click', function () {
+                if (!registroSelecionadoId) return;
+                var nova = getRegistros().filter(function (x) {
+                    return String(x.id || x.ts) !== String(registroSelecionadoId);
+                });
+                salvarRegistros(nova);
+                modalDetalhe.classList.remove('active');
+                renderizarPainel();
+            });
+
+            // GERADOR DE EXEMPLOS (DEMO)
+            document.getElementById('btnGerarDemo').addEventListener('click', function () {
+                var lista = getRegistros();
+                var agora = Date.now();
+                var exemplos = [
+                    {
+                        id: 'demo_1',
+                        ts: agora - 1800000,
+                        dataHora: 'Hoje 14:20',
+                        anoMes: new Date().toISOString().slice(0, 7),
+                        nome: 'Mariana Souza (Exemplo)',
+                        telefone: '(11) 98765-4321',
+                        modalidade: 'Terapia Individual Online',
+                        pagina: 'index.html',
+                        tituloPagina: 'Psicanálise Alma e Luz — Início',
+                        origem: 'Google Perfil Empresa (GMN)',
+                        botao: 'Contato Atendimento Online'
+                    },
+                    {
+                        id: 'demo_2',
+                        ts: agora - 7200000,
+                        dataHora: 'Hoje 11:05',
+                        anoMes: new Date().toISOString().slice(0, 7),
+                        nome: 'Carlos & Fernanda (Exemplo)',
+                        telefone: '(11) 97654-3210',
+                        modalidade: 'Terapia de Casal Online',
+                        pagina: 'conflitos-nos-relacionamentos-ego.html',
+                        tituloPagina: 'Conflitos nos Relacionamentos e o Ego',
+                        origem: 'youtube.com',
+                        botao: 'Agendar Terapia de Casal Comigo'
+                    },
+                    {
+                        id: 'demo_3',
+                        ts: agora - 86400000,
+                        dataHora: 'Ontem 19:40',
+                        anoMes: new Date().toISOString().slice(0, 7),
+                        nome: 'Patrícia Helena (Exemplo)',
+                        telefone: '(21) 99887-6655',
+                        modalidade: 'Mesa Quântica Estelar / Terapias Complementares',
+                        pagina: 'mesa-quantica-estelar-como-funciona.html',
+                        tituloPagina: 'Mesa Quântica Estelar: Como Funciona',
+                        origem: 'Direto / Orgânico',
+                        botao: 'Agendar Mesa Quântica Comigo'
+                    }
+                ];
+                salvarRegistros(exemplos.concat(lista));
+                renderizarPainel();
+            });
+
+            // EXPORTAR CSV
+            document.getElementById('btnExportarCsv').addEventListener('click', function () {
+                var lista = getRegistros();
+                if (!lista.length) {
+                    alert('Não há contatos registrados para exportar.');
+                    return;
+                }
+                var linhas = [['Data/Hora', 'Nome', 'WhatsApp', 'Modalidade', 'Pagina', 'Origem', 'Botao Clicado']];
+                lista.forEach(function (i) {
+                    linhas.push([
+                        i.dataHora || '',
+                        (i.nome || '').replace(/;/g, ','),
+                        i.telefone || '',
+                        (i.modalidade || 'Atendimento Online').replace(/;/g, ','),
+                        i.pagina || '',
+                        (i.origem || '').replace(/;/g, ','),
+                        (i.botao || '').replace(/;/g, ',')
+                    ]);
+                });
+                var csvContent = '\uFEFF' + linhas.map(function (r) { return r.join(';'); }).join('\r\n');
+                var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = 'contatos-psicanalise-alma-e-luz.csv';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            });
+
+            // MODAL LIMPEZA
+            var modalLimpeza = document.getElementById('modalLimpeza');
+            document.getElementById('btnAbrirLimpeza').addEventListener('click', function () {
+                var lista = getRegistros();
+                var meses = {};
+                lista.forEach(function (i) { if (i.anoMes) meses[i.anoMes] = (meses[i.anoMes] || 0) + 1; });
+                var sel = document.getElementById('selectMesLimpeza');
+                var chaves = Object.keys(meses).sort().reverse();
+                sel.innerHTML = chaves.length
+                    ? chaves.map(function (m) { return '<option value="' + m + '">' + m + ' (' + meses[m] + ' contatos)</option>'; }).join('')
+                    : '<option value="">Nenhum mês registrado</option>';
+                modalLimpeza.classList.add('active');
+            });
+            document.getElementById('closeModalLimpeza').addEventListener('click', function () {
+                modalLimpeza.classList.remove('active');
+            });
+            document.getElementById('btnExpurgarAntigos').addEventListener('click', function () {
+                var limite = Date.now() - (365 * 24 * 60 * 60 * 1000);
+                var nova = getRegistros().filter(function (i) { return i.ts && i.ts >= limite; });
+                salvarRegistros(nova);
+                modalLimpeza.classList.remove('active');
+                renderizarPainel();
+            });
+            document.getElementById('btnApagarMes').addEventListener('click', function () {
+                var mes = document.getElementById('selectMesLimpeza').value;
+                if (!mes) return;
+                var nova = getRegistros().filter(function (i) { return i.anoMes !== mes; });
+                salvarRegistros(nova);
+                modalLimpeza.classList.remove('active');
+                renderizarPainel();
+            });
+            document.getElementById('btnZerarTudo').addEventListener('click', function () {
+                if (!confirm('Tem certeza que deseja apagar todos os contatos salvos neste navegador?')) return;
+                salvarRegistros([]);
+                modalLimpeza.classList.remove('active');
+                renderizarPainel();
+            });
+
+            // MODAL CONFIGURAÇÕES
+            var modalConfig = document.getElementById('modalConfig');
+            document.getElementById('btnAbrirConfig').addEventListener('click', function () {
+                document.getElementById('inputWebhookUrl').value = localStorage.getItem(WEBHOOK_KEY) || '';
+                document.getElementById('inputNovaSenha').value = '';
+                modalConfig.classList.add('active');
+            });
+            document.getElementById('closeModalConfig').addEventListener('click', function () {
+                modalConfig.classList.remove('active');
+            });
+            document.getElementById('btnSalvarConfig').addEventListener('click', function () {
+                var novaSenha = document.getElementById('inputNovaSenha').value.trim();
+                var webhook = document.getElementById('inputWebhookUrl').value.trim();
+                if (novaSenha) localStorage.setItem(CUSTOM_PASS_KEY, novaSenha);
+                localStorage.setItem(WEBHOOK_KEY, webhook);
+                modalConfig.classList.remove('active');
+                alert('Configurações salvas com sucesso!');
+            });
+
+            document.getElementById('searchInput').addEventListener('input', renderizarPainel);
+
+            // Sincronizar com /api/triagem se estiver rodando no Cloudflare Worker
+            fetch('/api/triagem')
+                .then(function (r) { return r.ok ? r.json() : []; })
+                .then(function (remotos) {
+                    if (Array.isArray(remotos) && remotos.length) {
+                        var locais = getRegistros();
+                        var mapa = {};
+                        locais.concat(remotos).forEach(function (item) {
+                            if (item && (item.id || item.ts)) mapa[item.id || item.ts] = item;
+                        });
+                        var unificados = Object.keys(mapa).map(function (k) { return mapa[k]; });
+                        unificados.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+                        salvarRegistros(unificados);
+                        renderizarPainel();
+                    }
+                })
+                .catch(function () {});
+
+            renderizarPainel();
+        })();
+    </script>
+</body>
+</html>

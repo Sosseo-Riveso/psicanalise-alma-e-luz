@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Psicanálise Alma e Luz | Eu sou Valéria Pereira — Terapia Individual, Terapia de Casal e Atendimento Online</title>
+  <meta name="description" content="Seja bem-vindo(a) ao meu espaço Psicanálise Alma e Luz. Eu sou Valéria Pereira e realizo Atendimento Online de Psicanálise, Espiritualidade, Terapia Individual, Terapia de Casal e Mesa Quântica Estelar.">
+  <meta name="keywords" content="psicanálise online, terapia online, Valéria Pereira, Psicanálise Alma e Luz, terapia individual online, terapia de casal online, psicanálise e espiritualidade, mesa quântica estelar, curar feridas emocionais, medos e traumas, dores emocionais, crenças limitantes, padrões repetitivos, falta de prosperidade, dificuldades em se relacionar">
+  <link rel="canonical" href="https://psicanalisealmaeluz.com.br/">
+  <script>
+    // Se aberto diretamente via file:// no Windows, verifica se o servidor local http://localhost:8080 está ativo
+    // para garantir que o player do YouTube reproduza sem erro 153 de origem local.
+    if (window.location.protocol === 'file:') {
+      fetch('http://localhost:8080/assets/style.css', { mode: 'no-cors', cache: 'no-store' })
+        .then(() => {
+          const fileName = window.location.pathname.split('/').pop() || 'index.html';
+          window.location.replace('http://localhost:8080/' + fileName + window.location.search + window.location.hash);
+        })
+        .catch(() => {});
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <!-- 1ª Linha: Marca (1ª Coluna) + Botão WhatsApp (2ª Coluna) -->
+      <div class="header-top-row">
+        <a href="index.html" class="brand">
+          <img src="assets/valeria-foto.jpg" alt="Eu sou Valéria Pereira - Psicanálise Alma e Luz" class="brand-avatar">
+          <div class="brand-text">
+            <strong>Psicanálise Alma e Luz</strong>
+            <span>Eu sou Valéria Pereira • Terapia Individual, Casal e Complementares</span>
+          </div>
+        </a>
+        <div class="header-top-right">
+          <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp-header">
+            <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
+            <span>Contato Atendimento Online</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 2ª Linha: Menu de Navegação + Item Blog com Submenu de todas as 10 Categorias -->
+      <div class="header-nav-row">
+        <nav class="nav-links" aria-label="Menu Principal">
+          <a href="index.html" class="nav-item active">Início</a>
+          <a href="index.html#atendimentos" class="nav-item">Meus Atendimentos</a>
+          <a href="index.html#como-funciona-online" class="nav-item">Atendimento Online</a>
+          <div class="nav-dropdown" id="blogNavDropdown">
+            <button type="button" class="nav-dropdown-trigger " id="blogNavTrigger" aria-expanded="false" aria-haspopup="true">
+              <span>Blog</span>
+              <span class="nav-dropdown-caret">▾</span>
+            </button>
+            <div class="nav-dropdown-menu" id="blogNavMenu" role="menu">
+              <div class="nav-dropdown-header">
+                <span>🌸 Meus Artigos e Vídeos por Categoria:</span>
+                <a href="index.html#artigos" data-select-cat="all">Ver todos (16) →</a>
+              </div>
+              <div class="nav-dropdown-grid">
+                <a href="index.html?categoria=medos-e-traumas#artigos" class="nav-dropdown-item" data-select-cat="medos-e-traumas">
+                <span><span class="dot">●</span>Medos e Traumas</span>
+                <span class="count-pill">4</span>
+              </a>
+              <a href="index.html?categoria=dores-emocionais#artigos" class="nav-dropdown-item" data-select-cat="dores-emocionais">
+                <span><span class="dot">●</span>Dores emocionais</span>
+                <span class="count-pill">6</span>
+              </a>
+              <a href="index.html?categoria=arrependimentos#artigos" class="nav-dropdown-item" data-select-cat="arrependimentos">
+                <span><span class="dot">●</span>Arrependimentos</span>
+                <span class="count-pill">3</span>
+              </a>
+              <a href="index.html?categoria=crencas-limitantes#artigos" class="nav-dropdown-item" data-select-cat="crencas-limitantes">
+                <span><span class="dot">●</span>Crenças limitantes</span>
+                <span class="count-pill">5</span>
+              </a>
+              <a href="index.html?categoria=ressignificar-a-vida#artigos" class="nav-dropdown-item" data-select-cat="ressignificar-a-vida">
+                <span><span class="dot">●</span>Ressignificar a vida</span>
+                <span class="count-pill">6</span>
+              </a>
+              <a href="index.html?categoria=padroes-repetitivos#artigos" class="nav-dropdown-item" data-select-cat="padroes-repetitivos">
+                <span><span class="dot">●</span>Padrões repetitivos</span>
+                <span class="count-pill">5</span>
+              </a>
+              <a href="index.html?categoria=tristeza-e-melancolia#artigos" class="nav-dropdown-item" data-select-cat="tristeza-e-melancolia">
+                <span><span class="dot">●</span>Tristeza e melancolia</span>
+                <span class="count-pill">4</span>
+              </a>
+              <a href="index.html?categoria=sentimentos-de-culpa#artigos" class="nav-dropdown-item" data-select-cat="sentimentos-de-culpa">
+                <span><span class="dot">●</span>Sentimentos de culpa</span>
+                <span class="count-pill">4</span>
+              </a>
+              <a href="index.html?categoria=falta-de-prosperidade#artigos" class="nav-dropdown-item" data-select-cat="falta-de-prosperidade">
+                <span><span class="dot">●</span>Falta de Prosperidade</span>
+                <span class="count-pill">6</span>
+              </a>
+              <a href="index.html?categoria=dificuldades-em-se-relacionar#artigos" class="nav-dropdown-item" data-select-cat="dificuldades-em-se-relacionar">
+                <span><span class="dot">●</span>Dificuldades em se relacionar</span>
+                <span class="count-pill">4</span>
+              </a>
+              </div>
+            </div>
+          </div>
+          <a href="analise-canal.html" class="nav-item ">Sobre Mim & Minha Trajetória</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION: Eu, Valéria Pereira, acolhendo o cliente em 1ª pessoa (sem botões duplicados com o menu) -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-badge-row">
+            <span class="badge-flower">✨ Psicanálise, Espiritualidade & Terapias Complementares</span>
+            <span class="badge-amber">Meu Atendimento 100% Online</span>
+          </div>
+          <h1>Compreenda Suas Dores e Construa Comigo um Caminho de Vida <span>Mais Leve e Proveitoso</span></h1>
+          <p class="hero-lead">
+            Seja muito bem-vindo(a) ao meu espaço, <strong>Psicanálise Alma e Luz</strong>. Eu sou <strong>Valéria Pereira</strong> — psicanalista, espiritualista e terapeuta integrativa. Através da <strong>Terapia Individual</strong>, da <strong>Terapia de Casal</strong> e das <strong>Terapias Complementares</strong>, caminho ao seu lado para ajudar você a olhar para dentro, acolher e curar suas feridas emocionais e destravar a sua vida — com escuta profunda, sigilo e carinho, no conforto da sua casa.
+          </p>
+          <div class="hero-trust-note">
+            <span>🔒 Realizo minhas sessões online por videochamada com total sigilo ético • Atendo todo o Brasil e exterior</span>
+          </div>
+        </div>
+
+        <!-- Cartão Visual fiel ao Meu Banner Azul (com as 10 Categorias Clicáveis, sem botão repetido próximo ao menu) -->
+        <aside class="banner-card">
+          <div class="banner-card-header">
+            <img src="assets/valeria-foto.jpg" alt="Eu sou Valéria Pereira - Psicanálise e Espiritualidade" class="banner-card-avatar">
+            <div class="banner-card-title">
+              <strong>Valéria Pereira</strong>
+              <span>Psicanálise, Espiritualidade e Terapias Complementares</span>
+            </div>
+          </div>
+          <div class="banner-pill-bar">
+            Terapia Individual e Terapia de Casal
+          </div>
+          <p class="banner-checklist-hint">👇 Clique em qualquer tema abaixo para ver meus vídeos e artigos sobre ele:</p>
+          <ul class="banner-checklist">
+            <li><a href="#artigos" data-select-cat="medos-e-traumas">Medos e Traumas</a></li>
+            <li><a href="#artigos" data-select-cat="dores-emocionais">Dores emocionais</a></li>
+            <li><a href="#artigos" data-select-cat="arrependimentos">Arrependimentos</a></li>
+            <li><a href="#artigos" data-select-cat="crencas-limitantes">Crenças limitantes</a></li>
+            <li><a href="#artigos" data-select-cat="ressignificar-a-vida">Ressignificar a vida</a></li>
+            <li><a href="#artigos" data-select-cat="padroes-repetitivos">Padrões repetitivos</a></li>
+            <li><a href="#artigos" data-select-cat="tristeza-e-melancolia">Tristeza e melancolia</a></li>
+            <li><a href="#artigos" data-select-cat="sentimentos-de-culpa">Sentimentos de culpa</a></li>
+            <li><a href="#artigos" data-select-cat="falta-de-prosperidade">Falta de Prosperidade</a></li>
+            <li><a href="#artigos" data-select-cat="dificuldades-em-se-relacionar">Dificuldades em se relacionar</a></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 1: MEUS TIPOS DE ATENDIMENTO + NOTA DELICADA SOBRE CONVÊNIOS + AS 10 CATEGORIAS DO BANNER -->
+    <section class="section-block" id="atendimentos">
+      <div class="container">
+        <div class="section-header-center">
+          <span class="badge-flower">Cuidado Integral para Sua Mente, Emoção e Espírito</span>
+          <h2>Como Posso Caminhar com Você nos Meus Atendimentos</h2>
+          <p>Sei que cada pessoa carrega uma história única e sagrada. Por isso, nos meus atendimentos uno a escuta clínica da Psicanálise à sabedoria espiritualista e às terapias integrativas para cuidar da verdadeira raiz do que impede você de avançar.</p>
+        </div>
+
+        <div class="modalities-grid">
+          <!-- Modalidade 1 -->
+          <div class="modality-card">
+            <div>
+              <div class="modality-icon">🛋️</div>
+              <h3>Terapia Individual Online</h3>
+              <p>Ofereço a você um espaço seguro, humano e livre de julgamentos para compreendermos juntos(as) a origem inconsciente das suas angústias, fortalecendo seu amor-próprio e sua autonomia emocional.</p>
+              <ul class="modality-bullets">
+                <li>Superação de ansiedade, tristeza profunda e vazio existencial</li>
+                <li>Cura das 4 feridas da infância, perfeccionismo e autossabotagem</li>
+                <li>Elaboração de lutos, términos, culpas e arrependimentos</li>
+                <li>Reconexão com a sua essência, valores e propósito de vida</li>
+              </ul>
+            </div>
+            <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="btn-whatsapp" style="width:100%;">
+              <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
+              <span>Agendar Terapia Individual Comigo</span>
+            </a>
+          </div>
+
+          <!-- Modalidade 2 -->
+          <div class="modality-card">
+            <div>
+              <div class="modality-icon">🤝</div>
+              <h3>Terapia de Casal Online</h3>
+              <p>Conduzo a mediação terapêutica para casais que desejam superar crises, dissolver mágoas acumuladas e reconstruir um diálogo verdadeiro, maduro e afetuoso.</p>
+              <ul class="modality-bullets">
+                <li>Superação de falhas de comunicação e brigas repetitivas</li>
+                <li>Compreensão das projeções do ego e cobranças mútuas</li>
+                <li>Reconstrução da confiança, do respeito e da parceria a dois</li>
+                <li>Alinhamento de expectativas sem que ninguém precise se anular</li>
+              </ul>
+            </div>
+            <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="btn-whatsapp" style="width:100%;">
+              <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
+              <span>Agendar Terapia de Casal Comigo</span>
+            </a>
+          </div>
+
+          <!-- Modalidade 3 -->
+          <div class="modality-card">
+            <div>
+              <div class="modality-icon">✨</div>
+              <h3>Terapias Complementares & Mesa Quântica Estelar</h3>
+              <p>Há mais de 10 anos opero e ensino a Mesa Quântica Estelar — trabalhando com Radiestesia, Radiônica, Psiônica e Energia Quântica para limpeza energética e abertura dos seus caminhos.</p>
+              <ul class="modality-bullets">
+                <li>Dissolução de bloqueios energéticos e estados de estagnação</li>
+                <li>Abertura de caminhos profissionais, empresariais e de prosperidade</li>
+                <li>Harmonização de ambientes familiares, societários e afetivos</li>
+                <li>Corte de laços densos e encerramento de ciclos repetitivos</li>
+              </ul>
+            </div>
+            <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="btn-whatsapp" style="width:100%;">
+              <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
+              <span>Agendar Mesa Quântica Comigo</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Nota Delicada sobre Convênios (Em Primeira Pessoa) -->
+        <div class="delicate-convenio-note">
+          <div class="delicate-convenio-icon">💛</div>
+          <div>
+            <h4>Uma nota carinhosa sobre convênios e planos de saúde</h4>
+            <p>
+              Gostaria de informar, com todo carinho e transparência, que <strong>no momento não estou realizando atendimentos por convênios ou planos de saúde</strong>. Escolhi dedicar minha agenda exclusivamente aos <strong>atendimentos particulares</strong> para poder oferecer a você uma escuta verdadeiramente profunda, sem pressa, sem limitações de tempo impostas por planos e com total atenção à singularidade da sua história. Se você desejar conhecer os valores das sessões ou como funcionam os pacotes de acompanhamento, me chame no WhatsApp — terei muita alegria em conversar com você.
+            </p>
+          </div>
+        </div>
+
+        <!-- As 10 Categorias do Banner detalhadas -->
+        <div class="section-header-center" style="margin-top: 10px; margin-bottom: 28px;">
+          <span class="badge-amber">Em Quais Momentos Posso Ajudar Você?</span>
+          <h3 style="font-size: 1.6rem; margin-top: 10px;">As 10 Categorias Que Trabalho nos Meus Atendimentos</h3>
+          <p>Clique em qualquer uma das 10 categorias abaixo para filtrar imediatamente os meus vídeos e artigos relacionados a ela:</p>
+        </div>
+
+        <div class="pillars-grid">
+          
+          <a href="#artigos" class="pillar-item" data-select-cat="medos-e-traumas">
+            <div>
+              <h4><span class="dot">●</span> Medos e Traumas</h4>
+              <p>Acolho você na elaboração de feridas da infância, ansiedades e choques emocionais que paralisam suas escolhas.</p>
+            </div>
+            <div class="pillar-count-badge">
+              <span>Ver 4 reflexões minhas</span>
+              <span>→</span>
+            </div>
+          </a>
+          
+          <a href="#artigos" class="pillar-item" data-select-cat="dores-emocionais">
+            <div>
+              <h4><span class="dot">●</span> Dores emocionais</h4>
+              <p>Ajudo você a diferenciar a dor natural do sofrimento prolongado para superar términos, perdas e decepções.</p>
+            </div>
+            <div class="pillar-count-badge">
+              <span>Ver 6 reflexões minhas</span>
+              <span>→</span>
+            </div>
+          </a>
+          
+          <a href="#artigos" class="pillar-item" data-select-cat="arrependimentos">
+            <div>
+              <h4><span class="dot">●</span> Arrependimentos</h4>
+              <p>Caminho ao seu lado para transformar o peso de decisões ou reações do passado em aprendizado e reconciliação interior.</p>
+            </div>
+            <div class="pillar-count-badge">
+              <span>Ver 3 reflexões minhas</span>
+              <span>→</span>
+            </div>
+          </a>
+          
+          <a href="#artigos" class="pillar-item" data-select-cat="crencas-limitantes">
+            <div>
+              <h4><span class="dot">●</span> Crenças limitantes</h4>
+              <p>Trabalho com você para desconstruir vozes internas de incapacidade ("não consigo", "não mereço") que sabotam sua vida.</p>
+            </div>
+            <div class="pillar-count-badge">
+              <span>Ver 5 reflexões minhas</span>
+              <span>→</span>
+            </div>
+          </a>
+          
+          <a href="#artigos" class="pillar-item" data-select-cat="ressignificar-a-vida">
+            <div>
+              <h4><span class="dot">●</span> Ressignificar a vida</h4>
+              <p>Convido você a sair do piloto automático e do desgaste de fingir estar bem para viver alinhado(a) à sua essência.</p>
+            </div>
+            <div class="pillar-count-badge">
+              <span>Ver 6 reflexões minhas</span>
+              <span>→</span>
+            </div>
+          </a>
+          
+          <a href="#artigos" class="pillar-item" data-select-cat="padroes-repetitivos">
+            <div>
+              <h4><span class="dot">●</span> Padrões repetitivos</h4>
+              <p>Identifico junto com você por que certas crises se repetem no trabalho ou no amor, tratando a causa pela raiz.</p>
+            </div>
+            <div class="pillar-count-badge">
+              <span>Ver 5 reflexões minhas</span>
+              <span>→</span>
+            </div>
+          </a>
+          
+          <a href="#artigos" class="pillar-item" data-select-cat="tristeza-e-melancolia">
+            <div>
+              <h4><span class="dot">●</span> Tristeza e melancolia</h4>
+              <p>Ofereço uma escuta empática e humana para ajudar você a atravessar o vazio existencial, a solidão e a depressão.</p>
+            </div>
+            <div class="pillar-count-badge">
+              <span>Ver 4 reflexões minhas</span>
+              <span>→</span>
+            </div>
+          </a>
+          
+          <a href="#artigos" class="pillar-item" data-select-cat="sentimentos-de-culpa">
+            <div>
+              <h4><span class="dot">●</span> Sentimentos de culpa</h4>
+              <p>Auxilio você a se libertar do carrasco interno através do autoperdão, da retratação consciente e da leveza mental.</p>
+            </div>
+            <div class="pillar-count-badge">
+              <span>Ver 4 reflexões minhas</span>
+              <span>→</span>
+            </div>
+          </a>
+          
+          <a href="#artigos" class="pillar-item" data-select-cat="falta-de-prosperidade">
+            <div>
+              <h4><span class="dot">●</span> Falta de Prosperidade</h4>
+              <p>Unindo Psicanálise e Mesa Quântica Estelar, ajudo você a destravar bloqueios emocionais e energéticos de escassez.</p>
+            </div>
+            <div class="pillar-count-badge">
+              <span>Ver 6 reflexões minhas</span>
+              <span>→</span>
+            </div>
+          </a>
+          
+          <a href="#artigos" class="pillar-item" data-select-cat="dificuldades-em-se-relacionar">
+            <div>
+              <h4><span class="dot">●</span> Dificuldades em se relacionar</h4>
+              <p>Na Terapia Individual e de Casal, ajudo você a superar mágoas, cobranças, raiva e a sensação de "pisar em ovos".</p>
+            </div>
+            <div class="pillar-count-badge">
+              <span>Ver 4 reflexões minhas</span>
+              <span>→</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: COMO FUNCIONAM OS MEUS ATENDIMENTOS ONLINE -->
+    <section class="section-block alt-bg" id="como-funciona-online">
+      <div class="container">
+        <div class="section-header-center">
+          <span class="badge-flower">Conforto, Sigilo e Profundidade Terapêutica</span>
+          <h2>Como Funcionam os Meus Atendimentos Online?</h2>
+          <p>A Psicanálise e as Terapias Complementares acontecem pela força da palavra, da minha escuta clínica qualificada e da nossa sintonia consciente. No formato online, levo até você todo o acolhimento do consultório, onde quer que você esteja.</p>
+        </div>
+
+        <div class="online-steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Você Me Chama no WhatsApp</h3>
+            <p>Basta clicar no botão do WhatsApp aqui no site e me enviar uma mensagem contando brevemente se você busca Terapia Individual, Terapia de Casal ou Mesa Quântica Estelar.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Escolhemos Seu Horário</h3>
+            <p>Converso diretamente com você para alinharmos o dia e o horário mais confortáveis para a sua rotina (em modalidade particular, com tempo dedicado exclusivamente a você).</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Nossa Sessão por Vídeo</h3>
+            <p>No horário agendado, realizamos nosso encontro por videochamada (pelo seu celular, tablet ou computador) em um ambiente 100% confidencial, ético e acolhedor.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <h3>Nosso Caminho de Cura</h3>
+            <p>A cada sessão, caminhamos juntos(as) trabalhando a raiz das suas dores emocionais, crenças e relacionamentos para que você viva com mais clareza, autonomia e paz.</p>
+          </div>
+        </div>
+
+        <div class="online-benefits-box">
+          <div>
+            <span class="badge-flower" style="margin-bottom:10px;">Por Que Atendo 100% Online?</span>
+            <h3>O acolhimento que você precisa, na segurança do seu lar</h3>
+            <p>Ao longo da minha prática clínica, percebi que muitas pessoas se sentem ainda mais à vontade para abrir o coração sobre suas dores profundas, traumas e questões familiares quando estão no seu próprio espaço seguro. No meu atendimento online particular, mantenho exatamente a mesma presença, entrega e eficácia das sessões presenciais.</p>
+            <ul class="online-benefits-list">
+              <li>Privacidade e sigilo absoluto comigo em cada sessão</li>
+              <li>Atendo você em qualquer cidade do Brasil ou exterior</li>
+              <li>Economia de tempo e zero estresse com trânsito</li>
+              <li>Atendimento particular sem pressa (não atendo convênios)</li>
+              <li>Horários planejados com carinho para a sua rotina</li>
+              <li>Integração entre Psicanálise e Espiritualidade</li>
+            </ul>
+          </div>
+          <div class="online-cta-panel">
+            <img src="assets/valeria-foto.jpg" alt="Eu sou Valéria Pereira" style="width:84px; height:84px; border-radius:50%; object-fit:cover; border:3px solid var(--flower); margin-bottom:12px;">
+            <h4 style="font-size:1.2rem; margin-bottom:8px;">Vamos conversar?</h4>
+            <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:18px;">Fale diretamente comigo pelo WhatsApp, tire suas dúvidas e consulte os horários disponíveis na minha agenda desta semana.</p>
+            <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="btn-whatsapp" style="width:100%;">
+              <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
+              <span>Falar Comigo no WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3: MEUS ARTIGOS E VÍDEOS DISTRIBUÍDOS PELAS 10 CATEGORIAS DO BANNER -->
+    <section class="section-block" id="artigos">
+      <div class="container">
+        <div class="section-header-center">
+          <span class="badge-flower">Meu Conteúdo Terapêutico Para Você</span>
+          <h2>Meus Artigos, Vídeos e Reflexões por Categoria</h2>
+          <p>Reuni e revisei aqui as reflexões que gravo semanalmente no meu canal, acompanhadas de uma análise psicanalítica escrita por mim e distribuídas nas <strong>10 categorias dos meus atendimentos</strong>.</p>
+        </div>
+
+        <div class="filter-bar">
+          <div class="filter-bar-top">
+            <span class="filter-bar-label">🌸 Escolha um dos 10 temas do meu banner para filtrar os conteúdos:</span>
+            <input type="search" id="searchInput" class="search-input" placeholder="Buscar nos meus artigos (ex: ansiedade, culpa, infância)...">
+          </div>
+          <div class="filter-pills">
+            <button class="filter-btn active" data-filter="all">
+              <span>Todos os Meus Temas</span>
+              <span class="count">16</span>
+            </button>
+            
+            <button class="filter-btn" data-filter="medos-e-traumas">
+              <span>● Medos e Traumas</span>
+              <span class="count">4</span>
+            </button>
+            <button class="filter-btn" data-filter="dores-emocionais">
+              <span>● Dores emocionais</span>
+              <span class="count">6</span>
+            </button>
+            <button class="filter-btn" data-filter="arrependimentos">
+              <span>● Arrependimentos</span>
+              <span class="count">3</span>
+            </button>
+            <button class="filter-btn" data-filter="crencas-limitantes">
+              <span>● Crenças limitantes</span>
+              <span class="count">5</span>
+            </button>
+            <button class="filter-btn" data-filter="ressignificar-a-vida">
+              <span>● Ressignificar a vida</span>
+              <span class="count">6</span>
+            </button>
+            <button class="filter-btn" data-filter="padroes-repetitivos">
+              <span>● Padrões repetitivos</span>
+              <span class="count">5</span>
+            </button>
+            <button class="filter-btn" data-filter="tristeza-e-melancolia">
+              <span>● Tristeza e melancolia</span>
+              <span class="count">4</span>
+            </button>
+            <button class="filter-btn" data-filter="sentimentos-de-culpa">
+              <span>● Sentimentos de culpa</span>
+              <span class="count">4</span>
+            </button>
+            <button class="filter-btn" data-filter="falta-de-prosperidade">
+              <span>● Falta de Prosperidade</span>
+              <span class="count">6</span>
+            </button>
+            <button class="filter-btn" data-filter="dificuldades-em-se-relacionar">
+              <span>● Dificuldades em se relacionar</span>
+              <span class="count">4</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Painel que aparece quando o visitante escolhe uma das 10 categorias -->
+        <div class="category-active-banner" id="categoryActiveBanner">
+          <div>
+            <h3 id="catBannerTitle">Categoria Selecionada</h3>
+            <p id="catBannerDesc"></p>
+          </div>
+          <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="btn-whatsapp" id="catBannerWaBtn">
+            <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
+            <span>Falar Comigo Sobre Este Tema</span>
+          </a>
+        </div>
+
+        <div class="articles-grid" id="articlesGrid">
+          
+          <article class="article-card" data-categories="ressignificar-a-vida|falta-de-prosperidade|sentimentos-de-culpa" data-search="o camelo, o buraco da agulha e o portal de luz: o que fazer quando tudo parece parado compartilho com você uma leitura psicanalítica, neurocientífica e espiritualista da parábola de mateus 19:24 para soltar fardos emocionais e destravar sua vida. quando você se sente estagnado(a), sem energia e desconectado(a) de si mesmo(a), muitas vezes está agindo como o camelo da parábola de jesus (mateus 19:24): carregando fardos emocionais, culpas, traumas, necessidade de controle e apego excessivo. nesta reflexão, uno a psicanálise, a neurociência e a física quântica para mostrar a você como o apego do ego hiperativa o sistema de medo do cérebro, reduz a empatia e bloqueia o seu caminho de prosperidade e paz interior. ressignificar a vida falta de prosperidade sentimentos de culpa">
+            <a href="artigos/camelo-buraco-da-agulha-portal-de-luz.html" class="card-thumb-link">
+              <img src="assets/thumbs/camelo-buraco-da-agulha-portal-de-luz.png" alt="O Camelo, o Buraco da Agulha e o Portal de Luz: O Que Fazer Quando Tudo Parece Parado" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="ressignificar-a-vida">● Ressignificar a vida</button><button type="button" class="cat-tag" data-select-cat="falta-de-prosperidade">● Falta de Prosperidade</button><button type="button" class="cat-tag" data-select-cat="sentimentos-de-culpa">● Sentimentos de culpa</button>
+              </div>
+              <h3><a href="artigos/camelo-buraco-da-agulha-portal-de-luz.html">O Camelo, o Buraco da Agulha e o Portal de Luz: O Que Fazer Quando Tudo Parece Parado</a></h3>
+              <p>Quando você se sente estagnado(a), sem energia e desconectado(a) de si mesmo(a), muitas vezes está agindo como o "camelo" da parábola de Jesus (Mateus 19:24): carregando fardos emocionais, culpas, traumas, necessidade de controle e apego excessivo. Nesta reflexão, uno a Psicanálise, a Neurociência e a Física Quântica para mostrar a você como o apego do ego hiperativa o sistema de medo do cérebro, reduz a empatia e bloqueia o seu caminho de prosperidade e paz interior.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 11 min de leitura</span>
+              <a href="artigos/camelo-buraco-da-agulha-portal-de-luz.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="crencas-limitantes|ressignificar-a-vida|padroes-repetitivos" data-search="te falta iniciativa para mudar de vida? como sair da paralisia e resgatar sua força interior a história da mulher que sofria há 12 anos, a diferença entre problemas reais e situações cotidianas, e o chamado à sua integridade emocional. por que tantas vezes sabemos exatamente o que precisa mudar, mas ficamos paralisados esperando que a solução venha de fora? a partir do arquétipo da mulher que sofria de uma hemorragia há 12 anos, converso com você sobre a perda da força vital, a diferença entre problemas reais e situações resolvíveis, e o verdadeiro sentido de lech leshalom (vá para a plenitude): unir fé, terapia e ação prática para sair do papel de vítima. crenças limitantes ressignificar a vida padrões repetitivos">
+            <a href="artigos/te-falta-iniciativa-para-mudar-de-vida-lech-leshalom.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_VKqXLaDfqIg.jpg" alt="Te Falta Iniciativa Para Mudar de Vida? Como Sair da Paralisia e Resgatar Sua Força Interior" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="crencas-limitantes">● Crenças limitantes</button><button type="button" class="cat-tag" data-select-cat="ressignificar-a-vida">● Ressignificar a vida</button><button type="button" class="cat-tag" data-select-cat="padroes-repetitivos">● Padrões repetitivos</button>
+              </div>
+              <h3><a href="artigos/te-falta-iniciativa-para-mudar-de-vida-lech-leshalom.html">Te Falta Iniciativa Para Mudar de Vida? Como Sair da Paralisia e Resgatar Sua Força Interior</a></h3>
+              <p>Por que tantas vezes sabemos exatamente o que precisa mudar, mas ficamos paralisados esperando que a solução venha de fora? A partir do arquétipo da mulher que sofria de uma hemorragia há 12 anos, converso com você sobre a perda da força vital, a diferença entre problemas reais e situações resolvíveis, e o verdadeiro sentido de Lech LeShalom ("vá para a plenitude"): unir fé, terapia e ação prática para sair do papel de vítima.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 8 min de leitura</span>
+              <a href="artigos/te-falta-iniciativa-para-mudar-de-vida-lech-leshalom.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="medos-e-traumas|crencas-limitantes|padroes-repetitivos" data-search="o impacto invisível da infância: como as 4 feridas do passado moldam quem você é hoje perfeccionismo, controle excessivo, autossabotagem e desmerecimento: como ajudo você a acolher e curar a sua criança interior. frases que ouvimos entre os 0 e 7 anos de idade — como você faz tudo errado, engole esse choro ou comparações constantes — ficam registradas no inconsciente e moldam nossa vida adulta. neste vídeo e artigo, explico em detalhes as 4 grandes feridas da primeira infância (o perfeccionista, o controlador, o autossabotador e o que se sente indigno de amor) e mostro como trabalhamos na terapia para libertar o adulto que você é hoje dos traumas da sua criança ferida. medos e traumas crenças limitantes padrões repetitivos">
+            <a href="artigos/impacto-invisivel-da-infancia-4-feridas-do-passado.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_9P_BBXJMPVQ.jpg" alt="O Impacto Invisível da Infância: Como as 4 Feridas do Passado Moldam Quem Você É Hoje" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="medos-e-traumas">● Medos e Traumas</button><button type="button" class="cat-tag" data-select-cat="crencas-limitantes">● Crenças limitantes</button><button type="button" class="cat-tag" data-select-cat="padroes-repetitivos">● Padrões repetitivos</button>
+              </div>
+              <h3><a href="artigos/impacto-invisivel-da-infancia-4-feridas-do-passado.html">O Impacto Invisível da Infância: Como as 4 Feridas do Passado Moldam Quem Você É Hoje</a></h3>
+              <p>Frases que ouvimos entre os 0 e 7 anos de idade — como "você faz tudo errado", "engole esse choro" ou comparações constantes — ficam registradas no inconsciente e moldam nossa vida adulta. Neste vídeo e artigo, explico em detalhes as 4 grandes feridas da primeira infância (o perfeccionista, o controlador, o autossabotador e o que se sente indigno de amor) e mostro como trabalhamos na terapia para libertar o adulto que você é hoje dos traumas da sua criança ferida.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 14 min de leitura</span>
+              <a href="artigos/impacto-invisivel-da-infancia-4-feridas-do-passado.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="dores-emocionais|arrependimentos|padroes-repetitivos" data-search="por que é difícil superar? a diferença crucial entre dor e sofrimento explico por que reviver o passado mantém você preso(a) no efeito sapo na panela e como recomeçar após perdas, términos ou decepções. sentir dor diante de um término de relacionamento, uma perda, uma traição ou uma demissão é humano e inevitável. porém, continuar revivendo o evento meses ou anos depois transforma a dor em sofrimento crônico. nesta reflexão, explico para você a diferença entre dor e sofrimento, alerto sobre o perigo de se acostumar ao que faz mal (efeito sapo na panela) e mostro como dar a volta por cima. dores emocionais arrependimentos padrões repetitivos">
+            <a href="artigos/diferenca-crucial-entre-dor-e-sofrimento-efeito-sapo-na-panela.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_tFj3WwpflT4.jpg" alt="Por Que É Difícil Superar? A Diferença Crucial Entre Dor e Sofrimento" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="dores-emocionais">● Dores emocionais</button><button type="button" class="cat-tag" data-select-cat="arrependimentos">● Arrependimentos</button><button type="button" class="cat-tag" data-select-cat="padroes-repetitivos">● Padrões repetitivos</button>
+              </div>
+              <h3><a href="artigos/diferenca-crucial-entre-dor-e-sofrimento-efeito-sapo-na-panela.html">Por Que É Difícil Superar? A Diferença Crucial Entre Dor e Sofrimento</a></h3>
+              <p>Sentir dor diante de um término de relacionamento, uma perda, uma traição ou uma demissão é humano e inevitável. Porém, continuar revivendo o evento meses ou anos depois transforma a dor em sofrimento crônico. Nesta reflexão, explico para você a diferença entre dor e sofrimento, alerto sobre o perigo de se acostumar ao que faz mal ("Efeito Sapo na Panela") e mostro como dar a volta por cima.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 13 min de leitura</span>
+              <a href="artigos/diferenca-crucial-entre-dor-e-sofrimento-efeito-sapo-na-panela.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="tristeza-e-melancolia|dores-emocionais|ressignificar-a-vida" data-search="você sente um vazio inexplicável e uma tristeza profunda? como a psicanálise me ajudou abro meu coração sobre como venci a depressão e como ajudo você a resgatar o sentido de viver através do acolhimento terapêutico e espiritual. a depressão e o vazio existencial ainda são cercados de incompreensão, mas têm caminho de saída e tratamento. neste relato humano e acolhedor, compartilho com você como enfrentei e venci dois episódios de depressão profunda na minha própria trajetória, explicando os sinais emocionais do esgotamento e como a psicanálise unida à espiritualidade reconstruiu a minha vontade de viver — e pode reconstruir a sua também. tristeza e melancolia dores emocionais ressignificar a vida">
+            <a href="artigos/vazio-inexplicavel-tristeza-profunda-como-a-psicanalise-me-ajudou.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_sTJ0PNQwaMo.jpg" alt="Você Sente um Vazio Inexplicável e uma Tristeza Profunda? Como a Psicanálise Me Ajudou" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="tristeza-e-melancolia">● Tristeza e melancolia</button><button type="button" class="cat-tag" data-select-cat="dores-emocionais">● Dores emocionais</button><button type="button" class="cat-tag" data-select-cat="ressignificar-a-vida">● Ressignificar a vida</button>
+              </div>
+              <h3><a href="artigos/vazio-inexplicavel-tristeza-profunda-como-a-psicanalise-me-ajudou.html">Você Sente um Vazio Inexplicável e uma Tristeza Profunda? Como a Psicanálise Me Ajudou</a></h3>
+              <p>A depressão e o vazio existencial ainda são cercados de incompreensão, mas têm caminho de saída e tratamento. Neste relato humano e acolhedor, compartilho com você como enfrentei e venci dois episódios de depressão profunda na minha própria trajetória, explicando os sinais emocionais do esgotamento e como a Psicanálise unida à espiritualidade reconstruiu a minha vontade de viver — e pode reconstruir a sua também.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 14 min de leitura</span>
+              <a href="artigos/vazio-inexplicavel-tristeza-profunda-como-a-psicanalise-me-ajudou.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="dificuldades-em-se-relacionar|dores-emocionais" data-search="dificuldades em se relacionar: a raiz da mágoa e a metáfora do copo vazio explico por que esperar que o outro preencha suas carências gera frustração constante e como construir relações mais leves e maduras. por que algumas atitudes ou palavras de parceiros, familiares e colegas nos ferem tão profundamente e deixam mágoas duradouras? nesta reflexão, converso com você sobre os mecanismos de projeção nos relacionamentos e apresento a metáfora do copo vazio: quando não nos validamos nem preenchemos nosso próprio interior, cobramos do outro uma conta emocional que ninguém além de nós mesmos pode pagar. dificuldades em se relacionar dores emocionais">
+            <a href="artigos/ego-inflado-destroi-suas-relacoes-magoa-copo-vazio.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_Y1pd7L6MjyE.jpg" alt="Dificuldades em se Relacionar: A Raiz da Mágoa e a Metáfora do Copo Vazio" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="dificuldades-em-se-relacionar">● Dificuldades em se relacionar</button><button type="button" class="cat-tag" data-select-cat="dores-emocionais">● Dores emocionais</button>
+              </div>
+              <h3><a href="artigos/ego-inflado-destroi-suas-relacoes-magoa-copo-vazio.html">Dificuldades em se Relacionar: A Raiz da Mágoa e a Metáfora do Copo Vazio</a></h3>
+              <p>Por que algumas atitudes ou palavras de parceiros, familiares e colegas nos ferem tão profundamente e deixam mágoas duradouras? Nesta reflexão, converso com você sobre os mecanismos de projeção nos relacionamentos e apresento a metáfora do "Copo Vazio": quando não nos validamos nem preenchemos nosso próprio interior, cobramos do outro uma conta emocional que ninguém além de nós mesmos pode pagar.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 12 min de leitura</span>
+              <a href="artigos/ego-inflado-destroi-suas-relacoes-magoa-copo-vazio.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="ressignificar-a-vida|crencas-limitantes|falta-de-prosperidade" data-search="como você se trata? o perigo de viver no piloto automático e esquecer de si mesmo meu convite para você desacelerar, perceber a beleza das pequenas coisas e reconectar-se com o seu verdadeiro valor. na correria do dia a dia, quantas vezes cuidamos de todas as obrigações e esquecemos completamente de nós mesmos? neste texto e vídeo acolhedor, convido você a fazer uma pausa para observar como tem se tratado, valorizar o afeto verdadeiro dentro de casa e resgatar a sua significância única. ressignificar a vida crenças limitantes falta de prosperidade">
+            <a href="artigos/como-voce-se-trata-voce-e-bom-para-voce.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_dCvpCjboqDY.jpg" alt="Como Você Se Trata? O Perigo de Viver no Piloto Automático e Esquecer de Si Mesmo" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="ressignificar-a-vida">● Ressignificar a vida</button><button type="button" class="cat-tag" data-select-cat="crencas-limitantes">● Crenças limitantes</button><button type="button" class="cat-tag" data-select-cat="falta-de-prosperidade">● Falta de Prosperidade</button>
+              </div>
+              <h3><a href="artigos/como-voce-se-trata-voce-e-bom-para-voce.html">Como Você Se Trata? O Perigo de Viver no Piloto Automático e Esquecer de Si Mesmo</a></h3>
+              <p>Na correria do dia a dia, quantas vezes cuidamos de todas as obrigações e esquecemos completamente de nós mesmos? Neste texto e vídeo acolhedor, convido você a fazer uma pausa para observar como tem se tratado, valorizar o afeto verdadeiro dentro de casa e resgatar a sua significância única.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 6 min de leitura</span>
+              <a href="artigos/como-voce-se-trata-voce-e-bom-para-voce.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="medos-e-traumas|dores-emocionais|tristeza-e-melancolia" data-search="quais são os seus medos? o custo invisível de fingir estar bem e 3 passos para uma vida plena por que usar uma máscara de fortaleza o tempo todo esgota sua energia e como ajudo você na psicanálise a viver com verdade. tentar parecer forte o tempo todo e esconder as próprias dores atrás de um sorriso cobra um preço altíssimo da nossa saúde emocional e física. neste vídeo e artigo, apresento a você os 3 passos fundamentais que trabalho na clínica para sair do desgaste de fingir estar bem, compreender os seus medos e construir uma vida verdadeiramente plena. medos e traumas dores emocionais tristeza e melancolia">
+            <a href="artigos/custo-invisivel-de-fingir-estar-bem-3-passos-vida-plena.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_--MQ529auW0.jpg" alt="Quais São os Seus Medos? O Custo Invisível de Fingir Estar Bem e 3 Passos Para uma Vida Plena" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="medos-e-traumas">● Medos e Traumas</button><button type="button" class="cat-tag" data-select-cat="dores-emocionais">● Dores emocionais</button><button type="button" class="cat-tag" data-select-cat="tristeza-e-melancolia">● Tristeza e melancolia</button>
+              </div>
+              <h3><a href="artigos/custo-invisivel-de-fingir-estar-bem-3-passos-vida-plena.html">Quais São os Seus Medos? O Custo Invisível de Fingir Estar Bem e 3 Passos Para uma Vida Plena</a></h3>
+              <p>Tentar parecer forte o tempo todo e esconder as próprias dores atrás de um sorriso cobra um preço altíssimo da nossa saúde emocional e física. Neste vídeo e artigo, apresento a você os 3 passos fundamentais que trabalho na clínica para sair do desgaste de fingir estar bem, compreender os seus medos e construir uma vida verdadeiramente plena.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 11 min de leitura</span>
+              <a href="artigos/custo-invisivel-de-fingir-estar-bem-3-passos-vida-plena.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="medos-e-traumas|dificuldades-em-se-relacionar|falta-de-prosperidade" data-search="o que a sua ansiedade está escondendo de você? quando você abre mão de si mesmo como a ansiedade funciona como um alerta de que você está vivendo no automático, em relações desgastantes ou longe do seu desejo. o brasil é considerado pela oms o país mais ansioso do mundo. mas e se a sua ansiedade não for apenas uma inimiga, e sim um mensageiro avisando que algo na sua vida precisa de cuidado? apoiada na minha clínica psicanalítica e no pensamento de jacques lacan, explico para você por que a ansiedade dispara quando você cede do seu próprio desejo e passa a viver pisando em ovos. medos e traumas dificuldades em se relacionar falta de prosperidade">
+            <a href="artigos/o-que-a-sua-ansiedade-esta-escondendo-de-voce.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_SLJLU_rsxzg.jpg" alt="O Que a Sua Ansiedade Está Escondendo de Você? Quando Você Abre Mão de Si Mesmo" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="medos-e-traumas">● Medos e Traumas</button><button type="button" class="cat-tag" data-select-cat="dificuldades-em-se-relacionar">● Dificuldades em se relacionar</button><button type="button" class="cat-tag" data-select-cat="falta-de-prosperidade">● Falta de Prosperidade</button>
+              </div>
+              <h3><a href="artigos/o-que-a-sua-ansiedade-esta-escondendo-de-voce.html">O Que a Sua Ansiedade Está Escondendo de Você? Quando Você Abre Mão de Si Mesmo</a></h3>
+              <p>O Brasil é considerado pela OMS o país mais ansioso do mundo. Mas e se a sua ansiedade não for apenas uma inimiga, e sim um mensageiro avisando que algo na sua vida precisa de cuidado? Apoiada na minha clínica psicanalítica e no pensamento de Jacques Lacan, explico para você por que a ansiedade dispara quando você cede do seu próprio desejo e passa a viver "pisando em ovos".</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 10 min de leitura</span>
+              <a href="artigos/o-que-a-sua-ansiedade-esta-escondendo-de-voce.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="falta-de-prosperidade|padroes-repetitivos|ressignificar-a-vida" data-search="mesa quântica estelar: como funciona minha terapia complementar para destravar caminhos apresento as 4 técnicas integradas que utilizo há mais de 10 anos nos meus atendimentos para limpeza energética e harmonização da sua vida. muitas vezes sentimos que, apesar de todo esforço, certas áreas da vida (profissional, financeira, familiar ou afetiva) parecem bloqueadas por uma força invisível. neste guia completo, eu — valéria pereira, operadora e professora de mesa quântica estelar há mais de 10 anos — explico como trabalho com as 4 técnicas desse atendimento (radiestesia, radiônica, psiônica e energia quântica) para limpeza energética e abertura dos seus caminhos. falta de prosperidade padrões repetitivos ressignificar a vida">
+            <a href="artigos/mesa-quantica-estelar-como-funciona-beneficios.html" class="card-thumb-link">
+              <img src="assets/thumbs/mesa-quantica-estelar-como-funciona-beneficios.png" alt="Mesa Quântica Estelar: Como Funciona Minha Terapia Complementar Para Destravar Caminhos" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="falta-de-prosperidade">● Falta de Prosperidade</button><button type="button" class="cat-tag" data-select-cat="padroes-repetitivos">● Padrões repetitivos</button><button type="button" class="cat-tag" data-select-cat="ressignificar-a-vida">● Ressignificar a vida</button>
+              </div>
+              <h3><a href="artigos/mesa-quantica-estelar-como-funciona-beneficios.html">Mesa Quântica Estelar: Como Funciona Minha Terapia Complementar Para Destravar Caminhos</a></h3>
+              <p>Muitas vezes sentimos que, apesar de todo esforço, certas áreas da vida (profissional, financeira, familiar ou afetiva) parecem bloqueadas por uma força invisível. Neste guia completo, eu — Valéria Pereira, operadora e professora de Mesa Quântica Estelar há mais de 10 anos — explico como trabalho com as 4 técnicas desse atendimento (Radiestesia, Radiônica, Psiônica e Energia Quântica) para limpeza energética e abertura dos seus caminhos.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 7 min de leitura</span>
+              <a href="artigos/mesa-quantica-estelar-como-funciona-beneficios.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="padroes-repetitivos|falta-de-prosperidade|crencas-limitantes" data-search="minha vida estava uma bagunça... até eu entender as 3 causas invisíveis da estagnação compartilho a metáfora do galpão com goteiras e como sair das 3 formas de empobrecimento interno: psicológico, moral e espiritual. por que às vezes sentimos que estamos enxugando gelo na vida, resolvendo uma crise hoje apenas para ver outra surgir amanhã? neste artigo baseado no vídeo mais assistido do meu canal psicanálise alma e luz, apresento a você a metáfora do galpão com goteiras e explico como identificar e superar as 3 formas de empobrecimento interno (psicológico, moral e espiritual) para reconstruir sua vida pela raiz. padrões repetitivos falta de prosperidade crenças limitantes">
+            <a href="artigos/minha-vida-estava-uma-bagunca-pobreza-de-espirito.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_2NokFwupKAE.jpg" alt="Minha Vida Estava uma Bagunça... Até Eu Entender as 3 Causas Invisíveis da Estagnação" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="padroes-repetitivos">● Padrões repetitivos</button><button type="button" class="cat-tag" data-select-cat="falta-de-prosperidade">● Falta de Prosperidade</button><button type="button" class="cat-tag" data-select-cat="crencas-limitantes">● Crenças limitantes</button>
+              </div>
+              <h3><a href="artigos/minha-vida-estava-uma-bagunca-pobreza-de-espirito.html">Minha Vida Estava uma Bagunça... Até Eu Entender as 3 Causas Invisíveis da Estagnação</a></h3>
+              <p>Por que às vezes sentimos que estamos enxugando gelo na vida, resolvendo uma crise hoje apenas para ver outra surgir amanhã? Neste artigo baseado no vídeo mais assistido do meu canal Psicanálise Alma e Luz, apresento a você a metáfora do "Galpão com Goteiras" e explico como identificar e superar as 3 formas de empobrecimento interno (psicológico, moral e espiritual) para reconstruir sua vida pela raiz.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 7 min de leitura</span>
+              <a href="artigos/minha-vida-estava-uma-bagunca-pobreza-de-espirito.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="sentimentos-de-culpa|arrependimentos|dores-emocionais" data-search="qual é a minha culpa? como se libertar do sentimento de culpa e dos arrependimentos ensino os 2 passos práticos para transformar o remorso que paralisa você em reparação, autoperdão e leveza emocional. o sentimento de culpa e o arrependimento estão entre as dores mais corrosivas da alma humana. apoiada na minha prática psicanalítica e na sabedoria de joanna de ângelis, explico a você por que a culpa conservada na mente age como um ácido emocional e apresento os 2 passos libertadores para sair da autopunição: a retratação sincera (com o outro ou consigo mesmo) e a reeducação dos pensamentos. sentimentos de culpa arrependimentos dores emocionais">
+            <a href="artigos/qual-e-a-minha-culpa-como-se-libertar-do-algoz-interno.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_U-VwLLDF0NM.jpg" alt="Qual É a Minha Culpa? Como Se Libertar do Sentimento de Culpa e dos Arrependimentos" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="sentimentos-de-culpa">● Sentimentos de culpa</button><button type="button" class="cat-tag" data-select-cat="arrependimentos">● Arrependimentos</button><button type="button" class="cat-tag" data-select-cat="dores-emocionais">● Dores emocionais</button>
+              </div>
+              <h3><a href="artigos/qual-e-a-minha-culpa-como-se-libertar-do-algoz-interno.html">Qual É a Minha Culpa? Como Se Libertar do Sentimento de Culpa e dos Arrependimentos</a></h3>
+              <p>O sentimento de culpa e o arrependimento estão entre as dores mais corrosivas da alma humana. Apoiada na minha prática psicanalítica e na sabedoria de Joanna de Ângelis, explico a você por que a culpa conservada na mente age como um ácido emocional e apresento os 2 passos libertadores para sair da autopunição: a retratação sincera (com o outro ou consigo mesmo) e a reeducação dos pensamentos.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 6 min de leitura</span>
+              <a href="artigos/qual-e-a-minha-culpa-como-se-libertar-do-algoz-interno.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="ressignificar-a-vida|falta-de-prosperidade|tristeza-e-melancolia" data-search="a que você se dedica? como cuidar do jardim da sua existência e desbloquear a prosperidade uma meditação sobre valorização pessoal, sintonia com o universo e como plantar sementes que florescem em paz e abundância. a que você tem dedicado o seu tempo, os seus pensamentos e a sua energia todos os dias? inspirada em uma meditação do livro pílulas de esperança (de andrei moreira, pelo espírito dias da cruz), converso com você sobre a metáfora do jardim da existência: por que esperar que os outros reguem o seu jardim gera frustração e como a conexão profunda consigo mesmo(a) abre o fluxo da inspiração e da prosperidade. ressignificar a vida falta de prosperidade tristeza e melancolia">
+            <a href="artigos/a-que-voce-se-dedica-jardim-da-existencia.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_kpoBQEbQpN4.jpg" alt="A Que Você Se Dedica? Como Cuidar do Jardim da Sua Existência e Desbloquear a Prosperidade" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="ressignificar-a-vida">● Ressignificar a vida</button><button type="button" class="cat-tag" data-select-cat="falta-de-prosperidade">● Falta de Prosperidade</button><button type="button" class="cat-tag" data-select-cat="tristeza-e-melancolia">● Tristeza e melancolia</button>
+              </div>
+              <h3><a href="artigos/a-que-voce-se-dedica-jardim-da-existencia.html">A Que Você Se Dedica? Como Cuidar do Jardim da Sua Existência e Desbloquear a Prosperidade</a></h3>
+              <p>A que você tem dedicado o seu tempo, os seus pensamentos e a sua energia todos os dias? Inspirada em uma meditação do livro "Pílulas de Esperança" (de Andrei Moreira, pelo espírito Dias da Cruz), converso com você sobre a metáfora do "Jardim da Existência": por que esperar que os outros reguem o seu jardim gera frustração e como a conexão profunda consigo mesmo(a) abre o fluxo da inspiração e da prosperidade.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 8 min de leitura</span>
+              <a href="artigos/a-que-voce-se-dedica-jardim-da-existencia.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="tristeza-e-melancolia|dores-emocionais|medos-e-traumas" data-search="você não está sozinho(a)! a mensagem reveladora para atravessar o seu dia de chuva como superar o aperto no peito, a solidão profunda e a sensação de desamparo através do acolhimento psicanalítico e espiritual. você já sentiu um aperto no peito, uma solidão profunda ou aquela sensação dolorosa de que ninguém entende o que você está passando? neste vídeo e artigo, trago uma reflexão acolhedora sobre os nossos dias de chuva — mostrando por que o isolamento emocional é uma percepção momentânea e como a terapia e a espiritualidade ajudam você a atravessar a tempestade. tristeza e melancolia dores emocionais medos e traumas">
+            <a href="artigos/voce-nao-esta-sozinho-mensagem-dia-de-chuva.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_aqD90UVwRSc.jpg" alt="Você Não Está Sozinho(a)! A Mensagem Reveladora Para Atravessar o Seu &quot;Dia de Chuva&quot;" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="tristeza-e-melancolia">● Tristeza e melancolia</button><button type="button" class="cat-tag" data-select-cat="dores-emocionais">● Dores emocionais</button><button type="button" class="cat-tag" data-select-cat="medos-e-traumas">● Medos e Traumas</button>
+              </div>
+              <h3><a href="artigos/voce-nao-esta-sozinho-mensagem-dia-de-chuva.html">Você Não Está Sozinho(a)! A Mensagem Reveladora Para Atravessar o Seu "Dia de Chuva"</a></h3>
+              <p>Você já sentiu um aperto no peito, uma solidão profunda ou aquela sensação dolorosa de que ninguém entende o que você está passando? Neste vídeo e artigo, trago uma reflexão acolhedora sobre os nossos "dias de chuva" — mostrando por que o isolamento emocional é uma percepção momentânea e como a terapia e a espiritualidade ajudam você a atravessar a tempestade.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 6 min de leitura</span>
+              <a href="artigos/voce-nao-esta-sozinho-mensagem-dia-de-chuva.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="dificuldades-em-se-relacionar|arrependimentos|sentimentos-de-culpa" data-search="visualizou e não respondeu? o que a sua raiva e o arrependimento dizem sobre você o espelho da raiva nos relacionamentos: por que a irritação com o vácuo do outro revela o quanto você tem se deixado em segundo plano. muitas vezes achamos que a nossa raiva ou explosão emocional é 100% justificada pelo erro do outro — como quando alguém visualiza uma mensagem e não responde. neste vídeo e artigo, trago a você uma visão psicanalítica sincera e libertadora sobre o espelho da raiva: como a irritação acumulada intoxica o seu corpo, gera atitudes impulsivas seguidas de arrependimento e mostra que você precisa voltar a se dar prioridade. dificuldades em se relacionar arrependimentos sentimentos de culpa">
+            <a href="artigos/visualizou-e-nao-respondeu-o-que-sua-raiva-diz-sobre-voce.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_KXshLa9fWa0.jpg" alt="Visualizou e Não Respondeu? O Que a Sua Raiva e o Arrependimento Dizem Sobre Você" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="dificuldades-em-se-relacionar">● Dificuldades em se relacionar</button><button type="button" class="cat-tag" data-select-cat="arrependimentos">● Arrependimentos</button><button type="button" class="cat-tag" data-select-cat="sentimentos-de-culpa">● Sentimentos de culpa</button>
+              </div>
+              <h3><a href="artigos/visualizou-e-nao-respondeu-o-que-sua-raiva-diz-sobre-voce.html">Visualizou e Não Respondeu? O Que a Sua Raiva e o Arrependimento Dizem Sobre Você</a></h3>
+              <p>Muitas vezes achamos que a nossa raiva ou explosão emocional é 100% justificada pelo erro do outro — como quando alguém visualiza uma mensagem e não responde. Neste vídeo e artigo, trago a você uma visão psicanalítica sincera e libertadora sobre o "Espelho da Raiva": como a irritação acumulada intoxica o seu corpo, gera atitudes impulsivas seguidas de arrependimento e mostra que você precisa voltar a se dar prioridade.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 7 min de leitura</span>
+              <a href="artigos/visualizou-e-nao-respondeu-o-que-sua-raiva-diz-sobre-voce.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+          
+          <article class="article-card" data-categories="dificuldades-em-se-relacionar|crencas-limitantes|sentimentos-de-culpa" data-search="você acha que as pessoas falam mal de você? como se libertar do medo do julgamento entenda como a projeção mental cria filmes de perseguição na nossa cabeça e descubra a liberdade de não levar nada para o lado pessoal. você já entrou em um ambiente ou conversou com alguém sentindo que estavam julgando ou falando mal de você? neste vídeo e artigo, explico como funciona o mecanismo psicanalítico da projeção: por que muitas vezes projetamos nos outros as críticas que nós mesmos fazemos contra nós, e como conquistar a liberdade emocional de focar no seu próprio coração. dificuldades em se relacionar crenças limitantes sentimentos de culpa">
+            <a href="artigos/voce-acha-que-as-pessoas-falam-mal-de-voce.html" class="card-thumb-link">
+              <img src="assets/thumbs/yt_9r2JD5Q6-qk.jpg" alt="Você Acha Que as Pessoas Falam Mal de Você? Como Se Libertar do Medo do Julgamento" loading="lazy">
+              <span class="card-play-badge">▶ Assistir vídeo + Ler artigo</span>
+            </a>
+            <div class="card-body">
+              <div class="card-meta">
+                <button type="button" class="cat-tag" data-select-cat="dificuldades-em-se-relacionar">● Dificuldades em se relacionar</button><button type="button" class="cat-tag" data-select-cat="crencas-limitantes">● Crenças limitantes</button><button type="button" class="cat-tag" data-select-cat="sentimentos-de-culpa">● Sentimentos de culpa</button>
+              </div>
+              <h3><a href="artigos/voce-acha-que-as-pessoas-falam-mal-de-voce.html">Você Acha Que as Pessoas Falam Mal de Você? Como Se Libertar do Medo do Julgamento</a></h3>
+              <p>Você já entrou em um ambiente ou conversou com alguém sentindo que estavam julgando ou falando mal de você? Neste vídeo e artigo, explico como funciona o mecanismo psicanalítico da projeção: por que muitas vezes projetamos nos outros as críticas que nós mesmos fazemos contra nós, e como conquistar a liberdade emocional de focar no seu próprio coração.</p>
+            </div>
+            <div class="card-footer">
+              <span>⏱️ 6 min de leitura</span>
+              <a href="artigos/voce-acha-que-as-pessoas-falam-mal-de-voce.html" class="read-more">Ler minha reflexão →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: MEU CONVITE FINAL PARA VOCÊ -->
+    <section class="container">
+      <div class="cta-box">
+        <span class="badge-flower" style="margin-bottom:12px;">Dê o Primeiro Passo Por Você</span>
+        <h2>Vamos juntos(as) cuidar da sua saúde emocional e espiritual?</h2>
+        <p>Não permita que medos, traumas, culpas ou dificuldades nos relacionamentos continuem paralisando a sua caminhada. Me chame no WhatsApp para agendarmos o seu <strong>Atendimento Online particular</strong> comigo.</p>
+        <div class="social-links">
+          <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
+            <span>Contato Atendimento Online via WhatsApp</span>
+          </a>
+          <a href="analise-canal.html" class="btn-flower-outline">Conhecer Minha História e Experiência Clínica</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Psicanálise Alma e Luz • Comigo, Valéria Pereira</h4>
+          <p style="margin-bottom:12px;">Meu espaço dedicado ao seu acolhimento emocional, autoconhecimento profundo e transformação de vida através da Psicanálise, da Espiritualidade e das Terapias Complementares.</p>
+          <p style="font-size:0.86rem;"><strong>Meus Atendimentos:</strong> Terapia Individual • Terapia de Casal • Mesa Quântica Estelar (100% Online • Particular, sem convênios)</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navegação Rápida</h4>
+          <ul>
+            <li><a href="index.html#atendimentos">Meus Tipos de Atendimento</a></li>
+            <li><a href="index.html#como-funciona-online">Como Funciona Meu Atendimento Online</a></li>
+            <li><a href="index.html#artigos">Blog: Meus Artigos e Vídeos por Categoria</a></li>
+            <li><a href="analise-canal.html">Minha Trajetória & Experiência</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Fale Comigo e Me Acompanhe</h4>
+          <ul>
+            <li><a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener"><strong>💬 Meu WhatsApp: (11) 92675-5744 (Atendimento Online)</strong></a></li>
+            <li><a href="https://www.youtube.com/@psicanalisealmaeluz" target="_blank" rel="noopener">🎥 Meu Canal no YouTube (@psicanalisealmaeluz)</a></li>
+            <li><a href="https://www.instagram.com/psicanalisealmaeluz/" target="_blank" rel="noopener">📸 Meu Instagram (@psicanalisealmaeluz)</a></li>
+            <li><a href="https://www.facebook.com/PsicanaliseAlmaeLuz" target="_blank" rel="noopener">👍 Meu Facebook (Psicanálise Alma e Luz)</a></li>
+            <li><a href="https://maps.app.goo.gl/VvZ8yxnsiZoaSH6w7" target="_blank" rel="noopener">📍 Depoimentos no Meu Google Perfil</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Psicanálise Alma e Luz — Por mim, Valéria Pereira • WhatsApp Atendimento Online: (11) 92675-5744. Todos os direitos reservados. <a href="painel-leads.html" style="opacity:0.55; margin-left:10px; font-size:0.8rem;" title="Acesso Administrativo ao Mini CRM">🔒 Painel CRM</a></p>
+      </div>
+    </div>
+  </footer>
+  <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Contato Atendimento Online comigo pelo WhatsApp (11) 92675-5744">
+    <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
+    <span>Atendimento Online</span>
+  </a>
+  <script>
+    // Controle do Cabeçalho Reduzido na Rolagem (Sticky Shrinking Header) + Submenu Blog
+    (function() {
+      var siteHeader = document.getElementById('siteHeader') || document.querySelector('.site-header');
+      var isHeaderScrolled = false;
+      function checkScroll() {
+        if (!siteHeader) return;
+        var y = window.scrollY;
+        if (!isHeaderScrolled && y > 48) {
+          isHeaderScrolled = true;
+          siteHeader.classList.add('scrolled');
+        } else if (isHeaderScrolled && y <= 12) {
+          isHeaderScrolled = false;
+          siteHeader.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', checkScroll, { passive: true });
+      checkScroll();
+
+      var dropdown = document.getElementById('blogNavDropdown');
+      var trigger = document.getElementById('blogNavTrigger');
+      if (dropdown && trigger) {
+        trigger.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var isOpen = dropdown.classList.toggle('open');
+          trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        document.addEventListener('click', function(e) {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+            trigger.setAttribute('aria-expanded', 'false');
+          }
+        });
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            dropdown.classList.remove('open');
+            trigger.setAttribute('aria-expanded', 'false');
+          }
+        });
+        dropdown.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            dropdown.classList.remove('open');
+            trigger.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
+  </script>
+  <script src="assets/crm-valeria.js" defer></script>
+
+  <script>
+    const categoryMeta = {"medos-e-traumas":{"slug":"medos-e-traumas","title":"Medos e Traumas","shortDesc":"Acolho você na elaboração de feridas da infância, ansiedades e choques emocionais que paralisam suas escolhas.","introFirstPerson":"Nos meus atendimentos online, acolho você com escuta segura para olharmos para a raiz dos seus medos, crises de ansiedade e traumas da infância — libertando o adulto que você é hoje das defesas que um dia precisou criar para sobreviver."},"dores-emocionais":{"slug":"dores-emocionais","title":"Dores emocionais","shortDesc":"Ajudo você a diferenciar a dor natural do sofrimento prolongado para superar términos, perdas e decepções.","introFirstPerson":"Sentir dor diante de perdas, términos ou decepções faz parte da nossa humanidade, mas permanecer preso ao sofrimento adoece a alma. Aqui reuni meus vídeos e artigos para ajudar você a elaborar e curar suas dores emocionais."},"arrependimentos":{"slug":"arrependimentos","title":"Arrependimentos","shortDesc":"Caminho ao seu lado para transformar o peso de decisões ou reações do passado em aprendizado e reconciliação interior.","introFirstPerson":"Muitas vezes nos chicoteamos pelo que fizemos, dissemos ou deixamos de viver no passado. Nestas reflexões, mostro como trabalho com você para transformar o arrependimento em maturidade, reparação e paz de espírito."},"crencas-limitantes":{"slug":"crencas-limitantes","title":"Crenças limitantes","shortDesc":"Trabalho com você para desconstruir vozes internas de incapacidade (\"não consigo\", \"não mereço\") que sabotam sua vida.","introFirstPerson":"Frases que ouvimos na infância ou rótulos que aceitamos ao longo da vida criam bloqueios invisíveis. Veja abaixo meus conteúdos dedicados a identificar e reprogramar crenças limitantes que travam a sua iniciativa e autoestima."},"ressignificar-a-vida":{"slug":"ressignificar-a-vida","title":"Ressignificar a vida","shortDesc":"Convido você a sair do piloto automático e do desgaste de fingir estar bem para viver alinhado(a) à sua essência.","introFirstPerson":"Ressignificar a vida é dar um novo sentido para a sua história, sair do piloto automático e reconectar-se com a sua verdadeira essência emocional e espiritual. Confira abaixo as reflexões que preparei sobre este tema."},"padroes-repetitivos":{"slug":"padroes-repetitivos","title":"Padrões repetitivos","shortDesc":"Identifico junto com você por que certas crises se repetem no trabalho ou no amor, tratando a causa pela raiz.","introFirstPerson":"Quando não compreendemos uma lição emocional no inconsciente, acabamos atraindo os mesmos cenários repetidas vezes. Nestes vídeos e artigos, explico como parar de \"enxugar gelo\" e curar a causa real dos padrões repetitivos."},"tristeza-e-melancolia":{"slug":"tristeza-e-melancolia","title":"Tristeza e melancolia","shortDesc":"Ofereço uma escuta empática e humana para ajudar você a atravessar o vazio existencial, a solidão e a depressão.","introFirstPerson":"Eu sei, tanto pela clínica psicanalítica quanto pela minha própria história de superação, o quanto o vazio e a tristeza profunda doem. Reuni aqui minhas mensagens de acolhimento e tratamento para os seus \"dias de chuva\"."},"sentimentos-de-culpa":{"slug":"sentimentos-de-culpa","title":"Sentimentos de culpa","shortDesc":"Auxilio você a se libertar do carrasco interno através do autoperdão, da retratação consciente e da leveza mental.","introFirstPerson":"A culpa conservada em silêncio corrói nossas forças como um ácido emocional. Nestes artigos e vídeos, compartilho como podemos desarmar esse algoz interno através do autoperdão e da reeducação dos pensamentos."},"falta-de-prosperidade":{"slug":"falta-de-prosperidade","title":"Falta de Prosperidade","shortDesc":"Unindo Psicanálise e Mesa Quântica Estelar, ajudo você a destravar bloqueios emocionais e energéticos de escassez.","introFirstPerson":"A prosperidade começa na mente, na frequência vibracional e na forma como nos sentimos merecedores da abundância. Veja como trabalho o desbloqueio de caminhos financeiros, profissionais e vitais."},"dificuldades-em-se-relacionar":{"slug":"dificuldades-em-se-relacionar","title":"Dificuldades em se relacionar","shortDesc":"Na Terapia Individual e de Casal, ajudo você a superar mágoas, cobranças, raiva e a sensação de \"pisar em ovos\".","introFirstPerson":"Relacionar-se exige autoconhecimento para não cobrarmos do outro o preenchimento do nosso próprio copo emocional nem vivermos nos anulando. Confira minhas reflexões sobre relacionamentos, limites e vida a dois."}};
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.article-card');
+    const catBanner = document.getElementById('categoryActiveBanner');
+    const catBannerTitle = document.getElementById('catBannerTitle');
+    const catBannerDesc = document.getElementById('catBannerDesc');
+    const catBannerWaBtn = document.getElementById('catBannerWaBtn');
+    let activeCategory = 'all';
+
+    function selectCategory(catSlug, shouldScroll) {
+      activeCategory = catSlug || 'all';
+      filterBtns.forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-filter') === activeCategory);
+      });
+
+      if (activeCategory !== 'all' && categoryMeta[activeCategory]) {
+        const info = categoryMeta[activeCategory];
+        catBannerTitle.textContent = '● ' + info.title + ' — Como posso ajudar você:';
+        catBannerDesc.textContent = info.introFirstPerson;
+        catBannerWaBtn.href = 'https://wa.me/5511926755744?text=' + encodeURIComponent(
+          'Olá, Valéria! Estava lendo seus conteúdos sobre "' + info.title + '" no site Psicanálise Alma e Luz e gostaria de saber mais sobre o seu Atendimento Online.'
+        );
+        catBanner.classList.add('visible');
+      } else {
+        catBanner.classList.remove('visible');
+      }
+
+      filterArticles();
+
+      if (shouldScroll) {
+        const sec = document.getElementById('artigos');
+        if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function filterArticles() {
+      const q = (searchInput.value || '').toLowerCase().trim();
+      cards.forEach(card => {
+        const cats = (card.getAttribute('data-categories') || '').split('|');
+        const text = card.getAttribute('data-search') || '';
+        const matchCat = activeCategory === 'all' || cats.includes(activeCategory);
+        const matchSearch = !q || text.includes(q);
+        card.style.display = (matchCat && matchSearch) ? 'flex' : 'none';
+      });
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectCategory(btn.getAttribute('data-filter'), false);
+      });
+    });
+
+    document.querySelectorAll('[data-select-cat]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        selectCategory(el.getAttribute('data-select-cat'), true);
+      });
+    });
+
+    searchInput.addEventListener('input', filterArticles);
+
+    // Se vier de um link de categoria de dentro de um artigo (?categoria=...)
+    const params = new URLSearchParams(window.location.search);
+    const urlCat = params.get('categoria');
+    if (urlCat && categoryMeta[urlCat]) {
+      selectCategory(urlCat, true);
+    }
+  </script>
+</body>
+</html>

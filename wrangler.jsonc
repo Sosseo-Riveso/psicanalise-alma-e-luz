@@ -1,0 +1,8 @@
+{
+  "name": "psicanalise-alma-e-luz",
+  "compatibility_date": "2026-04-01",
+  "main": "worker.js",
+  "assets": {
+    "directory": "."
+  }
+}

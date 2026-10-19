@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /painel-leads.html
+
+Sitemap: https://psicanalisealmaeluz.com.br/sitemap.xml

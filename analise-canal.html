@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Mim, Valéria Pereira & Minha Experiência | Psicanálise Alma e Luz</title>
+  <meta name="description" content="Conheça a minha história: eu sou Valéria Pereira (Psicanalista, Espiritualista e Terapeuta). Saiba como funcionam meus atendimentos online e minha dedicação à saúde emocional.">
+  <link rel="canonical" href="https://psicanalisealmaeluz.com.br/analise-canal.html">
+  <script>
+    // Se aberto diretamente via file:// no Windows, verifica se o servidor local http://localhost:8080 está ativo
+    // para garantir que o player do YouTube reproduza sem erro 153 de origem local.
+    if (window.location.protocol === 'file:') {
+      fetch('http://localhost:8080/assets/style.css', { mode: 'no-cors', cache: 'no-store' })
+        .then(() => {
+          const fileName = window.location.pathname.split('/').pop() || 'index.html';
+          window.location.replace('http://localhost:8080/' + fileName + window.location.search + window.location.hash);
+        })
+        .catch(() => {});
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <!-- 1ª Linha: Marca (1ª Coluna) + Botão WhatsApp (2ª Coluna) -->
+      <div class="header-top-row">
+        <a href="index.html" class="brand">
+          <img src="assets/valeria-foto.jpg" alt="Eu sou Valéria Pereira - Psicanálise Alma e Luz" class="brand-avatar">
+          <div class="brand-text">
+            <strong>Psicanálise Alma e Luz</strong>
+            <span>Eu sou Valéria Pereira • Terapia Individual, Casal e Complementares</span>
+          </div>
+        </a>
+        <div class="header-top-right">
+          <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp-header">
+            <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
+            <span>Contato Atendimento Online</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 2ª Linha: Menu de Navegação + Item Blog com Submenu de todas as 10 Categorias -->
+      <div class="header-nav-row">
+        <nav class="nav-links" aria-label="Menu Principal">
+          <a href="index.html" class="nav-item ">Início</a>
+          <a href="index.html#atendimentos" class="nav-item">Meus Atendimentos</a>
+          <a href="index.html#como-funciona-online" class="nav-item">Atendimento Online</a>
+          <div class="nav-dropdown" id="blogNavDropdown">
+            <button type="button" class="nav-dropdown-trigger " id="blogNavTrigger" aria-expanded="false" aria-haspopup="true">
+              <span>Blog</span>
+              <span class="nav-dropdown-caret">▾</span>
+            </button>
+            <div class="nav-dropdown-menu" id="blogNavMenu" role="menu">
+              <div class="nav-dropdown-header">
+                <span>🌸 Meus Artigos e Vídeos por Categoria:</span>
+                <a href="index.html#artigos" >Ver todos (16) →</a>
+              </div>
+              <div class="nav-dropdown-grid">
+                <a href="index.html?categoria=medos-e-traumas#artigos" class="nav-dropdown-item" >
+                <span><span class="dot">●</span>Medos e Traumas</span>
+                <span class="count-pill">4</span>
+              </a>
+              <a href="index.html?categoria=dores-emocionais#artigos" class="nav-dropdown-item" >
+                <span><span class="dot">●</span>Dores emocionais</span>
+                <span class="count-pill">6</span>
+              </a>
+              <a href="index.html?categoria=arrependimentos#artigos" class="nav-dropdown-item" >
+                <span><span class="dot">●</span>Arrependimentos</span>
+                <span class="count-pill">3</span>
+              </a>
+              <a href="index.html?categoria=crencas-limitantes#artigos" class="nav-dropdown-item" >
+                <span><span class="dot">●</span>Crenças limitantes</span>
+                <span class="count-pill">5</span>
+              </a>
+              <a href="index.html?categoria=ressignificar-a-vida#artigos" class="nav-dropdown-item" >
+                <span><span class="dot">●</span>Ressignificar a vida</span>
+                <span class="count-pill">6</span>
+              </a>
+              <a href="index.html?categoria=padroes-repetitivos#artigos" class="nav-dropdown-item" >
+                <span><span class="dot">●</span>Padrões repetitivos</span>
+                <span class="count-pill">5</span>
+              </a>
+              <a href="index.html?categoria=tristeza-e-melancolia#artigos" class="nav-dropdown-item" >
+                <span><span class="dot">●</span>Tristeza e melancolia</span>
+                <span class="count-pill">4</span>
+              </a>
+              <a href="index.html?categoria=sentimentos-de-culpa#artigos" class="nav-dropdown-item" >
+                <span><span class="dot">●</span>Sentimentos de culpa</span>
+                <span class="count-pill">4</span>
+              </a>
+              <a href="index.html?categoria=falta-de-prosperidade#artigos" class="nav-dropdown-item" >
+                <span><span class="dot">●</span>Falta de Prosperidade</span>
+                <span class="count-pill">6</span>
+              </a>
+              <a href="index.html?categoria=dificuldades-em-se-relacionar#artigos" class="nav-dropdown-item" >
+                <span><span class="dot">●</span>Dificuldades em se relacionar</span>
+                <span class="count-pill">4</span>
+              </a>
+              </div>
+            </div>
+          </div>
+          <a href="analise-canal.html" class="nav-item active">Sobre Mim & Minha Trajetória</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="article-header">
+      <div class="container">
+        <div class="breadcrumb"><a href="index.html">Início</a> › Sobre Mim & Minha Experiência em Atendimentos</div>
+        <div class="hero-badge-row">
+          <span class="badge-flower">Minha Escuta Clínica, Ética & Dedicação</span>
+          <span class="badge-amber">Mais de 10 Anos em Terapias Integrativas</span>
+        </div>
+        <h1>Prazer, Eu Sou Valéria Pereira: Minha Trajetória Dedicada ao Seu Acolhimento e Transformação</h1>
+        <p class="article-subtitle">Quero abrir o meu coração para que você conheça a minha história, a minha formação integrativa e como conduzo cada atendimento aqui no espaço <strong>Psicanálise Alma e Luz</strong>.</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Perfil da Valéria em 1ª pessoa -->
+      <section class="online-benefits-box" style="margin: 40px 0;">
+        <div>
+          <span class="badge-flower" style="margin-bottom:10px;">Quem Caminha Ao Seu Lado nas Sessões</span>
+          <h2 style="font-size:1.75rem; margin-bottom:14px;">Eu sou Valéria Pereira — Psicanalista, Espiritualista e Terapeuta</h2>
+          <p style="margin-bottom:14px;">Ao longo da minha caminhada pessoal e clínica, aprendi na prática e no estudo profundo que nenhuma dor humana deve ser diminuída ou julgada. Como <strong>Psicanalista e Espiritualista</strong>, uno o rigor da escuta do inconsciente (compreendendo traumas de infância, mecanismos de defesa do ego, culpas e dinâmicas de relacionamento) à sensibilidade da espiritualidade e das terapias integrativas.</p>
+          <p style="margin-bottom:14px;">Também atuo como operadora e professora de <strong>Mesa Quântica Estelar há mais de 10 anos</strong>. Nesse período, tive a alegria de auxiliar dezenas de clientes e alunos — e a mim mesma, quando venci dois episódios de depressão profunda — a superarem fases de estagnação, lutos, conflitos conjugais e bloqueios de prosperidade.</p>
+          <div class="hero-actions" style="margin-top:22px; margin-bottom:0;">
+            <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="btn-whatsapp">
+              <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
+              <span>Falar Comigo e Agendar Atendimento Online</span>
+            </a>
+            <a href="https://maps.app.goo.gl/VvZ8yxnsiZoaSH6w7" target="_blank" rel="noopener" class="btn-flower-outline">⭐ Ver Depoimentos dos Meus Clientes no Google</a>
+          </div>
+        </div>
+        <div class="online-cta-panel">
+          <img src="assets/sobre-valeria-pereira.jpg" alt="Eu sou Valéria Pereira — Psicanalista, Espiritualista e Terapeuta (Psicanálise Alma e Luz)" style="width:100%; max-width:340px; border-radius:14px; border:2px solid var(--border-strong); margin-bottom:12px; box-shadow:0 10px 28px rgba(4,42,55,0.12);">
+          <p style="font-size:0.86rem; color:var(--text-muted); font-weight:600;">Valéria Pereira • Terapia Individual, Terapia de Casal e Terapias Complementares</p>
+        </div>
+      </section>
+
+      <!-- Nota delicada sobre convênios em 1ª pessoa -->
+      <div class="delicate-convenio-note">
+        <div class="delicate-convenio-icon">💛</div>
+        <div>
+          <h4>Por que realizo apenas atendimentos particulares (e não atendo convênios no momento)</h4>
+          <p>
+            Muitas pessoas me perguntam com carinho se atendo por planos de saúde. No momento, <strong>não realizo atendimentos por convênios</strong>. Tomei essa decisão com muito respeito a você: no atendimento particular online, consigo dedicar o tempo integral que a sua dor e a sua história pedem, sem sessões cronometradas às pressas e com total liberdade para integrarmos a escuta psicanalítica e as terapias complementares no seu próprio ritmo. Quando quiser conversar sobre valores e formatos de acompanhamento, basta me chamar no WhatsApp.
+          </p>
+        </div>
+      </div>
+
+      <!-- Prova Social e Consistência Profissional em 1ª pessoa -->
+      <section class="analysis-box">
+        <h2>🌱 Meu Compromisso Público com a Saúde Emocional</h2>
+        <p>Além dos meus atendimentos clínicos individuais e de casal, mantenho há mais de 3 anos um trabalho semanal ininterrupto de educação emocional e espiritual aberta no meu canal <strong>Psicanálise Alma e Luz</strong>, levando acolhimento gratuito a milhares de pessoas:</p>
+
+        <div class="online-steps-grid" style="margin-top:24px; margin-bottom:24px;">
+          <div class="step-card" style="text-align:center;">
+            <div style="font-size:2rem; font-weight:800; color:var(--flower-dark); font-family:'Lora', serif;">10+ Anos</div>
+            <h3 style="margin-top:6px;">Minha Prática Terapêutica</h3>
+            <p>Mais de uma década atuando com terapias integrativas, escuta humana e abertura de caminhos.</p>
+          </div>
+          <div class="step-card" style="text-align:center;">
+            <div style="font-size:2rem; font-weight:800; color:var(--flower-dark); font-family:'Lora', serif;">80+ Reflexões</div>
+            <h3 style="margin-top:6px;">Conteúdo Autoral</h3>
+            <p>Mais de 80 vídeos profundos que gravei unindo Psicanálise, Neurociência e Espiritualidade.</p>
+          </div>
+          <div class="step-card" style="text-align:center;">
+            <div style="font-size:2rem; font-weight:800; color:var(--flower-dark); font-family:'Lora', serif;">+7.500</div>
+            <h3 style="margin-top:6px;">Pessoas Alcançadas</h3>
+            <p>Milhares de visualizações orgânicas de pessoas que acompanham minhas mensagens para transformar a própria vida.</p>
+          </div>
+          <div class="step-card" style="text-align:center;">
+            <div style="font-size:2rem; font-weight:800; color:var(--flower-dark); font-family:'Lora', serif;">100% Online</div>
+            <h3 style="margin-top:6px;">Acolhimento Sem Fronteiras</h3>
+            <p>Atendo por videochamada com total sigilo clientes em diversas cidades do Brasil e no exterior.</p>
+          </div>
+        </div>
+
+        <h3>As 10 Demandas Que Mais Acolho no Meu Consultório Online</h3>
+        <p>O que as pessoas mais buscam nos meus vídeos reflete exatamente o que escuto e trato todos os dias nos meus atendimentos online. Veja como cada uma das 10 categorias do meu trabalho se conecta com a sua vida:</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Categoria do Meu Atendimento</th>
+                <th>Como Eu Trabalho Essa Demanda Com Você</th>
+                <th>Meus Artigos e Vídeos</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <tr>
+                <td><strong>● Medos e Traumas</strong></td>
+                <td>Acolho você na elaboração de feridas da infância, ansiedades e choques emocionais que paralisam suas escolhas.</td>
+                <td><a href="index.html?categoria=medos-e-traumas#artigos">Ver 4 conteúdos meus →</a></td>
+              </tr>
+              <tr>
+                <td><strong>● Dores emocionais</strong></td>
+                <td>Ajudo você a diferenciar a dor natural do sofrimento prolongado para superar términos, perdas e decepções.</td>
+                <td><a href="index.html?categoria=dores-emocionais#artigos">Ver 6 conteúdos meus →</a></td>
+              </tr>
+              <tr>
+                <td><strong>● Arrependimentos</strong></td>
+                <td>Caminho ao seu lado para transformar o peso de decisões ou reações do passado em aprendizado e reconciliação interior.</td>
+                <td><a href="index.html?categoria=arrependimentos#artigos">Ver 3 conteúdos meus →</a></td>
+              </tr>
+              <tr>
+                <td><strong>● Crenças limitantes</strong></td>
+                <td>Trabalho com você para desconstruir vozes internas de incapacidade ("não consigo", "não mereço") que sabotam sua vida.</td>
+                <td><a href="index.html?categoria=crencas-limitantes#artigos">Ver 5 conteúdos meus →</a></td>
+              </tr>
+              <tr>
+                <td><strong>● Ressignificar a vida</strong></td>
+                <td>Convido você a sair do piloto automático e do desgaste de fingir estar bem para viver alinhado(a) à sua essência.</td>
+                <td><a href="index.html?categoria=ressignificar-a-vida#artigos">Ver 6 conteúdos meus →</a></td>
+              </tr>
+              <tr>
+                <td><strong>● Padrões repetitivos</strong></td>
+                <td>Identifico junto com você por que certas crises se repetem no trabalho ou no amor, tratando a causa pela raiz.</td>
+                <td><a href="index.html?categoria=padroes-repetitivos#artigos">Ver 5 conteúdos meus →</a></td>
+              </tr>
+              <tr>
+                <td><strong>● Tristeza e melancolia</strong></td>
+                <td>Ofereço uma escuta empática e humana para ajudar você a atravessar o vazio existencial, a solidão e a depressão.</td>
+                <td><a href="index.html?categoria=tristeza-e-melancolia#artigos">Ver 4 conteúdos meus →</a></td>
+              </tr>
+              <tr>
+                <td><strong>● Sentimentos de culpa</strong></td>
+                <td>Auxilio você a se libertar do carrasco interno através do autoperdão, da retratação consciente e da leveza mental.</td>
+                <td><a href="index.html?categoria=sentimentos-de-culpa#artigos">Ver 4 conteúdos meus →</a></td>
+              </tr>
+              <tr>
+                <td><strong>● Falta de Prosperidade</strong></td>
+                <td>Unindo Psicanálise e Mesa Quântica Estelar, ajudo você a destravar bloqueios emocionais e energéticos de escassez.</td>
+                <td><a href="index.html?categoria=falta-de-prosperidade#artigos">Ver 6 conteúdos meus →</a></td>
+              </tr>
+              <tr>
+                <td><strong>● Dificuldades em se relacionar</strong></td>
+                <td>Na Terapia Individual e de Casal, ajudo você a superar mágoas, cobranças, raiva e a sensação de "pisar em ovos".</td>
+                <td><a href="index.html?categoria=dificuldades-em-se-relacionar#artigos">Ver 4 conteúdos meus →</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="cta-box">
+        <h2>Agende Sua Sessão Online Comigo</h2>
+        <p>Seja através da <strong>Terapia Individual</strong>, da <strong>Terapia de Casal</strong> ou da <strong>Mesa Quântica Estelar</strong>, estarei aqui para caminhar com você com ética, acolhimento e dedicação.</p>
+        <div class="social-links">
+          <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
+            <span>Falar Comigo no WhatsApp</span>
+          </a>
+          <a href="index.html#atendimentos" class="btn-flower">Ver Todos os Meus Atendimentos</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Psicanálise Alma e Luz • Comigo, Valéria Pereira</h4>
+          <p style="margin-bottom:12px;">Meu espaço dedicado ao seu acolhimento emocional, autoconhecimento profundo e transformação de vida através da Psicanálise, da Espiritualidade e das Terapias Complementares.</p>
+          <p style="font-size:0.86rem;"><strong>Meus Atendimentos:</strong> Terapia Individual • Terapia de Casal • Mesa Quântica Estelar (100% Online • Particular, sem convênios)</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navegação Rápida</h4>
+          <ul>
+            <li><a href="index.html#atendimentos">Meus Tipos de Atendimento</a></li>
+            <li><a href="index.html#como-funciona-online">Como Funciona Meu Atendimento Online</a></li>
+            <li><a href="index.html#artigos">Blog: Meus Artigos e Vídeos por Categoria</a></li>
+            <li><a href="analise-canal.html">Minha Trajetória & Experiência</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Fale Comigo e Me Acompanhe</h4>
+          <ul>
+            <li><a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener"><strong>💬 Meu WhatsApp: (11) 92675-5744 (Atendimento Online)</strong></a></li>
+            <li><a href="https://www.youtube.com/@psicanalisealmaeluz" target="_blank" rel="noopener">🎥 Meu Canal no YouTube (@psicanalisealmaeluz)</a></li>
+            <li><a href="https://www.instagram.com/psicanalisealmaeluz/" target="_blank" rel="noopener">📸 Meu Instagram (@psicanalisealmaeluz)</a></li>
+            <li><a href="https://www.facebook.com/PsicanaliseAlmaeLuz" target="_blank" rel="noopener">👍 Meu Facebook (Psicanálise Alma e Luz)</a></li>
+            <li><a href="https://maps.app.goo.gl/VvZ8yxnsiZoaSH6w7" target="_blank" rel="noopener">📍 Depoimentos no Meu Google Perfil</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Psicanálise Alma e Luz — Por mim, Valéria Pereira • WhatsApp Atendimento Online: (11) 92675-5744. Todos os direitos reservados. <a href="painel-leads.html" style="opacity:0.55; margin-left:10px; font-size:0.8rem;" title="Acesso Administrativo ao Mini CRM">🔒 Painel CRM</a></p>
+      </div>
+    </div>
+  </footer>
+  <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Contato Atendimento Online comigo pelo WhatsApp (11) 92675-5744">
+    <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
+    <span>Atendimento Online</span>
+  </a>
+  <script>
+    // Controle do Cabeçalho Reduzido na Rolagem (Sticky Shrinking Header) + Submenu Blog
+    (function() {
+      var siteHeader = document.getElementById('siteHeader') || document.querySelector('.site-header');
+      var isHeaderScrolled = false;
+      function checkScroll() {
+        if (!siteHeader) return;
+        var y = window.scrollY;
+        if (!isHeaderScrolled && y > 48) {
+          isHeaderScrolled = true;
+          siteHeader.classList.add('scrolled');
+        } else if (isHeaderScrolled && y <= 12) {
+          isHeaderScrolled = false;
+          siteHeader.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', checkScroll, { passive: true });
+      checkScroll();
+
+      var dropdown = document.getElementById('blogNavDropdown');
+      var trigger = document.getElementById('blogNavTrigger');
+      if (dropdown && trigger) {
+        trigger.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var isOpen = dropdown.classList.toggle('open');
+          trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        document.addEventListener('click', function(e) {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+            trigger.setAttribute('aria-expanded', 'false');
+          }
+        });
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            dropdown.classList.remove('open');
+            trigger.setAttribute('aria-expanded', 'false');
+          }
+        });
+        dropdown.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            dropdown.classList.remove('open');
+            trigger.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
+  </script>
+  <script src="assets/crm-valeria.js" defer></script>
+</body>
+</html>
