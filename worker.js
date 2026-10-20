@@ -1,5 +1,22 @@
 import { EmailMessage } from "cloudflare:email";
 
+function utf8ToBase64(str) {
+  const bytes = new TextEncoder().encode(String(str || ''));
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+
+function escapeHtml(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -161,7 +178,78 @@ export default {
           if (stored.length > 500) stored = stored.slice(0, 500);
           await env.LEADS_KV.put(KV_KEY, JSON.stringify(stored));
 
-          return new Response(JSON.stringify({ success: true, id }), {
+          // Disparo de E-mail via Cloudflare Email Routing (provisório para testes: riveso@gmail.com)
+          let emailSent = false;
+          if (env.SEND_EMAIL) {
+            try {
+              const siteName = 'Psicanálise Alma e Luz — Valéria Pereira';
+              const fromEmail = 'contato@sosseo.com.br';
+              const toEmail = 'riveso@gmail.com';
+              const nome = dados.nome || 'Visitante pelo Site';
+              const telefone = dados.telefone || 'Não informado';
+              const emailCliente = dados.email || 'Não informado';
+              const modalidade = dados.modalidade || 'Atendimento Online';
+              const preferenciaRetorno = dados.preferenciaRetorno || 'WhatsApp';
+              const mensagem = dados.mensagem || dados.relato || dados.detalhes || 'Contato iniciado pelo site.';
+              const pagina = dados.pagina || 'contato.html';
+              const tipoCanal = dados.tipo || dados.botao || 'Formulário de Contato';
+
+              const fromDisplayHeader = '=?UTF-8?B?' + utf8ToBase64(siteName) + '?= <' + fromEmail + '>';
+              const subject = '🌸 Psicanálise Alma e Luz — ' + nome + ' (' + modalidade + ')';
+              const subjectHeader = '=?UTF-8?B?' + utf8ToBase64(subject) + '?=';
+              const msgId = '<lead-' + Date.now() + '-' + Math.random().toString(36).slice(2, 9) + '@sosseo.com.br>';
+              const dateStr = new Date().toUTCString();
+              const brDate = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+              const rawPhone = String(telefone).replace(/\D/g, '');
+
+              const htmlBody = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"></head>
+<body style="font-family: Arial, sans-serif; background-color: #eef9fb; margin: 0; padding: 24px; color: #042a37;">
+  <div style="max-width: 620px; margin: 0 auto; background: #ffffff; border-radius: 14px; overflow: hidden; border: 1.5px solid #96cbd6;">
+    <div style="background: linear-gradient(135deg, #042a37 0%, #6347a6 100%); color: #ffffff; padding: 22px 28px;">
+      <h2 style="margin: 0; font-size: 20px;">🌸 Novo Contato — ${escapeHtml(siteName)}</h2>
+      <p style="margin: 6px 0 0; font-size: 13px; opacity: 0.92;">Recebido em ${escapeHtml(brDate)} • Canal: ${escapeHtml(tipoCanal)} (${escapeHtml(pagina)})</p>
+    </div>
+    <div style="padding: 24px 28px;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 15px;">
+        <tr><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold; width: 175px; color: #295666;">👤 Nome:</td><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold;">${escapeHtml(nome)}</td></tr>
+        <tr><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold; color: #295666;">📱 Telefone / WhatsApp:</td><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold; color: #128c7e;">${escapeHtml(telefone)}</td></tr>
+        <tr><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold; color: #295666;">✉️ E-mail:</td><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb;">${escapeHtml(emailCliente)}</td></tr>
+        <tr><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold; color: #295666;">🌷 Modalidade Buscada:</td><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; color: #6347a6; font-weight: bold;">${escapeHtml(modalidade)}</td></tr>
+        <tr><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold; color: #295666;">💬 Retorno Preferido:</td><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb;">${escapeHtml(preferenciaRetorno)}</td></tr>
+        <tr><td style="padding: 10px 0; font-weight: bold; color: #295666; vertical-align: top;">📝 Mensagem / Relato:</td><td style="padding: 10px 0; line-height: 1.55; white-space: pre-wrap;">${escapeHtml(mensagem)}</td></tr>
+      </table>
+      ${rawPhone ? `<div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid #eef9fb; text-align: center;">
+        <a href="https://api.whatsapp.com/send?phone=55${rawPhone}" style="display: inline-block; background-color: #25d366; color: #ffffff; text-decoration: none; font-weight: bold; padding: 12px 24px; border-radius: 999px; font-size: 14px;">💬 Responder no WhatsApp (${escapeHtml(telefone)})</a>
+      </div>` : ''}
+    </div>
+  </div>
+</body>
+</html>`;
+
+              const bodyB64 = utf8ToBase64(htmlBody).replace(/(.{76})/g, '$1\r\n');
+              const headersList = [
+                'From: ' + fromDisplayHeader,
+                'To: <' + toEmail + '>',
+                'Subject: ' + subjectHeader,
+                'Message-ID: ' + msgId,
+                'Date: ' + dateStr,
+                'MIME-Version: 1.0',
+                'Content-Type: text/html; charset=UTF-8',
+                'Content-Transfer-Encoding: base64'
+              ];
+              if (emailCliente && emailCliente.includes('@')) {
+                headersList.splice(2, 0, 'Reply-To: <' + emailCliente.trim() + '>');
+              }
+              const rawMime = headersList.join('\r\n') + '\r\n\r\n' + bodyB64 + '\r\n';
+
+              await env.SEND_EMAIL.send(new EmailMessage(fromEmail, toEmail, rawMime));
+              emailSent = true;
+            } catch (emailErr) {}
+          }
+
+          return new Response(JSON.stringify({ success: true, id, emailSent }), {
             status: 200,
             headers: corsHeaders
           });
@@ -188,6 +276,11 @@ export default {
 
     if (url.pathname === '/sobre') {
       url.pathname = '/sobre.html';
+      return Response.redirect(url.toString(), 301);
+    }
+
+    if (url.pathname === '/contato') {
+      url.pathname = '/contato.html';
       return Response.redirect(url.toString(), 301);
     }
 

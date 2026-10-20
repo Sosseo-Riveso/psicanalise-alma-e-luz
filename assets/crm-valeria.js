@@ -77,24 +77,34 @@
 
     function registrarTriagem(dados) {
         var agora = new Date();
+        var pad = function (n) { return n < 10 ? '0' + n : '' + n; };
+        var dataStr = pad(agora.getDate()) + '/' + pad(agora.getMonth() + 1) + '/' + agora.getFullYear();
+        var horaStr = pad(agora.getHours()) + ':' + pad(agora.getMinutes());
         var lista = getRegistros();
         var novo = {
             id: 'almaeluz_' + agora.getTime() + '_' + Math.random().toString(36).substring(2, 6),
             ts: agora.getTime(),
+            timestamp: agora.getTime(),
+            data: dataStr,
+            hora: horaStr,
             dataHora: formatarDataHora(agora),
-            anoMes: agora.getFullYear() + '-' + (agora.getMonth() + 1 < 10 ? '0' + (agora.getMonth() + 1) : '' + (agora.getMonth() + 1)),
+            anoMes: agora.getFullYear() + '-' + pad(agora.getMonth() + 1),
             nome: dados.nome || 'Visitante',
             telefone: dados.telefone || 'Não informado',
+            email: dados.email || '',
             modalidade: dados.modalidade || 'Atendimento Online',
+            preferenciaRetorno: dados.preferenciaRetorno || 'WhatsApp',
+            mensagem: dados.mensagem || '',
             pagina: window.location.pathname.split('/').pop() || 'index.html',
             tituloPagina: document.title.split('|')[0].trim(),
             origem: detectarOrigem(),
-            botao: dados.botao || 'Botão WhatsApp'
+            botao: dados.botao || 'Botão WhatsApp',
+            tipo: dados.tipo || dados.botao || 'WhatsApp Popup'
         };
         lista.unshift(novo);
         salvarRegistros(lista);
 
-        // Envio em background para API Cloudflare (/api/triagem) se disponível
+        // Envio em background para API Cloudflare (/api/triagem) se disponível (grava no KV e envia e-mail para riveso@gmail.com)
         try {
             fetch('/api/triagem', {
                 method: 'POST',
@@ -301,15 +311,102 @@
         }
     }
 
-    // ─── INTERCEPTAÇÃO DOS LINKS DE WHATSAPP ────────────────────────────────
+    // ─── INTERCEPTAÇÃO DOS LINKS DE WHATSAPP E FORMULÁRIO DE CONTATO ─────────
+    function inicializarFormularioContato() {
+        var forms = document.querySelectorAll('form[data-valeria-contact-form], #formContatoValeria');
+        forms.forEach(function (form) {
+            if (form.getAttribute('data-crm-bound') === 'true') return;
+            form.setAttribute('data-crm-bound', 'true');
+
+            var telInput = form.querySelector('input[name="telefone"]');
+            if (telInput) {
+                telInput.addEventListener('input', function () {
+                    telInput.value = aplicarMascaraTelefone(telInput.value);
+                });
+            }
+
+            form.addEventListener('submit', function (ev) {
+                ev.preventDefault();
+                var nomeEl = form.querySelector('[name="nome"]');
+                var telEl = form.querySelector('[name="telefone"]');
+                var emailEl = form.querySelector('[name="email"]');
+                var modEl = form.querySelector('[name="modalidade"]');
+                var prefEl = form.querySelector('[name="preferenciaRetorno"]');
+                var msgEl = form.querySelector('[name="mensagem"]');
+                var btnSubmit = form.querySelector('button[type="submit"]');
+                var feedbackEl = document.getElementById('contatoFormFeedback') || form.querySelector('[data-form-feedback]');
+
+                var nomeVal = nomeEl ? (nomeEl.value || '').trim() : '';
+                var telVal = telEl ? (telEl.value || '').trim() : '';
+                var emailVal = emailEl ? (emailEl.value || '').trim() : '';
+                var modVal = modEl ? (modEl.value || 'Atendimento Online') : 'Atendimento Online';
+                var prefVal = prefEl ? (prefEl.value || 'WhatsApp') : 'WhatsApp';
+                var msgVal = msgEl ? (msgEl.value || '').trim() : '';
+
+                if (!nomeVal) {
+                    if (nomeEl) nomeEl.focus();
+                    return;
+                }
+                if (telVal.replace(/\D/g, '').length < 10) {
+                    if (telEl) telEl.focus();
+                    return;
+                }
+
+                var originalBtnHtml = btnSubmit ? btnSubmit.innerHTML : '';
+                if (btnSubmit) {
+                    btnSubmit.disabled = true;
+                    btnSubmit.innerHTML = '<span>🌸 Enviando sua mensagem com carinho...</span>';
+                }
+
+                var lead = registrarTriagem({
+                    nome: nomeVal,
+                    telefone: telVal,
+                    email: emailVal,
+                    modalidade: modVal,
+                    preferenciaRetorno: prefVal,
+                    mensagem: msgVal,
+                    botao: 'Formulário de Contato',
+                    tipo: 'Formulário de Contato'
+                });
+
+                setTimeout(function () {
+                    if (btnSubmit) {
+                        btnSubmit.disabled = false;
+                        btnSubmit.innerHTML = originalBtnHtml;
+                    }
+                    if (feedbackEl) {
+                        var waTexto = encodeURIComponent(
+                            'Olá, Valéria! Acabei de enviar uma mensagem pelo Formulário de Contato do site Psicanálise Alma e Luz.\n\n' +
+                            'Meu nome é ' + nomeVal + ' (' + telVal + ').\n' +
+                            'Interesse: ' + modVal + (msgVal ? '\nMensagem: ' + msgVal : '')
+                        );
+                        feedbackEl.className = 'contact-feedback-box active';
+                        feedbackEl.innerHTML =
+                            '<strong>🌸 Recebi sua mensagem com muito carinho, ' + nomeVal.replace(/</g, '&lt;') + '!</strong><br>' +
+                            'Seu contato foi registrado com segurança (Protocolo <code>' + lead.id + '</code>) e enviado para o meu e-mail de atendimento. ' +
+                            'Retornarei o mais breve possível conforme sua preferência (<strong>' + prefVal.replace(/</g, '&lt;') + '</strong>).<br>' +
+                            '<div style="margin-top:12px;">' +
+                            '<a href="https://wa.me/5511926755744?text=' + waTexto + '" target="_blank" rel="noopener" data-no-modal="true" class="btn-whatsapp" style="padding:9px 18px;font-size:0.88rem;">' +
+                            '💬 Se desejar, clique aqui para já abrir nosso WhatsApp direto' +
+                            '</a>' +
+                            '</div>';
+                        feedbackEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                    form.reset();
+                }, 350);
+            });
+        });
+    }
+
     function inicializarInterceptacao() {
         limparExpirados();
+        inicializarFormularioContato();
 
         document.addEventListener('click', function (ev) {
             var link = ev.target.closest('a[href*="wa.me"], a[href*="whatsapp.com"]');
             if (!link) return;
 
-            // Se o link tiver data-no-modal="true" (ex: dentro do próprio painel CRM), não intercepta
+            // Se o link tiver data-no-modal="true" (ex: dentro do próprio painel CRM ou após envio do formulário), não intercepta
             if (link.getAttribute('data-no-modal') === 'true') return;
 
             ev.preventDefault();

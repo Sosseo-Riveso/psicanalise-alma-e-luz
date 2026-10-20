@@ -815,8 +815,11 @@
                 anoMes: anoMesStr,
                 nome: item.nome || item.contact || 'Visitante',
                 telefone: item.telefone || item.whatsapp || item.phone || '',
+                email: item.email || '',
                 modalidade: item.modalidade || item.servico || 'Atendimento Online',
                 servico: item.modalidade || item.servico || 'Atendimento Online',
+                preferenciaRetorno: item.preferenciaRetorno || '',
+                mensagem: item.mensagem || '',
                 pagina: item.pagina || item.paginaOrigem || 'index.html',
                 tituloPagina: item.tituloPagina || 'Psicanálise Alma e Luz',
                 origem: item.origem || 'Direto / Orgânico',
@@ -1156,6 +1159,7 @@
                     <td style="font-weight: 700; color: #ffffff;">
                         👤 ${lead.nome}
                         ${lead.modalidade ? `<div style="font-size: 11px; color: #94a3b8; font-weight: 500; margin-top: 2px;">✨ ${lead.modalidade}</div>` : ''}
+                        ${lead.email ? `<div style="font-size: 11px; color: #38bdf8; font-weight: 500; margin-top: 2px;">✉️ ${lead.email}</div>` : ''}
                     </td>
                     <td>
                         <strong style="color: #38bdf8; font-size: 15px;">${lead.telefone}</strong>
@@ -1195,7 +1199,9 @@
             const filtered = allLeads.filter(l => {
                 return (l.nome && l.nome.toLowerCase().includes(query)) ||
                        (l.telefone && l.telefone.toLowerCase().includes(query)) ||
+                       (l.email && l.email.toLowerCase().includes(query)) ||
                        (l.modalidade && l.modalidade.toLowerCase().includes(query)) ||
+                       (l.mensagem && l.mensagem.toLowerCase().includes(query)) ||
                        (l.pagina && l.pagina.toLowerCase().includes(query)) ||
                        (l.origem && l.origem.toLowerCase().includes(query)) ||
                        (l.data && l.data.toLowerCase().includes(query));
@@ -1223,6 +1229,16 @@
                     <span class="lead-detail-label">WhatsApp / Telefone</span>
                     <span class="lead-detail-val" style="color:#38bdf8;font-weight:700;">${lead.telefone}</span>
                 </div>
+                ${lead.email ? `
+                <div class="lead-detail-item">
+                    <span class="lead-detail-label">E-mail Informado</span>
+                    <span class="lead-detail-val" style="color:#38bdf8;">${lead.email}</span>
+                </div>` : ''}
+                ${lead.preferenciaRetorno ? `
+                <div class="lead-detail-item">
+                    <span class="lead-detail-label">Preferência de Retorno</span>
+                    <span class="lead-detail-val">${lead.preferenciaRetorno}</span>
+                </div>` : ''}
                 <div class="lead-detail-item">
                     <span class="lead-detail-label">Página de Origem</span>
                     <span class="lead-detail-val">${lead.pagina || 'index.html'}</span>
@@ -1235,6 +1251,11 @@
                     <span class="lead-detail-label">Modalidade de Atendimento</span>
                     <span class="lead-detail-val">${lead.modalidade || 'Atendimento Online'}</span>
                 </div>
+                ${lead.mensagem ? `
+                <div class="lead-detail-item full">
+                    <span class="lead-detail-label">Mensagem / Relato Enviado</span>
+                    <span class="lead-detail-val" style="white-space:pre-wrap;line-height:1.5;color:#f1f5f9;">${lead.mensagem}</span>
+                </div>` : ''}
                 <div class="lead-detail-item full">
                     <span class="lead-detail-label">Título da Página / Origem</span>
                     <span class="lead-detail-val" style="font-size:12px;color:#94a3b8;">${lead.tituloPagina || 'Psicanálise Alma e Luz'} (${lead.origem || 'Direto / Orgânico'})</span>
@@ -1438,11 +1459,11 @@
             }
 
             let csv = '\uFEFF';
-            csv += 'ID;Data;Hora;Nome;WhatsApp;Modalidade;Pagina;Origem;Tipo de Acao\n';
+            csv += 'ID;Data;Hora;Nome;WhatsApp;Email;Modalidade;Retorno Preferido;Mensagem;Pagina;Origem;Tipo de Acao\n';
 
             leads.forEach(l => {
                 const safe = (v) => `"${String(v || '').replace(/"/g, '""')}"`;
-                csv += `${safe(l.id)};${safe(l.data)};${safe(l.hora)};${safe(l.nome)};${safe(l.telefone)};${safe(l.modalidade)};${safe(l.pagina)};${safe(l.origem)};${safe(l.tipo)}\n`;
+                csv += `${safe(l.id)};${safe(l.data)};${safe(l.hora)};${safe(l.nome)};${safe(l.telefone)};${safe(l.email)};${safe(l.modalidade)};${safe(l.preferenciaRetorno)};${safe(l.mensagem)};${safe(l.pagina)};${safe(l.origem)};${safe(l.tipo)}\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
