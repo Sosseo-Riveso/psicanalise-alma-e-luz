@@ -542,9 +542,67 @@
     <script>
         (function () {
             var STORAGE_KEY = 'psicanalise_almaeluz_triagem_v1';
+            var DELETED_SIGS_KEY = STORAGE_KEY + '_deleted_sigs';
+            var CLEARED_AT_KEY = STORAGE_KEY + '_cleared_at';
             var SESSION_AUTH_KEY = 'almaeluz_crm_auth_ok';
             var CUSTOM_PASS_KEY = 'almaeluz_crm_custom_pass';
             var WEBHOOK_KEY = 'almaeluz_sheets_webhook_url';
+
+            function getLeadSignature(item) {
+                if (!item) return '';
+                var tel = String(item.telefone || '').replace(/\D/g, '');
+                var dh = String(item.dataHora || '').trim();
+                return tel + '_' + dh;
+            }
+
+            function getDeletedSignatures() {
+                try {
+                    var raw = localStorage.getItem(DELETED_SIGS_KEY);
+                    return new Set(raw ? JSON.parse(raw) : []);
+                } catch (e) {
+                    return new Set();
+                }
+            }
+
+            function addDeletedSignatures(arr) {
+                var set = getDeletedSignatures();
+                (arr || []).forEach(function (item) {
+                    if (!item) return;
+                    if (item.id || item.ts) set.add(String(item.id || item.ts));
+                    var sig = getLeadSignature(item);
+                    if (sig && sig !== '_') set.add(sig);
+                });
+                localStorage.setItem(DELETED_SIGS_KEY, JSON.stringify(Array.from(set).slice(-1000)));
+            }
+
+            function isLeadDeleted(item) {
+                if (!item) return true;
+                var clearedAt = parseInt(localStorage.getItem(CLEARED_AT_KEY) || '0', 10);
+                if (clearedAt > 0 && item.ts && item.ts <= clearedAt) return true;
+                var set = getDeletedSignatures();
+                if ((item.id || item.ts) && set.has(String(item.id || item.ts))) return true;
+                var sig = getLeadSignature(item);
+                if (sig && set.has(sig)) return true;
+                return false;
+            }
+
+            function syncRemoteAction(payload) {
+                fetch('/api/triagem', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(function () {});
+
+                var webhook = localStorage.getItem(WEBHOOK_KEY) || '';
+                if (webhook) {
+                    fetch(webhook, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify(payload)
+                    }).catch(function () {});
+                }
+            }
 
             function verificarSenha(digitada) {
                 var custom = localStorage.getItem(CUSTOM_PASS_KEY);
@@ -575,7 +633,8 @@
             function getRegistros() {
                 try {
                     var raw = localStorage.getItem(STORAGE_KEY);
-                    return raw ? JSON.parse(raw) : [];
+                    var lista = raw ? JSON.parse(raw) : [];
+                    return Array.isArray(lista) ? lista.filter(function (x) { return !isLeadDeleted(x); }) : [];
                 } catch (e) { return []; }
             }
 
@@ -683,7 +742,21 @@
 
             document.getElementById('btnExcluirUnico').addEventListener('click', function () {
                 if (!registroSelecionadoId) return;
-                var nova = getRegistros().filter(function (x) {
+                var todos = getRegistros();
+                var alvo = todos.find(function (x) {
+                    return String(x.id || x.ts) === String(registroSelecionadoId);
+                });
+                if (alvo) {
+                    addDeletedSignatures([alvo]);
+                    syncRemoteAction({
+                        action: 'delete',
+                        id: String(alvo.id || alvo.ts),
+                        telefone: alvo.telefone,
+                        dataHora: alvo.dataHora,
+                        signature: getLeadSignature(alvo)
+                    });
+                }
+                var nova = todos.filter(function (x) {
                     return String(x.id || x.ts) !== String(registroSelecionadoId);
                 });
                 salvarRegistros(nova);
@@ -788,7 +861,11 @@
             });
             document.getElementById('btnExpurgarAntigos').addEventListener('click', function () {
                 var limite = Date.now() - (365 * 24 * 60 * 60 * 1000);
-                var nova = getRegistros().filter(function (i) { return i.ts && i.ts >= limite; });
+                var todos = getRegistros();
+                var removidos = todos.filter(function (i) { return !i.ts || i.ts < limite; });
+                if (removidos.length > 0) addDeletedSignatures(removidos);
+                syncRemoteAction({ action: 'prune_year' });
+                var nova = todos.filter(function (i) { return i.ts && i.ts >= limite; });
                 salvarRegistros(nova);
                 modalLimpeza.classList.remove('active');
                 renderizarPainel();
@@ -796,14 +873,22 @@
             document.getElementById('btnApagarMes').addEventListener('click', function () {
                 var mes = document.getElementById('selectMesLimpeza').value;
                 if (!mes) return;
-                var nova = getRegistros().filter(function (i) { return i.anoMes !== mes; });
+                var todos = getRegistros();
+                var removidos = todos.filter(function (i) { return i.anoMes === mes; });
+                if (removidos.length > 0) addDeletedSignatures(removidos);
+                syncRemoteAction({ action: 'delete_month', month: mes });
+                var nova = todos.filter(function (i) { return i.anoMes !== mes; });
                 salvarRegistros(nova);
                 modalLimpeza.classList.remove('active');
                 renderizarPainel();
             });
             document.getElementById('btnZerarTudo').addEventListener('click', function () {
-                if (!confirm('Tem certeza que deseja apagar todos os contatos salvos neste navegador?')) return;
+                if (!confirm('Tem certeza que deseja apagar permanentemente TODOS os contatos salvos (inclusive na nuvem e planilha)?')) return;
+                var todos = getRegistros();
+                if (todos.length > 0) addDeletedSignatures(todos);
+                localStorage.setItem(CLEARED_AT_KEY, String(Date.now()));
                 salvarRegistros([]);
+                syncRemoteAction({ action: 'clear' });
                 modalLimpeza.classList.remove('active');
                 renderizarPainel();
             });
@@ -831,19 +916,39 @@
 
             // Sincronizar com /api/triagem se estiver rodando no Cloudflare Worker
             fetch('/api/triagem')
-                .then(function (r) { return r.ok ? r.json() : []; })
-                .then(function (remotos) {
-                    if (Array.isArray(remotos) && remotos.length) {
-                        var locais = getRegistros();
-                        var mapa = {};
-                        locais.concat(remotos).forEach(function (item) {
-                            if (item && (item.id || item.ts)) mapa[item.id || item.ts] = item;
-                        });
-                        var unificados = Object.keys(mapa).map(function (k) { return mapa[k]; });
-                        unificados.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
-                        salvarRegistros(unificados);
-                        renderizarPainel();
+                .then(function (r) { return r.ok ? r.json() : null; })
+                .then(function (dados) {
+                    if (!dados) return;
+                    var remotos = [];
+                    if (Array.isArray(dados)) {
+                        remotos = dados;
+                    } else if (dados && typeof dados === 'object') {
+                        remotos = Array.isArray(dados.leads) ? dados.leads : [];
+                        if (dados.meta) {
+                            if (dados.meta.clearedAt) {
+                                var localCleared = parseInt(localStorage.getItem(CLEARED_AT_KEY) || '0', 10);
+                                if (dados.meta.clearedAt > localCleared) {
+                                    localStorage.setItem(CLEARED_AT_KEY, String(dados.meta.clearedAt));
+                                }
+                            }
+                            if (Array.isArray(dados.meta.deletedSignatures) && dados.meta.deletedSignatures.length > 0) {
+                                var set = getDeletedSignatures();
+                                dados.meta.deletedSignatures.forEach(function (s) { set.add(s); });
+                                localStorage.setItem(DELETED_SIGS_KEY, JSON.stringify(Array.from(set).slice(-1000)));
+                            }
+                        }
                     }
+                    var locais = getRegistros();
+                    var mapa = {};
+                    locais.concat(remotos).forEach(function (item) {
+                        if (item && (item.id || item.ts) && !isLeadDeleted(item)) {
+                            mapa[item.id || item.ts] = item;
+                        }
+                    });
+                    var unificados = Object.keys(mapa).map(function (k) { return mapa[k]; });
+                    unificados.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+                    salvarRegistros(unificados);
+                    renderizarPainel();
                 })
                 .catch(function () {});
 

@@ -4,5 +4,11 @@
   "main": "worker.js",
   "assets": {
     "directory": "."
-  }
+  },
+  "kv_namespaces": [
+    {
+      "binding": "LEADS_KV",
+      "id": "2cbc209828db4822a3f351d9faa92dba"
+    }
+  ]
 }
