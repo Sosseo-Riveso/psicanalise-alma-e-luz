@@ -47,6 +47,8 @@
 html {
   scroll-behavior: smooth;
   color-scheme: only light;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -56,11 +58,13 @@ body {
   line-height: 1.75;
   font-size: 16px;
   padding-top: 114px;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 @media (max-width: 960px) {
   body {
-    padding-top: 60px;
+    padding-top: 0 !important;
   }
 }
 
@@ -447,17 +451,52 @@ a:hover {
 }
 
 @media (max-width: 960px) {
-  .header-layout,
-  .site-header.scrolled .header-layout {
-    grid-template-columns: 14px minmax(0, 1fr) auto 14px;
-    grid-template-areas: ". brand cta .";
-    column-gap: 8px;
+  .site-header,
+  .site-header.scrolled {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 1000 !important;
+    transform: none !important;
+    margin: 0 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: #eef9fb !important;
   }
 
-  .brand {
+  .site-header.scrolled {
+    background: #ffffff !important;
+    box-shadow: 0 6px 24px rgba(4, 42, 55, 0.12) !important;
+  }
+
+  .header-layout,
+  .site-header.scrolled .header-layout {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    min-height: 54px !important;
+    padding: 6px 8px !important;
+    gap: 8px !important;
+  }
+
+  .site-header.scrolled .header-layout {
+    min-height: 44px !important;
+    padding: 4px 8px !important;
+  }
+
+  .brand,
+  .site-header.scrolled .brand {
+    display: flex !important;
+    align-items: center !important;
     gap: 9px;
-    padding: 9px 0;
+    padding: 0 !important;
+    margin: 0 !important;
     min-width: 0;
+    flex: 1 1 auto;
   }
 
   .brand-avatar {
@@ -481,9 +520,14 @@ a:hover {
     display: none !important;
   }
 
-  .header-top-right {
-    padding: 9px 0;
+  .header-top-right,
+  .site-header.scrolled .header-top-right {
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
     gap: 8px;
+    flex-shrink: 0;
   }
 
   .btn-whatsapp-header,
@@ -560,7 +604,7 @@ a:hover {
 
   /* Redução suave do cabeçalho no mobile ao rolar a página */
   .site-header.scrolled .brand {
-    padding: 5px 0;
+    padding: 0 !important;
     gap: 8px;
   }
 
@@ -574,7 +618,7 @@ a:hover {
   }
 
   .site-header.scrolled .header-top-right {
-    padding: 5px 0;
+    padding: 0 !important;
     gap: 7px;
   }
 
@@ -1982,7 +2026,7 @@ td {
     grid-template-columns: 1fr;
   }
   .article-content {
-    padding: 26px 22px;
+    padding: 20px 6px;
   }
   .delicate-convenio-note {
     flex-direction: column;
@@ -1991,9 +2035,102 @@ td {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 24px 20px;
+    padding: 18px 6px;
   }
   .author-box-links {
     justify-content: center;
+  }
+  /* Ocultar o banner grande das 10 categorias no topo das páginas de categorias em dispositivos móveis */
+  .article-header .filter-bar,
+  .category-top-filter-bar {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   AJUSTE DE MARGENS LATERAIS EM DISPOSITIVOS MÓVEIS (2px DA TELA E 6px INTERNO)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Margem de 2px entre os cards/conteúdos e as bordas laterais da tela */
+  .container:not(.header-layout),
+  .container-narrow {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Evitar estouro horizontal de grids e inputs em telas pequenas */
+  .articles-grid,
+  .pillars-grid,
+  .modalities-grid,
+  .online-steps-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .search-input {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Textos soltos fora de cards quase encostando nas margens internas da tela */
+  .hero > .container > div:first-child,
+  .section-header-center,
+  .article-header .breadcrumb,
+  .article-header .hero-badge-row,
+  .article-header h1,
+  .article-header .article-subtitle,
+  .article-header .article-meta-row,
+  .faq-section > h2 {
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+
+  /* Cards principais a 2px da borda da tela (via .container) e com margem interna reduzida (6px) para o texto quebrar em menos linhas */
+  .banner-card,
+  .modality-card,
+  .delicate-convenio-note,
+  .pillar-item,
+  .step-card,
+  .online-benefits-box,
+  .filter-bar,
+  .category-active-banner,
+  .article-card,
+  .summary-box,
+  .analysis-box,
+  .article-content,
+  .faq-item,
+  .author-box,
+  .cta-box,
+  .video-container {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
+  .article-card .card-body,
+  .article-card .card-footer {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
+  /* Elementos com risquinho lateral ou sub-cards dentro de cards: quase encostam na divisa do card pai deixando 2px do fundo visível */
+  .online-benefits-box .online-cta-panel,
+  .analysis-box .online-steps-grid,
+  .analysis-box .table-wrap,
+  .article-content .summary-box,
+  .article-content blockquote {
+    margin-left: -4px !important;
+    margin-right: -4px !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
+  .analysis-box .step-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
   }
 }
