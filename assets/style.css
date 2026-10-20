@@ -46,6 +46,7 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: only light;
 }
 
 body {
@@ -496,6 +497,17 @@ a:hover {
     justify-content: center;
     gap: 0;
     flex-shrink: 0;
+    background-color: var(--whatsapp) !important;
+    color: #ffffff !important;
+  }
+
+  .btn-whatsapp-header .wa-icon,
+  .btn-whatsapp-header svg,
+  .btn-whatsapp-header svg path {
+    width: 20px;
+    height: 20px;
+    fill: #ffffff !important;
+    color: #ffffff !important;
   }
 
   .btn-whatsapp-header .wa-text-full,
@@ -516,8 +528,12 @@ a:hover {
     padding: 0;
     border-radius: 9px;
     border: 1.5px solid var(--border-strong);
-    background: #ffffff;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
     color: var(--text-heading);
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    color-scheme: only light;
     cursor: pointer;
     flex-shrink: 0;
     transition: width 0.22s ease, height 0.22s ease, gap 0.22s ease, background-color 0.2s ease;
@@ -689,11 +705,22 @@ a:hover {
   cursor: pointer;
 }
 
-.btn-whatsapp:hover {
+.btn-whatsapp:hover,
+.btn-whatsapp:focus,
+.btn-whatsapp:active,
+.btn-whatsapp:visited {
   background-color: var(--whatsapp-dark);
   color: #ffffff !important;
   transform: translateY(-2px);
   box-shadow: 0 10px 24px rgba(29, 168, 81, 0.4);
+}
+
+.btn-whatsapp svg,
+.btn-whatsapp svg path,
+.whatsapp-float svg,
+.whatsapp-float svg path {
+  fill: #ffffff !important;
+  color: #ffffff !important;
 }
 
 .btn-whatsapp-header {
