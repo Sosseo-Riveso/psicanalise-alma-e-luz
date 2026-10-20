@@ -21,6 +21,18 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
+    // Bloqueio / Redirecionamento imediato de qualquer subdomínio provisório (*.workers.dev) para o domínio oficial
+    if (url.hostname.endsWith('.workers.dev')) {
+      url.hostname = 'psicanalisealmaeluz.com.br';
+      return new Response(null, {
+        status: 301,
+        headers: {
+          'Location': url.toString(),
+          'X-Robots-Tag': 'noindex, nofollow, noarchive, nosnippet'
+        }
+      });
+    }
+
     // Endpoint de API para salvar, listar e excluir Leads do Mini CRM — Psicanálise Alma e Luz
     if (url.pathname === '/api/triagem') {
       const corsHeaders = {

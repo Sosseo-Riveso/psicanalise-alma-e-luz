@@ -43,23 +43,83 @@
         }
     }
 
-    function detectarOrigem() {
+    var SESSION_ORIGEM_KEY = 'almaeluz_origem_sessao_v1';
+    var LAST_UTM_KEY = 'almaeluz_last_utm_v1';
+
+    function formatarOrigemDaUrlOuReferrer() {
         try {
             var params = new URLSearchParams(window.location.search);
-            var utmSource = params.get('utm_source');
-            var utmMedium = params.get('utm_medium');
-            var utmCampaign = params.get('utm_campaign');
+            var utmSource = (params.get('utm_source') || '').trim();
+            var utmMedium = (params.get('utm_medium') || '').trim();
+            var utmCampaign = (params.get('utm_campaign') || '').trim();
+
             if (utmSource) {
-                if (utmSource.toLowerCase() === 'gmn' || utmSource.toLowerCase() === 'gbp') {
-                    return 'Google Perfil Empresa (GMN)' + (utmCampaign ? ' [' + utmCampaign + ']' : '');
+                var srcLower = utmSource.toLowerCase();
+                var origemStr = '';
+                if (srcLower === 'gmn' || srcLower === 'gbp' || srcLower === 'google-meu-negocio') {
+                    origemStr = 'Google Perfil Empresa (GMN)' +
+                        (utmMedium ? ' • ' + utmMedium : '') +
+                        (utmCampaign ? ' [' + utmCampaign + ']' : '');
+                } else if (srcLower === 'youtube' || srcLower === 'yt') {
+                    origemStr = 'YouTube' +
+                        (utmMedium ? ' (' + utmMedium + ')' : '') +
+                        (utmCampaign ? ' [' + utmCampaign + ']' : '');
+                } else if (srcLower === 'instagram' || srcLower === 'ig') {
+                    origemStr = 'Instagram' +
+                        (utmMedium ? ' (' + utmMedium + ')' : '') +
+                        (utmCampaign ? ' [' + utmCampaign + ']' : '');
+                } else {
+                    origemStr = utmSource +
+                        (utmMedium ? ' / ' + utmMedium : '') +
+                        (utmCampaign ? ' [' + utmCampaign + ']' : '');
                 }
-                return utmSource + (utmMedium ? ' / ' + utmMedium : '');
+                try {
+                    sessionStorage.setItem(SESSION_ORIGEM_KEY, origemStr);
+                    localStorage.setItem(LAST_UTM_KEY, JSON.stringify({ origem: origemStr, ts: Date.now() }));
+                } catch (e) {}
+                return origemStr;
             }
+
             if (document.referrer) {
-                if (document.referrer.indexOf('google.com/maps') !== -1) return 'Google Maps / GMN';
+                var ref = document.referrer.toLowerCase();
                 var refUrl = new URL(document.referrer);
                 if (refUrl.hostname !== window.location.hostname) {
-                    return refUrl.hostname.replace('www.', '');
+                    var refOrigem = '';
+                    if (ref.indexOf('google.com/maps') !== -1 || ref.indexOf('g.page') !== -1) {
+                        refOrigem = 'Google Maps / GMN';
+                    } else if (ref.indexOf('youtube.com') !== -1 || ref.indexOf('youtu.be') !== -1) {
+                        refOrigem = 'YouTube (Referência do Canal)';
+                    } else if (ref.indexOf('instagram.com') !== -1) {
+                        refOrigem = 'Instagram';
+                    } else if (ref.indexOf('google.') !== -1) {
+                        refOrigem = 'Busca Orgânica Google';
+                    } else {
+                        refOrigem = refUrl.hostname.replace(/^www\./, '');
+                    }
+                    try {
+                        if (!sessionStorage.getItem(SESSION_ORIGEM_KEY)) {
+                            sessionStorage.setItem(SESSION_ORIGEM_KEY, refOrigem);
+                        }
+                    } catch (e) {}
+                    return refOrigem;
+                }
+            }
+        } catch (e) {}
+        return '';
+    }
+
+    function detectarOrigem() {
+        var atual = formatarOrigemDaUrlOuReferrer();
+        if (atual) return atual;
+        try {
+            var sessao = sessionStorage.getItem(SESSION_ORIGEM_KEY);
+            if (sessao) return sessao;
+            var salvoRaw = localStorage.getItem(LAST_UTM_KEY);
+            if (salvoRaw) {
+                var salvo = JSON.parse(salvoRaw);
+                // Janela de atribuição de 7 dias para quem entrou por UTM (GMN ou YouTube) e voltou depois
+                if (salvo && salvo.origem && salvo.ts && (Date.now() - salvo.ts) < 7 * 24 * 60 * 60 * 1000) {
+                    return salvo.origem;
                 }
             }
         } catch (e) {}
@@ -399,6 +459,7 @@
     }
 
     function inicializarInterceptacao() {
+        formatarOrigemDaUrlOuReferrer();
         limparExpirados();
         inicializarFormularioContato();
 
