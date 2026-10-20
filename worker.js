@@ -76,6 +76,17 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
+    // Redirecionamento 301 da URL antiga analise-canal para sobre.html
+    if (url.pathname === '/analise-canal' || url.pathname === '/analise-canal.html') {
+      url.pathname = '/sobre.html';
+      return Response.redirect(url.toString(), 301);
+    }
+
+    if (url.pathname === '/sobre') {
+      url.pathname = '/sobre.html';
+      return Response.redirect(url.toString(), 301);
+    }
+
     // Comportamento padrão: servir os arquivos estáticos do site
     const response = await env.ASSETS.fetch(request);
 
