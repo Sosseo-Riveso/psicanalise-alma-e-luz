@@ -109,37 +109,37 @@ a:hover {
               border-color 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.header-inner {
-  display: flex;
-  flex-direction: column;
-  padding: 10px 0 8px;
-  gap: 8px;
-  transition: padding 0.22s cubic-bezier(0.4, 0, 0.2, 1),
-              gap 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* 1ª Linha do Cabeçalho: Coluna 1 (Marca) + Coluna 2 (Botão WhatsApp) */
-.header-top-row {
-  display: flex;
+.header-layout {
+  display: grid;
+  grid-template-columns:
+    max(20px, calc((100% - 1180px) / 2))
+    1fr
+    auto
+    max(20px, calc((100% - 1180px) / 2));
+  grid-template-areas:
+    ". brand cta ."
+    "nav nav nav nav";
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
   width: 100%;
-  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-top-right {
+  grid-area: cta;
+  justify-self: end;
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 10px 0;
   flex-shrink: 0;
 }
 
 .brand {
+  grid-area: brand;
   display: flex;
   align-items: center;
   gap: 14px;
-  transition: gap 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 10px 0;
+  transition: gap 0.22s cubic-bezier(0.4, 0, 0.2, 1), padding 0.22s ease;
 }
 
 .brand-avatar {
@@ -149,6 +149,7 @@ a:hover {
   object-fit: cover;
   border: 2.5px solid var(--flower);
   box-shadow: 0 4px 12px rgba(124, 98, 189, 0.25);
+  flex-shrink: 0;
   transition: width 0.22s cubic-bezier(0.4, 0, 0.2, 1),
               height 0.22s cubic-bezier(0.4, 0, 0.2, 1),
               border-width 0.22s ease;
@@ -177,15 +178,24 @@ a:hover {
               font-size 0.22s ease;
 }
 
+.btn-whatsapp-header .wa-text-full {
+  display: inline;
+}
+
+.btn-whatsapp-header .wa-text-short {
+  display: none;
+}
+
 /* 2ª Linha do Cabeçalho: Barra do Menu em Branco Puro (#ffffff) + Menu Centralizado */
 .header-nav-row {
+  grid-area: nav;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   background-color: #ffffff;
   border-top: 1px solid rgba(4, 42, 55, 0.08);
-  padding: 7px 0;
+  padding: 7px 20px;
   transition: padding 0.22s cubic-bezier(0.4, 0, 0.2, 1),
               background-color 0.22s ease,
               border-color 0.22s ease;
@@ -198,6 +208,7 @@ a:hover {
   gap: 28px;
   flex-wrap: wrap;
   width: 100%;
+  max-width: 1180px;
   transition: gap 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -346,84 +357,99 @@ a:hover {
   border: 1px solid var(--border);
 }
 
-/* Estado Reduzido Durante a Rolagem (.site-header.scrolled) — Igual aos Outros Sites */
+/* Estado Reduzido Durante a Rolagem (.site-header.scrolled) — Em UMA ÚNICA LINHA (Logo + Menu no Centro + Botão "Atendimento") */
 .site-header.scrolled {
-  background: rgba(238, 249, 251, 0.98);
+  background: #ffffff;
   box-shadow: 0 6px 24px rgba(4, 42, 55, 0.12);
 }
 
-.site-header.scrolled .header-inner {
-  padding: 4px 0 4px;
-  gap: 3px;
+.site-header.scrolled .header-layout {
+  grid-template-columns:
+    max(20px, calc((100% - 1180px) / 2))
+    auto
+    1fr
+    auto
+    max(20px, calc((100% - 1180px) / 2));
+  grid-template-areas:
+    ". brand nav cta .";
+  column-gap: 16px;
 }
 
 .site-header.scrolled .brand {
   gap: 10px;
+  padding: 7px 0;
 }
 
 .site-header.scrolled .brand-avatar {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-width: 2px;
 }
 
 .site-header.scrolled .brand-text strong {
-  font-size: 1.02rem;
+  font-size: 1.04rem;
+  white-space: nowrap;
 }
 
 .site-header.scrolled .brand-text span {
-  max-height: 0;
-  opacity: 0;
-}
-
-.site-header.scrolled .btn-whatsapp-header {
-  padding: 5px 13px;
-  font-size: 0.76rem;
+  display: none;
 }
 
 .site-header.scrolled .header-nav-row {
-  padding: 4px 0;
-  background-color: #ffffff;
+  padding: 6px 0;
+  background-color: transparent;
+  border-top: none;
 }
 
 .site-header.scrolled .nav-links {
-  gap: 20px;
+  gap: clamp(12px, 1.5vw, 22px);
+  flex-wrap: nowrap;
 }
 
 .site-header.scrolled .nav-links a.nav-item,
 .site-header.scrolled .nav-dropdown-trigger {
-  font-size: 0.82rem;
-  padding: 2px 3px;
+  font-size: clamp(0.82rem, 1.05vw, 0.9rem);
+  padding: 4px 3px;
+  white-space: nowrap;
 }
 
-/* Expande suavemente ao passar o mouse sobre o cabeçalho reduzido no desktop */
-@media (hover: hover) {
-  .site-header.scrolled:hover .header-inner {
-    padding: 9px 0 6px;
-    gap: 7px;
+.site-header.scrolled .header-top-right {
+  padding: 7px 0;
+}
+
+.site-header.scrolled .btn-whatsapp-header {
+  padding: 7px 15px;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.site-header.scrolled .btn-whatsapp-header .wa-text-full {
+  display: none;
+}
+
+.site-header.scrolled .btn-whatsapp-header .wa-text-short {
+  display: inline;
+}
+
+@media (max-width: 960px) {
+  .site-header.scrolled .header-layout {
+    grid-template-columns:
+      max(16px, calc((100% - 1180px) / 2))
+      1fr
+      auto
+      max(16px, calc((100% - 1180px) / 2));
+    grid-template-areas:
+      ". brand cta ."
+      "nav nav nav nav";
+    column-gap: 10px;
   }
-  .site-header.scrolled:hover .brand-avatar {
-    width: 48px;
-    height: 48px;
+  .site-header.scrolled .header-nav-row {
+    border-top: 1px solid rgba(4, 42, 55, 0.08);
+    padding: 4px 12px;
   }
-  .site-header.scrolled:hover .brand-text strong {
-    font-size: 1.2rem;
-  }
-  .site-header.scrolled:hover .brand-text span {
-    max-height: 28px;
-    opacity: 1;
-  }
-  .site-header.scrolled:hover .btn-whatsapp-header {
-    padding: 8px 16px;
-    font-size: 0.84rem;
-  }
-  .site-header.scrolled:hover .header-nav-row {
-    padding: 7px 0;
-  }
-  .site-header.scrolled:hover .nav-links a.nav-item,
-  .site-header.scrolled:hover .nav-dropdown-trigger {
-    font-size: 0.92rem;
-    padding: 5px 4px;
+  .site-header.scrolled .nav-links {
+    flex-wrap: wrap;
+    gap: 12px;
   }
 }
 
@@ -440,8 +466,11 @@ a:hover {
   .nav-dropdown-grid {
     grid-template-columns: 1fr;
   }
-  .btn-whatsapp-header span {
-    font-size: 0.78rem;
+  .btn-whatsapp-header .wa-text-full {
+    display: none;
+  }
+  .btn-whatsapp-header .wa-text-short {
+    display: inline;
   }
 }
 

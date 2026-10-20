@@ -29,28 +29,18 @@
 <body>
   <div class="reading-progress" id="readingProgress"></div>
   <header class="site-header" id="siteHeader">
-    <div class="container header-inner">
-      <!-- 1ª Linha: Marca (1ª Coluna) + Botão WhatsApp (2ª Coluna) -->
-      <div class="header-top-row">
-        <a href="../index.html" class="brand">
-          <img src="../assets/valeria-foto.jpg" alt="Eu sou Valéria Pereira - Psicanálise Alma e Luz" class="brand-avatar">
-          <div class="brand-text">
-            <strong>Psicanálise Alma e Luz</strong>
-            <span>Eu sou Valéria Pereira • Terapia Individual, Casal e Complementares</span>
-          </div>
-        </a>
-        <div class="header-top-right">
-          <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp-header">
-            <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
-            <span>Contato Atendimento Online</span>
-          </a>
+    <div class="header-layout">
+      <!-- Marca (Esquerda) -->
+      <a href="../index.html" class="brand">
+        <img src="../assets/valeria-foto.jpg" alt="Eu sou Valéria Pereira - Psicanálise Alma e Luz" class="brand-avatar">
+        <div class="brand-text">
+          <strong>Psicanálise Alma e Luz</strong>
+          <span>Eu sou Valéria Pereira • Terapia Individual, Casal e Complementares</span>
         </div>
-      </div>
-    </div>
+      </a>
 
-    <!-- 2ª Linha: Barra em Branco Puro (#ffffff) com Menu de Navegação Centralizado + Submenu Megamenu -->
-    <div class="header-nav-row">
-      <div class="container">
+      <!-- Menu de Navegação (2ª Linha em Branco Puro no topo; Centro em 1 única linha ao rolar) -->
+      <div class="header-nav-row">
         <nav class="nav-links" aria-label="Menu Principal">
           <a href="../index.html" class="nav-item ">Início</a>
           <a href="../index.html#atendimentos" class="nav-item">Meus Atendimentos</a>
@@ -111,6 +101,15 @@
           </div>
           <a href="../analise-canal.html" class="nav-item ">Sobre Mim & Minha Trajetória</a>
         </nav>
+      </div>
+
+      <!-- Botão WhatsApp (Direita: Completo no topo, reduzido para "Atendimento" ao rolar) -->
+      <div class="header-top-right">
+        <a href="https://wa.me/5511926755744?text=Ol%C3%A1%2C%20Val%C3%A9ria!%20Acessei%20o%20seu%20site%20Psican%C3%A1lise%20Alma%20e%20Luz%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20funciona%20o%20seu%20Atendimento%20Online." target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp-header">
+          <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.031 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.031 2Zm5.829 14.126c-.246.693-1.434 1.325-1.988 1.411-.51.078-1.156.111-1.869-.116-.432-.137-.986-.321-1.696-.628-2.987-1.29-4.938-4.298-5.087-4.497-.149-.199-1.215-1.616-1.215-3.083 0-1.467.768-2.188 1.041-2.487.273-.299.595-.373.794-.373.198 0 .397.002.57.01.183.009.428-.069.669.512.248.597.843 2.064.917 2.213.075.149.124.323.025.522-.099.199-.149.323-.298.497-.149.174-.313.389-.447.522-.149.149-.304.311-.13.609.174.298.771 1.272 1.656 2.061 1.139 1.015 2.099 1.33 2.397 1.479.298.149.471.124.645-.075.174-.199.744-.87.942-1.169.199-.298.397-.248.67-.149.273.099 1.736.819 2.034.968.298.149.496.224.57.348.075.124.075.721-.171 1.414Z"/></svg>
+          <span class="wa-text-full">Contato Atendimento Online</span>
+          <span class="wa-text-short">Atendimento</span>
+        </a>
       </div>
     </div>
   </header>
@@ -387,17 +386,17 @@
     <span>Atendimento Online</span>
   </a>
   <script>
-    // Controle do Cabeçalho Reduzido na Rolagem (Sticky Shrinking Header) + Submenu Blog
+    // Controle do Cabeçalho Reduzido na Rolagem (Sticky Shrinking Header em 1 única linha) + Submenu Blog
     (function() {
       var siteHeader = document.getElementById('siteHeader') || document.querySelector('.site-header');
       var isHeaderScrolled = false;
       function checkScroll() {
         if (!siteHeader) return;
         var y = window.scrollY;
-        if (!isHeaderScrolled && y > 48) {
+        if (!isHeaderScrolled && y > 72) {
           isHeaderScrolled = true;
           siteHeader.classList.add('scrolled');
-        } else if (isHeaderScrolled && y <= 12) {
+        } else if (isHeaderScrolled && y <= 10) {
           isHeaderScrolled = false;
           siteHeader.classList.remove('scrolled');
         }
