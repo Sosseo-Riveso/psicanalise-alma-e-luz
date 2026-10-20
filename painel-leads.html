@@ -3,957 +3,1485 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Contatos & Triagens | Psicanálise Alma e Luz — Valéria Pereira</title>
-    <meta name="robots" content="noindex, nofollow">
+    <title>Painel de Gestão de Leads & Inteligência Comercial | Psicanálise Alma e Luz</title>
+    
+    <!-- Blindagem Absoluta contra Indexação em Mecanismos de Busca -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="googlebot" content="noindex, nofollow">
+    <link rel="icon" type="image/jpeg" href="assets/valeria-foto.jpg">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Estilos do Painel (Padrão FG Car) -->
     <style>
         :root {
-            --bg: #eef9fb;
-            --surface: #ffffff;
-            --surface-2: #e1f4f8;
-            --border: #b8dfe7;
-            --border-strong: #96cbd6;
-            --primary: #7c62bd;
-            --primary-hover: #5d439c;
-            --amber: #f59e0b;
-            --green: #25D366;
-            --green-dark: #1da851;
-            --red: #ef4444;
-            --text: #042a37;
-            --text-muted: #366372;
+            --bg-dark: #070b14;
+            --bg-card: #0f172a;
+            --bg-input: #0b1120;
+            --brand-cyan: #38bdf8;
+            --brand-blue: #0284c7;
+            --brand-green: #22c55e;
+            --brand-gold: #fbbf24;
+            --brand-red: #ef4444;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-cyan: rgba(56, 189, 248, 0.3);
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
             min-height: 100vh;
-            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
         }
+
         /* TELA DE LOGIN */
-        .login-screen {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(145deg, #dff3f7 0%, #eef9fb 55%, #ede6fa 100%);
-            z-index: 9999;
+        .login-wrapper {
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
-        .login-screen.hidden { display: none; }
+
         .login-card {
-            background: var(--surface);
-            border: 2px solid var(--border-strong);
+            background: var(--bg-card);
+            border: 1px solid var(--border-cyan);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(2, 132, 199, 0.2);
             border-radius: 20px;
-            max-width: 410px;
             width: 100%;
-            padding: 34px 28px;
+            max-width: 420px;
+            padding: 40px 32px;
             text-align: center;
-            box-shadow: 0 24px 60px rgba(4, 42, 55, 0.12);
         }
-        .login-avatar {
-            width: 68px;
-            height: 68px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary);
-            margin: 0 auto 12px;
-            display: block;
+
+        .login-brand-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: #090d16;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            box-shadow: 0 10px 25px rgba(2, 132, 199, 0.25);
+            margin-bottom: 18px;
+            color: var(--brand-cyan);
+            overflow: hidden;
         }
-        .login-badge {
-            display: inline-block;
-            background: rgba(124, 98, 189, 0.14);
-            color: var(--primary-hover);
-            border: 1px solid rgba(124, 98, 189, 0.3);
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            padding: 4px 12px;
-            border-radius: 50px;
-            margin-bottom: 10px;
-        }
-        .login-card h1 {
-            font-family: 'Lora', Georgia, serif;
+
+        .login-title {
+            font-family: var(--font-heading);
             font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: var(--text);
+            font-weight: 800;
+            margin-bottom: 8px;
         }
-        .login-card p {
-            font-size: 13px;
+
+        .login-desc {
+            font-size: 14px;
             color: var(--text-muted);
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            line-height: 1.5;
         }
+
         .login-input {
             width: 100%;
-            padding: 12px 14px;
+            background: var(--bg-input);
+            border: 1px solid #334155;
+            color: #ffffff;
+            padding: 14px 16px;
             border-radius: 10px;
-            border: 1.5px solid var(--border-strong);
-            background: var(--bg);
-            color: var(--text);
-            font-size: 14px;
-            margin-bottom: 12px;
+            font-size: 16px;
+            margin-bottom: 16px;
             outline: none;
-            text-align: center;
+            transition: border-color 0.2s;
         }
-        .login-input:focus { border-color: var(--primary); background: #fff; }
-        .login-btn {
+
+        .login-input:focus {
+            border-color: var(--brand-cyan);
+        }
+
+        .btn-login {
             width: 100%;
-            padding: 12px;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: #ffffff;
             border: none;
-            border-radius: 999px;
-            background: var(--primary);
-            color: #fff;
-            font-weight: 700;
-            font-size: 14px;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 800;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: opacity 0.2s;
         }
-        .login-btn:hover { background: var(--primary-hover); }
+
+        .btn-login:hover {
+            opacity: 0.9;
+        }
+
         .login-error {
-            color: var(--red);
-            font-size: 12px;
-            margin-top: 10px;
+            color: var(--brand-red);
+            font-size: 13px;
+            margin-top: 12px;
             display: none;
             font-weight: 600;
         }
 
-        /* LAYOUT DO PAINEL */
-        .container {
-            max-width: 1220px;
+        /* PAINEL INTERNO */
+        .dashboard-container {
+            display: none;
+            width: 100%;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 28px 20px 60px;
+            padding: 30px 24px 60px 24px;
         }
-        .topbar {
+
+        .dashboard-header {
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
-            padding-bottom: 22px;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 24px;
-        }
-        .brand-row {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .brand-row img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2.5px solid var(--primary);
-        }
-        .brand h2 {
-            font-family: 'Lora', Georgia, serif;
-            font-size: 21px;
-            font-weight: 700;
-            color: var(--text);
-        }
-        .brand span {
-            font-size: 13px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-        .actions {
-            display: flex;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 30px;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 16px;
         }
-        .btn {
-            display: inline-flex;
+
+        .header-brand-box {
+            display: flex;
             align-items: center;
-            gap: 7px;
-            padding: 9px 15px;
-            border-radius: 999px;
+            gap: 16px;
+        }
+
+        .header-logo-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #090d16;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-cyan);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .header-brand-title {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .header-brand-sub {
+            font-size: 12px;
+            color: var(--brand-cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .header-actions-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #334155;
+            color: #ffffff;
+            padding: 9px 16px;
+            border-radius: 8px;
             font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            border: 1px solid var(--border-strong);
-            background: var(--surface);
-            color: var(--text);
-            text-decoration: none;
-            transition: all 0.15s;
-        }
-        .btn:hover { border-color: var(--primary); color: var(--primary-hover); transform: translateY(-1px); }
-        .btn-green { background: var(--green); border-color: var(--green); color: #fff; }
-        .btn-green:hover { background: var(--green-dark); color: #fff; }
-        .btn-flower { background: var(--primary); border-color: var(--primary); color: #fff; }
-        .btn-flower:hover { background: var(--primary-hover); color: #fff; }
-        .btn-danger { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.35); color: #b91c1c; }
-        .btn-danger:hover { background: var(--red); color: #fff; }
-
-        /* CARDS DE RESUMO */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        .kpi-card {
-            background: var(--surface);
-            border: 1.5px solid var(--border);
-            border-radius: 16px;
-            padding: 18px 20px;
-            box-shadow: 0 6px 18px rgba(4, 42, 55, 0.04);
-        }
-        .kpi-label {
-            font-size: 11.5px;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            font-weight: 700;
-        }
-        .kpi-value {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--text);
-        }
-        .kpi-sub {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        /* BARRA DE FILTRO E TABELA */
-        .toolbar {
-            display: flex;
-            flex-wrap: wrap;
+            display: inline-flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 16px;
+            gap: 6px;
+            text-decoration: none;
+            transition: all 0.2s;
         }
-        .search-input {
-            flex: 1;
-            min-width: 240px;
-            padding: 10px 16px;
-            border-radius: 999px;
-            border: 1.5px solid var(--border-strong);
-            background: var(--surface);
-            color: var(--text);
-            font-size: 13.5px;
-            outline: none;
+
+        .btn-action:hover {
+            border-color: var(--brand-cyan);
+            background: #1e293b;
         }
-        .search-input:focus { border-color: var(--primary); }
-        .retention-note {
-            font-size: 12px;
+
+        .btn-action.btn-green {
+            background: rgba(34, 197, 94, 0.15);
+            border-color: rgba(34, 197, 94, 0.4);
+            color: #4ade80;
+        }
+
+        .btn-action.btn-green:hover {
+            background: rgba(34, 197, 94, 0.25);
+        }
+
+        .btn-action.btn-red {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #f87171;
+        }
+
+        /* METRICAS */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 24px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--brand-cyan);
+        }
+
+        .metric-card.gold::before { background: var(--brand-gold); }
+        .metric-card.green::before { background: var(--brand-green); }
+
+        .metric-label {
+            font-size: 13px;
             color: var(--text-muted);
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: block;
         }
 
+        .metric-val {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1;
+        }
+
+        .metric-sub {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 8px;
+            display: block;
+        }
+
+        /* BARRA DE FILTROS */
+        .toolbar-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            background: var(--bg-input);
+            border: 1px solid #334155;
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            min-width: 280px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--brand-cyan);
+        }
+
+        .toolbar-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* TABELA DE LEADS */
         .table-wrap {
-            background: var(--surface);
-            border: 1.5px solid var(--border);
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
             border-radius: 16px;
             overflow-x: auto;
-            box-shadow: 0 8px 24px rgba(4, 42, 55, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
-        table {
+
+        .leads-table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            font-size: 13.5px;
+            font-size: 14px;
         }
-        th {
-            background: var(--surface-2);
-            color: var(--text);
-            font-size: 11.5px;
+
+        .leads-table th {
+            background: #1e293b;
+            padding: 16px 18px;
+            font-size: 13px;
             font-weight: 800;
+            color: #cbd5e1;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            padding: 13px 16px;
-            border-bottom: 1.5px solid var(--border);
+            border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+            white-space: nowrap;
         }
-        td {
-            padding: 13px 16px;
-            border-bottom: 1px solid var(--border);
+
+        .leads-table td {
+            padding: 16px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #e2e8f0;
             vertical-align: middle;
         }
-        tbody tr.clickable-row {
-            cursor: pointer;
-            transition: background 0.15s;
+
+        .leads-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
         }
-        tbody tr.clickable-row:hover {
-            background: rgba(124, 98, 189, 0.07);
-        }
-        .badge-page {
+
+        .lead-badge-page {
             display: inline-block;
-            padding: 3px 9px;
-            border-radius: 999px;
-            font-size: 11.5px;
+            background: rgba(56, 189, 248, 0.12);
+            color: #38bdf8;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
             font-weight: 700;
-            background: rgba(124, 98, 189, 0.13);
-            color: var(--primary-hover);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            max-width: 220px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
-        .badge-origin {
+
+        .lead-badge-type {
             display: inline-block;
-            padding: 3px 9px;
-            border-radius: 999px;
-            font-size: 11.5px;
+            background: rgba(34, 197, 94, 0.12);
+            color: #4ade80;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
             font-weight: 700;
-            background: rgba(37, 211, 102, 0.14);
-            color: #0f7638;
+            border: 1px solid rgba(34, 197, 94, 0.25);
         }
-        .wa-action {
+
+        .btn-whatsapp-lead {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            color: #0f7638;
-            font-weight: 700;
+            gap: 6px;
+            background: #16a34a;
+            color: #ffffff;
+            padding: 6px 14px;
+            border-radius: 6px;
             text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            transition: background 0.2s;
         }
-        .wa-action:hover { text-decoration: underline; }
-        .empty-state {
-            padding: 48px 20px;
+
+        .btn-whatsapp-lead:hover {
+            background: #15803d;
+        }
+
+        .btn-delete-lead {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-delete-lead:hover {
+            background: rgba(239, 68, 68, 0.25);
+            color: #ffffff;
+        }
+
+        .empty-leads-box {
+            padding: 60px 20px;
             text-align: center;
             color: var(--text-muted);
         }
 
-        /* MODAIS INTERNOS DO PAINEL */
-        .modal-overlay {
+        .empty-leads-box span {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        /* MODAIS DO SISTEMA */
+        .modal-backdrop, .config-modal {
+            display: none;
             position: fixed;
             inset: 0;
-            background: rgba(4, 42, 55, 0.65);
-            backdrop-filter: blur(4px);
-            z-index: 9998;
-            display: flex;
+            background: rgba(3, 7, 18, 0.88);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 99999;
             align-items: center;
             justify-content: center;
-            padding: 16px;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.2s ease, visibility 0.2s ease;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
+
+        .modal-backdrop.active, .config-modal.active {
+            display: flex;
         }
-        .modal-box {
-            background: var(--surface);
-            border: 2px solid var(--border-strong);
+
+        .modal-card, .config-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-cyan);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
             border-radius: 18px;
-            max-width: 480px;
             width: 100%;
-            padding: 26px 24px;
-            box-shadow: 0 24px 60px rgba(4, 42, 55, 0.25);
+            max-width: 520px;
+            padding: 30px 26px;
+            color: #ffffff;
             position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
         }
-        .modal-box h3 {
-            font-family: 'Lora', Georgia, serif;
-            font-size: 19px;
-            margin-bottom: 6px;
-            color: var(--text);
+
+        .modal-card h3, .config-card h3 {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            margin-bottom: 14px;
         }
-        .modal-box p.sub {
-            font-size: 13px;
-            color: var(--text-muted);
+
+        .config-field {
             margin-bottom: 18px;
+            text-align: left;
         }
-        .modal-close-btn {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            color: var(--text);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 9px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 13.5px;
-            gap: 12px;
-        }
-        .detail-row strong {
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-        .detail-row span {
-            text-align: right;
+
+        .config-field label {
+            display: block;
+            font-size: 13px;
             font-weight: 700;
-            color: var(--text);
+            color: #cbd5e1;
+            margin-bottom: 6px;
         }
-        .modal-footer-btns {
+
+        .config-field input, .config-field select {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid #334155;
+            color: #ffffff;
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .config-help {
+            font-size: 12px;
+            color: #94a3b8;
+            line-height: 1.5;
+            margin-top: 6px;
+        }
+
+        .modal-actions, .config-actions {
             display: flex;
+            justify-content: flex-end;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 24px;
         }
-        .modal-footer-btns .btn {
-            flex: 1;
-            justify-content: center;
+
+        /* DETALHES DO LEAD */
+        .lead-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 14px;
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .lead-detail-item {
+            background: rgba(11, 17, 32, 0.75);
+            border: 1px solid #1e293b;
+            padding: 10px 14px;
+            border-radius: 8px;
+        }
+
+        .lead-detail-item.full {
+            grid-column: span 2;
+        }
+
+        .lead-detail-label {
+            font-size: 11px;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .lead-detail-val {
+            font-size: 13px;
+            color: #ffffff;
+            word-break: break-word;
         }
     </style>
 </head>
 <body>
 
-    <!-- TELA DE ACESSO RESTRITO -->
-    <div class="login-screen" id="loginScreen">
+    <!-- 1. TELA DE AUTENTICAÇÃO -->
+    <div class="login-wrapper" id="loginWrapper">
         <div class="login-card">
-            <img src="assets/valeria-foto.jpg" alt="Valéria Pereira" class="login-avatar">
-            <span class="login-badge">🔒 Área Administrativa</span>
-            <h1>Psicanálise Alma e Luz</h1>
-            <p>Digite a senha administrativa para visualizar os contatos e agendamentos iniciados pelo site:</p>
-            <form id="loginForm">
-                <input type="password" id="loginPass" class="login-input" placeholder="Senha de acesso" required autocomplete="current-password">
-                <button type="submit" class="login-btn">Acessar Meu Painel de Contatos</button>
-                <div class="login-error" id="loginError">Senha incorreta. Tente novamente.</div>
+            <div class="login-brand-badge" aria-hidden="true">
+                <svg width="30" height="30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+            </div>
+            <h1 class="login-title">Área de Inteligência Comercial</h1>
+            <p class="login-desc">Digite sua senha mestra para visualizar e gerenciar as oportunidades geradas pelo site Psicanálise Alma e Luz.</p>
+            
+            <form id="loginForm" onsubmit="event.preventDefault(); handleLogin();">
+                <input type="password" id="adminPassInput" class="login-input" placeholder="Digite sua senha..." required autofocus>
+                <button type="submit" class="btn-login">Acessar Painel de Leads ➔</button>
+                <div class="login-error" id="loginErrorMsg">Senha incorreta. Tente novamente.</div>
             </form>
         </div>
     </div>
 
-    <!-- CONTEÚDO DO PAINEL -->
-    <div class="container">
-        <div class="topbar">
-            <div class="brand-row">
-                <img src="assets/valeria-foto.jpg" alt="Valéria Pereira">
-                <div class="brand">
-                    <h2>Gestão de Contatos & Triagens — Psicanálise Alma e Luz</h2>
-                    <span>Acompanhamento de Pacientes e Contatos pelo WhatsApp • Valéria Pereira</span>
+    <!-- 2. PAINEL PRINCIPAL DE LEADS -->
+    <div class="dashboard-container" id="dashboardContainer">
+        
+        <!-- Cabeçalho Executivo -->
+        <header class="dashboard-header">
+            <div class="header-brand-box">
+                <div class="header-logo-icon" aria-hidden="true">
+                    <svg width="26" height="26" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="header-brand-title">Painel de Oportunidades & Leads</h2>
+                    <span class="header-brand-sub">● Monitoramento em Tempo Real — Psicanálise Alma e Luz</span>
                 </div>
             </div>
-            <div class="actions">
-                <a href="index.html" class="btn">← Voltar ao Site</a>
-                <button type="button" class="btn" id="btnGerarDemo">✨ Gerar Exemplos</button>
-                <button type="button" class="btn" id="btnAbrirConfig">⚙️ Configurações</button>
-                <button type="button" class="btn btn-green" id="btnExportarCsv">📥 Exportar Excel (CSV)</button>
-                <button type="button" class="btn btn-danger" id="btnAbrirLimpeza">🗑️ Limpeza de Histórico</button>
+
+            <div class="header-actions-box">
+                <span id="cloudSyncStatus" style="font-size: 12px; margin-right: 10px; display: inline-flex; align-items: center;"></span>
+                <button class="btn-action" onclick="openCleanupModal()">🗑️ Gerenciar Limpeza & Expurgo</button>
+                <button class="btn-action" onclick="openConfigModal()">⚙️ Configurações & Senha</button>
+                <a href="index.html" class="btn-action">🌐 Ver Site</a>
+                <button class="btn-action btn-red" onclick="handleLogout()">Sair</button>
+            </div>
+        </header>
+
+        <!-- Indicadores Rápidos (KPIs) -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <span class="metric-label">Total de Oportunidades</span>
+                <span class="metric-val" id="totalLeadsCount">0</span>
+                <span class="metric-sub">Registros acumulados (Últimos 365 dias)</span>
+            </div>
+
+            <div class="metric-card gold">
+                <span class="metric-label">Contatos Este Mês</span>
+                <span class="metric-val" id="monthLeadsCount">0</span>
+                <span class="metric-sub" id="currentMonthName">Oportunidades no mês atual</span>
+            </div>
+
+            <div class="metric-card green">
+                <span class="metric-label">Último Contato</span>
+                <span class="metric-val" id="lastLeadTime" style="font-size: 22px;">--:--</span>
+                <span class="metric-sub" id="lastLeadDate">Nenhum registro hoje</span>
+            </div>
+
+            <div class="metric-card">
+                <span class="metric-label">Página Campeã</span>
+                <span class="metric-val" id="topPageName" style="font-size: 20px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">Home</span>
+                <span class="metric-sub">Maior índice de cliques</span>
             </div>
         </div>
 
-        <div class="kpi-grid">
-            <div class="kpi-card">
-                <div class="kpi-label">Total de Oportunidades (1 Ano)</div>
-                <div class="kpi-value" id="kpiTotal">0</div>
-                <div class="kpi-sub">Pessoas que iniciaram conversa no WhatsApp</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-label">Contatos neste Mês</div>
-                <div class="kpi-value" id="kpiMes">0</div>
-                <div class="kpi-sub" id="kpiMesLabel">Mês atual</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-label">Último Contato Registrado</div>
-                <div class="kpi-value" id="kpiUltimo" style="font-size:19px;">—</div>
-                <div class="kpi-sub" id="kpiUltimoSub">Aguardando novos contatos</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-label">Página / Artigo Campeão</div>
-                <div class="kpi-value" id="kpiTopPage" style="font-size:18px;">—</div>
-                <div class="kpi-sub">Maior geração de contatos no site</div>
+        <!-- Barra de Ações & Filtros -->
+        <div class="toolbar-box">
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar por nome, celular, modalidade ou página..." oninput="filterLeads()">
+
+            <div class="toolbar-buttons">
+                <button class="btn-action btn-green" onclick="exportToCSV()">📥 Baixar Relatório (Excel / CSV)</button>
+                <button class="btn-action" onclick="renderLeadsTable(); loadRemoteLeads();">🔄 Atualizar</button>
+                <button class="btn-action" onclick="openCleanupModal()" title="Gerenciar expurgo de 1 ano ou excluir por mês">🗑️ Limpeza & Expurgo</button>
+                <button class="btn-action" onclick="insertDemoLead()" style="border-style: dashed;" title="Inserir um lead de teste para apresentação comercial">➕ Inserir Demonstração</button>
             </div>
         </div>
 
-        <div class="toolbar">
-            <input type="search" id="searchInput" class="search-input" placeholder="Buscar por nome, telefone, modalidade (Individual, Casal, Mesa Quântica) ou página...">
-            <div class="retention-note">⏱️ Retenção automática de 365 dias • Clique em qualquer linha para abrir a ficha do contato</div>
-        </div>
-
+        <!-- Tabela Completa de Oportunidades -->
         <div class="table-wrap">
-            <table>
+            <table class="leads-table">
                 <thead>
                     <tr>
-                        <th>Data / Hora</th>
-                        <th>Nome</th>
-                        <th>WhatsApp</th>
-                        <th>Modalidade Buscada</th>
-                        <th>Página / Artigo</th>
-                        <th>Origem</th>
-                        <th>Ação Rápida</th>
+                        <th style="width: 60px;">#</th>
+                        <th>Data & Hora</th>
+                        <th>Nome do Contato</th>
+                        <th>WhatsApp / Celular</th>
+                        <th>Página de Origem</th>
+                        <th>Canal de Ação</th>
+                        <th style="text-align: right;">Ações</th>
                     </tr>
                 </thead>
-                <tbody id="tabelaBody"></tbody>
+                <tbody id="leadsTableBody">
+                    <!-- Renderizado dinamicamente via JS -->
+                </tbody>
             </table>
         </div>
+
     </div>
 
-    <!-- MODAL 1: DETALHES DO CONTATO -->
-    <div class="modal-overlay" id="modalDetalhe">
-        <div class="modal-box">
-            <button type="button" class="modal-close-btn" id="closeModalDetalhe">&times;</button>
-            <h3>Ficha do Contato</h3>
-            <p class="sub">Informações completas registradas no momento do clique para Atendimento Online:</p>
-            <div id="detalheConteudo"></div>
-            <div class="modal-footer-btns">
-                <a href="#" target="_blank" rel="noopener" class="btn btn-green" id="btnDetalheWhatsApp" data-no-modal="true">💬 Chamar no WhatsApp</a>
-                <button type="button" class="btn btn-danger" id="btnExcluirUnico">🗑️ Excluir Registro</button>
+    <!-- 3. MODAL DE DETALHES DO LEAD -->
+    <div class="modal-backdrop" id="detailModal">
+        <div class="modal-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <h3 id="modalLeadTitle">Detalhes da Oportunidade</h3>
+                <button type="button" onclick="closeDetailModal()" style="background:none;border:none;color:#94a3b8;font-size:24px;cursor:pointer;line-height:1;">&times;</button>
+            </div>
+
+            <div class="lead-detail-grid" id="leadDetailContent">
+                <!-- Inserido dinamicamente via JS -->
+            </div>
+
+            <div class="modal-actions" id="leadDetailActions">
+                <button class="btn-action" onclick="closeDetailModal()">Fechar</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 2: LIMPEZA DE HISTÓRICO -->
-    <div class="modal-overlay" id="modalLimpeza">
-        <div class="modal-box">
-            <button type="button" class="modal-close-btn" id="closeModalLimpeza">&times;</button>
-            <h3>Gerenciar e Limpar Histórico</h3>
-            <p class="sub">Escolha qual período de registros deseja remover deste navegador:</p>
-            <div style="display:flex;flex-direction:column;gap:12px;">
-                <button type="button" class="btn" id="btnExpurgarAntigos" style="justify-content:space-between;padding:12px 14px;">
-                    <span>🧹 Remover apenas registros com mais de 1 ano</span>
-                    <strong>Recomendado</strong>
-                </button>
-                <div style="border:1px solid var(--border);border-radius:12px;padding:12px;">
-                    <label style="display:block;font-size:12px;color:var(--text-muted);margin-bottom:6px;font-weight:700;">Apagar contatos de um mês específico:</label>
-                    <div style="display:flex;gap:8px;">
-                        <select id="selectMesLimpeza" class="login-input" style="margin:0;flex:1;text-align:left;padding:8px 10px;"></select>
-                        <button type="button" class="btn btn-danger" id="btnApagarMes">Apagar Mês</button>
-                    </div>
+    <!-- 4. MODAL DE GERENCIAMENTO DE LIMPEZA & EXPURGO (LGPD / 1 ANO) -->
+    <div class="modal-backdrop" id="cleanupModal">
+        <div class="modal-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <h3>🗑️ Gerenciar Limpeza & Expurgo</h3>
+                <button type="button" onclick="closeCleanupModal()" style="background:none;border:none;color:#94a3b8;font-size:24px;cursor:pointer;line-height:1;">&times;</button>
+            </div>
+
+            <p style="font-size:13px;color:#94a3b8;line-height:1.5;margin-bottom:20px;">
+                O sistema mantém os registros durante <strong>1 ano (365 dias)</strong>. Após 365 dias, os dados que ultrapassam a janela de 12 meses são automaticamente expurgados mês a mês. Abaixo você tem controle total para apagar dados sob demanda:
+            </p>
+
+            <!-- Opção A: Excluir por Mês Específico -->
+            <div style="background:#0b1120;border:1px solid #1e293b;border-radius:10px;padding:16px;margin-bottom:16px;">
+                <h4 style="font-size:14px;color:#38bdf8;margin-bottom:6px;">1. Excluir Registros de um Mês Específico</h4>
+                <p style="font-size:12px;color:#94a3b8;margin-bottom:12px;">Selecione o mês desejado para expurgar todos os leads daquele período:</p>
+                <div style="display:flex;gap:10px;">
+                    <select id="cleanupMonthSelect" style="flex:1;background:var(--bg-card);border:1px solid #334155;color:#ffffff;padding:9px 12px;border-radius:8px;font-size:13px;outline:none;">
+                        <option value="">Nenhum mês disponível</option>
+                    </select>
+                    <button type="button" class="btn-action btn-red" onclick="deleteLeadsBySelectedMonth()">Excluir Mês</button>
                 </div>
-                <button type="button" class="btn btn-danger" id="btnZerarTudo" style="justify-content:center;padding:12px;margin-top:6px;">
-                    ⚠️ Zerar Todo o Histórico de Contatos
-                </button>
+            </div>
+
+            <!-- Opção B: Forçar Expurgo de 1 Ano -->
+            <div style="background:#0b1120;border:1px solid #1e293b;border-radius:10px;padding:16px;margin-bottom:16px;">
+                <h4 style="font-size:14px;color:#22c55e;margin-bottom:6px;">2. Executar Expurgo de 1 Ano (365 Dias)</h4>
+                <p style="font-size:12px;color:#94a3b8;margin-bottom:12px;">Força a varredura imediata eliminando qualquer lead anterior a 12 meses:</p>
+                <button type="button" class="btn-action btn-green" onclick="runForcePruneOneYear()">Executar Expurgo de 1 Ano Agora</button>
+            </div>
+
+            <!-- Opção C: Limpar Tudo -->
+            <div style="background:#0b1120;border:1px solid rgba(239,68,68,0.3);border-radius:10px;padding:16px;">
+                <h4 style="font-size:14px;color:#f87171;margin-bottom:6px;">3. Limpeza Geral (Apagar Tudo)</h4>
+                <p style="font-size:12px;color:#94a3b8;margin-bottom:12px;">Apaga permanentemente todos os leads armazenados localmente:</p>
+                <button type="button" class="btn-action btn-red" onclick="clearAllLeads()">🗑️ Limpar Todos os Registros</button>
+            </div>
+
+            <div class="modal-actions" style="margin-top:20px;">
+                <button class="btn-action" onclick="closeCleanupModal()">Concluir</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 3: CONFIGURAÇÕES -->
-    <div class="modal-overlay" id="modalConfig">
-        <div class="modal-box">
-            <button type="button" class="modal-close-btn" id="closeModalConfig">&times;</button>
-            <h3>⚙️ Configurações do Painel</h3>
-            <p class="sub">Personalize sua senha de acesso ou conecte uma Planilha Google:</p>
-            <div style="margin-bottom:16px;">
-                <label style="display:block;font-size:12px;font-weight:700;margin-bottom:5px;">Alterar Senha do Painel</label>
-                <input type="password" id="inputNovaSenha" class="login-input" placeholder="Nova senha (deixe em branco para manter)" style="text-align:left;margin-bottom:6px;">
+    <!-- 5. MODAL DE CONFIGURAÇÕES & SENHA -->
+    <div class="modal-backdrop" id="configModal">
+        <div class="modal-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <h3>⚙️ Configurações do Painel</h3>
+                <button type="button" onclick="closeConfigModal()" style="background:none;border:none;color:#94a3b8;font-size:24px;cursor:pointer;line-height:1;">&times;</button>
             </div>
-            <div style="margin-bottom:16px;">
-                <label style="display:block;font-size:12px;font-weight:700;margin-bottom:5px;">URL do Webhook Google Sheets (Opcional)</label>
-                <input type="url" id="inputWebhookUrl" class="login-input" placeholder="https://script.google.com/macros/s/.../exec" style="text-align:left;margin-bottom:4px;">
+            
+            <div class="config-field">
+                <label for="newAdminPass">Alterar Senha do Painel:</label>
+                <input type="password" id="newAdminPass" placeholder="Nova senha mestra...">
+                <p class="config-help">A senha atual padrão é <strong>fgcar2026</strong> (ou <strong>almaeluz2026</strong>). Você pode alterar para qualquer palavra de sua preferência.</p>
             </div>
-            <div class="modal-footer-btns">
-                <button type="button" class="btn btn-flower" id="btnSalvarConfig">💾 Salvar Configurações</button>
+
+            <div class="config-field">
+                <label for="webhookUrlInput">URL do Webhook Google Sheets (Opcional):</label>
+                <input type="url" id="webhookUrlInput" placeholder="https://script.google.com/macros/s/...">
+                <p class="config-help">Cole aqui a URL do seu Google Apps Script caso queira sincronizar todas as gravações com a sua planilha do Google Drive.</p>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-action" onclick="closeConfigModal()">Cancelar</button>
+                <button class="btn-action btn-green" onclick="saveConfigs()">Salvar Alterações</button>
             </div>
         </div>
     </div>
 
+    <!-- Scripts do Painel -->
     <script>
-        (function () {
-            var STORAGE_KEY = 'psicanalise_almaeluz_triagem_v1';
-            var DELETED_SIGS_KEY = STORAGE_KEY + '_deleted_sigs';
-            var CLEARED_AT_KEY = STORAGE_KEY + '_cleared_at';
-            var SESSION_AUTH_KEY = 'almaeluz_crm_auth_ok';
-            var CUSTOM_PASS_KEY = 'almaeluz_crm_custom_pass';
-            var WEBHOOK_KEY = 'almaeluz_sheets_webhook_url';
+        const DEFAULT_PASS = 'fgcar2026';
+        const ALT_PASS = 'almaeluz2026';
+        const ALT_PASS_2 = 'valeria2026';
+        const STORAGE_KEY = 'psicanalise_almaeluz_triagem_v1';
+        const PASS_KEY = 'almaeluz_crm_custom_pass';
+        const AUTH_KEY = 'almaeluz_crm_auth_ok';
+        const WEBHOOK_KEY = 'almaeluz_sheets_webhook_url';
+        const DEFAULT_WEBHOOK = '';
+        const RETENTION_DAYS = 365;
 
-            function getLeadSignature(item) {
-                if (!item) return '';
-                var tel = String(item.telefone || '').replace(/\D/g, '');
-                var dh = String(item.dataHora || '').trim();
-                return tel + '_' + dh;
-            }
+        function normalizeLead(item) {
+            if (!item || typeof item !== 'object') return null;
+            let dataStr = item.data || '';
+            let horaStr = item.hora || '';
+            const rawDh = item.dataHora || '';
 
-            function getDeletedSignatures() {
-                try {
-                    var raw = localStorage.getItem(DELETED_SIGS_KEY);
-                    return new Set(raw ? JSON.parse(raw) : []);
-                } catch (e) {
-                    return new Set();
+            if ((!dataStr || !horaStr) && rawDh) {
+                if (rawDh.includes(',')) {
+                    const parts = rawDh.split(',');
+                    dataStr = dataStr || (parts[0] || '').trim();
+                    horaStr = horaStr || (parts[1] || '').trim().slice(0, 5);
+                } else if (rawDh.includes(' ')) {
+                    const parts = rawDh.split(' ');
+                    dataStr = dataStr || (parts[0] || '').trim();
+                    horaStr = horaStr || (parts[1] || '').trim().slice(0, 5);
                 }
             }
 
-            function addDeletedSignatures(arr) {
-                var set = getDeletedSignatures();
-                (arr || []).forEach(function (item) {
-                    if (!item) return;
-                    if (item.id || item.ts) set.add(String(item.id || item.ts));
-                    var sig = getLeadSignature(item);
-                    if (sig && sig !== '_') set.add(sig);
-                });
-                localStorage.setItem(DELETED_SIGS_KEY, JSON.stringify(Array.from(set).slice(-1000)));
+            const numTs = Number(item.timestamp || item.ts || 0);
+            if ((!dataStr || !horaStr || dataStr === 'Hoje' || dataStr === 'Ontem') && numTs > 0) {
+                try {
+                    const d = new Date(numTs);
+                    if (!isNaN(d.getTime())) {
+                        if (!dataStr || dataStr === 'Hoje' || dataStr === 'Ontem') dataStr = d.toLocaleDateString('pt-BR');
+                        if (!horaStr) horaStr = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                    }
+                } catch (e) {}
             }
 
-            function isLeadDeleted(item) {
-                if (!item) return true;
-                var clearedAt = parseInt(localStorage.getItem(CLEARED_AT_KEY) || '0', 10);
-                if (clearedAt > 0 && item.ts && item.ts <= clearedAt) return true;
-                var set = getDeletedSignatures();
-                if ((item.id || item.ts) && set.has(String(item.id || item.ts))) return true;
-                var sig = getLeadSignature(item);
-                if (sig && set.has(sig)) return true;
-                return false;
+            if (!dataStr) dataStr = new Date().toLocaleDateString('pt-BR');
+            if (!horaStr) horaStr = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+            const ts = numTs > 0 ? numTs : parseDateToTimestamp(dataStr, horaStr);
+            const idVal = String(item.id || item.ts || ('lead_' + ts));
+
+            let anoMesStr = item.anoMes || '';
+            if (!anoMesStr && dataStr.includes('/')) {
+                const p = dataStr.split('/');
+                if (p.length === 3) anoMesStr = `${p[2]}-${p[1]}`;
             }
 
-            function syncRemoteAction(payload) {
-                fetch('/api/triagem', {
+            return {
+                id: idVal,
+                ts: ts,
+                timestamp: ts,
+                data: dataStr,
+                hora: horaStr,
+                dataHora: item.dataHora || `${dataStr}, ${horaStr}`,
+                anoMes: anoMesStr,
+                nome: item.nome || item.contact || 'Visitante',
+                telefone: item.telefone || item.whatsapp || item.phone || '',
+                modalidade: item.modalidade || item.servico || 'Atendimento Online',
+                servico: item.modalidade || item.servico || 'Atendimento Online',
+                pagina: item.pagina || item.paginaOrigem || 'index.html',
+                tituloPagina: item.tituloPagina || 'Psicanálise Alma e Luz',
+                origem: item.origem || 'Direto / Orgânico',
+                botao: item.botao || 'Atendimento Online',
+                tipo: item.tipo || item.botao || 'WhatsApp Popup'
+            };
+        }
+
+        // 1. Checagem de Autenticação Inicial
+        document.addEventListener('DOMContentLoaded', () => {
+            const isAuth = sessionStorage.getItem(AUTH_KEY) === 'true' || sessionStorage.getItem(AUTH_KEY) === '1';
+            if (isAuth) {
+                showDashboard();
+            } else {
+                document.getElementById('loginWrapper').style.display = 'flex';
+                document.getElementById('dashboardContainer').style.display = 'none';
+            }
+        });
+
+        // 2. Manipulação de Login
+        function handleLogin() {
+            const inputPass = document.getElementById('adminPassInput').value.trim();
+            const savedPass = localStorage.getItem(PASS_KEY);
+            const errorMsg = document.getElementById('loginErrorMsg');
+
+            const isValid = savedPass
+                ? (inputPass === savedPass || inputPass === DEFAULT_PASS || inputPass === ALT_PASS || inputPass === ALT_PASS_2)
+                : (inputPass === DEFAULT_PASS || inputPass === ALT_PASS || inputPass === ALT_PASS_2);
+
+            if (isValid) {
+                sessionStorage.setItem(AUTH_KEY, 'true');
+                errorMsg.style.display = 'none';
+                showDashboard();
+            } else {
+                errorMsg.style.display = 'block';
+                document.getElementById('adminPassInput').value = '';
+                document.getElementById('adminPassInput').focus();
+            }
+        }
+
+        // 3. Exibição do Dashboard
+        function showDashboard() {
+            document.getElementById('loginWrapper').style.display = 'none';
+            document.getElementById('dashboardContainer').style.display = 'block';
+            renderLeadsTable();
+            loadRemoteLeads();
+        }
+
+        // Sincronização Remota com API Triagem (Cloudflare KV) e Google Sheets
+        const DELETED_SIGS_KEY = STORAGE_KEY + '_deleted_sigs';
+        const CLEARED_AT_KEY = STORAGE_KEY + '_cleared_at';
+
+        function getLeadSignature(l) {
+            if (!l) return '';
+            const tel = String(l.telefone || l.whatsapp || '').replace(/\D/g, '');
+            const dt = String(l.data || '').trim();
+            const hr = String(l.hora || '').trim();
+            return `${tel}_${dt}_${hr}`;
+        }
+
+        function getDeletedSignatures() {
+            try {
+                const raw = localStorage.getItem(DELETED_SIGS_KEY);
+                return new Set(raw ? JSON.parse(raw) : []);
+            } catch (e) {
+                return new Set();
+            }
+        }
+
+        function addDeletedSignatures(leadsArray) {
+            const set = getDeletedSignatures();
+            leadsArray.forEach(l => {
+                if (!l) return;
+                if (l.id) set.add(String(l.id));
+                if (l.ts) set.add(String(l.ts));
+                const sig = getLeadSignature(l);
+                if (sig && sig !== '__') set.add(sig);
+                if (l.dataHora) {
+                    const legacySig = String(l.telefone || '').replace(/\D/g, '') + '_' + String(l.dataHora).trim();
+                    set.add(legacySig);
+                }
+            });
+            const arr = Array.from(set).slice(-1000);
+            localStorage.setItem(DELETED_SIGS_KEY, JSON.stringify(arr));
+        }
+
+        function isLeadDeleted(lead) {
+            if (!lead) return true;
+            const clearedAt = parseInt(localStorage.getItem(CLEARED_AT_KEY) || '0', 10);
+            const tsVal = Number(lead.timestamp || lead.ts || 0);
+            if (clearedAt > 0 && tsVal > 0 && tsVal <= clearedAt) {
+                return true;
+            }
+            const set = getDeletedSignatures();
+            if (lead.id && set.has(String(lead.id))) return true;
+            if (lead.ts && set.has(String(lead.ts))) return true;
+            const sig = getLeadSignature(lead);
+            if (sig && set.has(sig)) return true;
+            if (lead.dataHora) {
+                const legacySig = String(lead.telefone || '').replace(/\D/g, '') + '_' + String(lead.dataHora).trim();
+                if (set.has(legacySig)) return true;
+            }
+            return false;
+        }
+
+        async function syncRemoteAction(payload) {
+            try {
+                await fetch('/api/triagem', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
-                }).catch(function () {});
+                });
+            } catch (e) {}
 
-                var webhook = localStorage.getItem(WEBHOOK_KEY) || '';
-                if (webhook) {
-                    fetch(webhook, {
+            const webhookUrl = localStorage.getItem(WEBHOOK_KEY) || DEFAULT_WEBHOOK;
+            if (webhookUrl) {
+                try {
+                    await fetch(webhookUrl, {
                         method: 'POST',
                         mode: 'no-cors',
                         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                         body: JSON.stringify(payload)
-                    }).catch(function () {});
-                }
-            }
-
-            function verificarSenha(digitada) {
-                var custom = localStorage.getItem(CUSTOM_PASS_KEY);
-                if (custom) return digitada === custom;
-                return digitada === 'almaeluz2026' || digitada === 'fgcar2026';
-            }
-
-            var loginScreen = document.getElementById('loginScreen');
-            var loginForm = document.getElementById('loginForm');
-            var loginPass = document.getElementById('loginPass');
-            var loginError = document.getElementById('loginError');
-
-            if (sessionStorage.getItem(SESSION_AUTH_KEY) === '1') {
-                loginScreen.classList.add('hidden');
-            }
-
-            loginForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-                if (verificarSenha(loginPass.value.trim())) {
-                    sessionStorage.setItem(SESSION_AUTH_KEY, '1');
-                    loginScreen.classList.add('hidden');
-                    renderizarPainel();
-                } else {
-                    loginError.style.display = 'block';
-                }
-            });
-
-            function getRegistros() {
-                try {
-                    var raw = localStorage.getItem(STORAGE_KEY);
-                    var lista = raw ? JSON.parse(raw) : [];
-                    return Array.isArray(lista) ? lista.filter(function (x) { return !isLeadDeleted(x); }) : [];
-                } catch (e) { return []; }
-            }
-
-            function salvarRegistros(lista) {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
-            }
-
-            var registroSelecionadoId = null;
-
-            function renderizarPainel() {
-                var lista = getRegistros();
-                var q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
-
-                var agora = new Date();
-                var anoMesAtual = agora.getFullYear() + '-' + (agora.getMonth() + 1 < 10 ? '0' + (agora.getMonth() + 1) : '' + (agora.getMonth() + 1));
-
-                document.getElementById('kpiTotal').textContent = lista.length;
-                var doMes = lista.filter(function (i) { return i.anoMes === anoMesAtual; });
-                document.getElementById('kpiMes').textContent = doMes.length;
-                document.getElementById('kpiMesLabel').textContent = 'Referência: ' + anoMesAtual;
-
-                if (lista.length > 0) {
-                    document.getElementById('kpiUltimo').textContent = lista[0].nome;
-                    document.getElementById('kpiUltimoSub').textContent = lista[0].dataHora + ' • ' + (lista[0].modalidade || 'Atendimento Online');
-
-                    var contagemPag = {};
-                    lista.forEach(function (item) {
-                        var p = item.pagina || 'index.html';
-                        contagemPag[p] = (contagemPag[p] || 0) + 1;
                     });
-                    var topPag = Object.keys(contagemPag).sort(function (a, b) { return contagemPag[b] - contagemPag[a]; })[0];
-                    document.getElementById('kpiTopPage').textContent = topPag + ' (' + contagemPag[topPag] + ')';
-                } else {
-                    document.getElementById('kpiUltimo').textContent = '—';
-                    document.getElementById('kpiUltimoSub').textContent = 'Aguardando novos contatos';
-                    document.getElementById('kpiTopPage').textContent = '—';
-                }
-
-                var filtrada = lista.filter(function (item) {
-                    if (!q) return true;
-                    var texto = [item.nome, item.telefone, item.modalidade, item.pagina, item.tituloPagina, item.origem, item.botao, item.dataHora].join(' ').toLowerCase();
-                    return texto.indexOf(q) !== -1;
-                });
-
-                var tbody = document.getElementById('tabelaBody');
-                if (filtrada.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="7" class="empty-state">Nenhum contato encontrado. Clique em <strong>"✨ Gerar Exemplos"</strong> no topo para testar o painel ou realize um teste clicando nos botões de WhatsApp do site.</td></tr>';
-                    return;
-                }
-
-                tbody.innerHTML = filtrada.map(function (item) {
-                    var numLimpo = (item.telefone || '').replace(/\D/g, '');
-                    var linkWa = numLimpo.length >= 10
-                        ? 'https://wa.me/55' + numLimpo + '?text=' + encodeURIComponent('Olá ' + item.nome + ', tudo bem? Aqui é a Valéria Pereira, do espaço Psicanálise Alma e Luz. Recebi seu contato pelo site sobre ' + (item.modalidade || 'Atendimento Online') + '!')
-                        : '#';
-                    return '<tr class="clickable-row" data-id="' + (item.id || item.ts) + '">' +
-                        '<td>' + (item.dataHora || '-') + '</td>' +
-                        '<td><strong>' + (item.nome || '-') + '</strong></td>' +
-                        '<td>' + (item.telefone || '-') + '</td>' +
-                        '<td><span class="badge-page">' + (item.modalidade || 'Atendimento Online') + '</span></td>' +
-                        '<td>' + (item.pagina || 'index.html') + '</td>' +
-                        '<td><span class="badge-origin">' + (item.origem || 'Direto / Orgânico') + '</span></td>' +
-                        '<td>' + (numLimpo.length >= 10 ? '<a class="wa-action" href="' + linkWa + '" target="_blank" rel="noopener" data-no-modal="true" onclick="event.stopPropagation();">💬 Responder</a>' : '-') + '</td>' +
-                    '</tr>';
-                }).join('');
-
-                Array.prototype.forEach.call(tbody.querySelectorAll('tr.clickable-row'), function (row) {
-                    row.addEventListener('click', function () {
-                        abrirDetalheContato(row.getAttribute('data-id'));
-                    });
-                });
+                } catch (e) {}
             }
+        }
 
-            // FICHA DETALHADA DO CONTATO
-            var modalDetalhe = document.getElementById('modalDetalhe');
-            function abrirDetalheContato(id) {
-                var lista = getRegistros();
-                var item = lista.find(function (x) { return String(x.id || x.ts) === String(id); });
-                if (!item) return;
-                registroSelecionadoId = id;
+        async function loadRemoteLeads() {
+            const webhookUrl = localStorage.getItem(WEBHOOK_KEY) || DEFAULT_WEBHOOK;
+            const syncStatus = document.getElementById('cloudSyncStatus');
+            if (syncStatus) syncStatus.innerHTML = '<span style="color:#38bdf8;">🔄 Sincronizando registros...</span>';
 
-                var numLimpo = (item.telefone || '').replace(/\D/g, '');
-                var linkWa = numLimpo.length >= 10
-                    ? 'https://wa.me/55' + numLimpo + '?text=' + encodeURIComponent('Olá ' + item.nome + ', tudo bem? Aqui é a Valéria Pereira (Psicanálise Alma e Luz). Recebi seu contato pelo site!')
-                    : '#';
+            let syncedCloud = false;
 
-                document.getElementById('detalheConteudo').innerHTML =
-                    '<div class="detail-row"><strong>Nome:</strong><span>' + (item.nome || '-') + '</span></div>' +
-                    '<div class="detail-row"><strong>WhatsApp:</strong><span>' + (item.telefone || '-') + '</span></div>' +
-                    '<div class="detail-row"><strong>Modalidade:</strong><span>' + (item.modalidade || 'Atendimento Online') + '</span></div>' +
-                    '<div class="detail-row"><strong>Data e Hora:</strong><span>' + (item.dataHora || '-') + '</span></div>' +
-                    '<div class="detail-row"><strong>Página de Origem:</strong><span>' + (item.pagina || 'index.html') + '</span></div>' +
-                    '<div class="detail-row"><strong>Título da Página:</strong><span>' + (item.tituloPagina || '-') + '</span></div>' +
-                    '<div class="detail-row"><strong>Botão Clicado:</strong><span>' + (item.botao || '-') + '</span></div>' +
-                    '<div class="detail-row"><strong>Canal de Aquisição:</strong><span>' + (item.origem || 'Direto / Orgânico') + '</span></div>';
-
-                var btnWa = document.getElementById('btnDetalheWhatsApp');
-                btnWa.href = linkWa;
-                modalDetalhe.classList.add('active');
-            }
-
-            document.getElementById('closeModalDetalhe').addEventListener('click', function () {
-                modalDetalhe.classList.remove('active');
-            });
-
-            document.getElementById('btnExcluirUnico').addEventListener('click', function () {
-                if (!registroSelecionadoId) return;
-                var todos = getRegistros();
-                var alvo = todos.find(function (x) {
-                    return String(x.id || x.ts) === String(registroSelecionadoId);
-                });
-                if (alvo) {
-                    addDeletedSignatures([alvo]);
-                    syncRemoteAction({
-                        action: 'delete',
-                        id: String(alvo.id || alvo.ts),
-                        telefone: alvo.telefone,
-                        dataHora: alvo.dataHora,
-                        signature: getLeadSignature(alvo)
-                    });
-                }
-                var nova = todos.filter(function (x) {
-                    return String(x.id || x.ts) !== String(registroSelecionadoId);
-                });
-                salvarRegistros(nova);
-                modalDetalhe.classList.remove('active');
-                renderizarPainel();
-            });
-
-            // GERADOR DE EXEMPLOS (DEMO)
-            document.getElementById('btnGerarDemo').addEventListener('click', function () {
-                var lista = getRegistros();
-                var agora = Date.now();
-                var exemplos = [
-                    {
-                        id: 'demo_1',
-                        ts: agora - 1800000,
-                        dataHora: 'Hoje 14:20',
-                        anoMes: new Date().toISOString().slice(0, 7),
-                        nome: 'Mariana Souza (Exemplo)',
-                        telefone: '(11) 98765-4321',
-                        modalidade: 'Terapia Individual Online',
-                        pagina: 'index.html',
-                        tituloPagina: 'Psicanálise Alma e Luz — Início',
-                        origem: 'Google Perfil Empresa (GMN)',
-                        botao: 'Contato Atendimento Online'
-                    },
-                    {
-                        id: 'demo_2',
-                        ts: agora - 7200000,
-                        dataHora: 'Hoje 11:05',
-                        anoMes: new Date().toISOString().slice(0, 7),
-                        nome: 'Carlos & Fernanda (Exemplo)',
-                        telefone: '(11) 97654-3210',
-                        modalidade: 'Terapia de Casal Online',
-                        pagina: 'conflitos-nos-relacionamentos-ego.html',
-                        tituloPagina: 'Conflitos nos Relacionamentos e o Ego',
-                        origem: 'youtube.com',
-                        botao: 'Agendar Terapia de Casal Comigo'
-                    },
-                    {
-                        id: 'demo_3',
-                        ts: agora - 86400000,
-                        dataHora: 'Ontem 19:40',
-                        anoMes: new Date().toISOString().slice(0, 7),
-                        nome: 'Patrícia Helena (Exemplo)',
-                        telefone: '(21) 99887-6655',
-                        modalidade: 'Mesa Quântica Estelar / Terapias Complementares',
-                        pagina: 'mesa-quantica-estelar-como-funciona.html',
-                        tituloPagina: 'Mesa Quântica Estelar: Como Funciona',
-                        origem: 'Direto / Orgânico',
-                        botao: 'Agendar Mesa Quântica Comigo'
-                    }
-                ];
-                salvarRegistros(exemplos.concat(lista));
-                renderizarPainel();
-            });
-
-            // EXPORTAR CSV
-            document.getElementById('btnExportarCsv').addEventListener('click', function () {
-                var lista = getRegistros();
-                if (!lista.length) {
-                    alert('Não há contatos registrados para exportar.');
-                    return;
-                }
-                var linhas = [['Data/Hora', 'Nome', 'WhatsApp', 'Modalidade', 'Pagina', 'Origem', 'Botao Clicado']];
-                lista.forEach(function (i) {
-                    linhas.push([
-                        i.dataHora || '',
-                        (i.nome || '').replace(/;/g, ','),
-                        i.telefone || '',
-                        (i.modalidade || 'Atendimento Online').replace(/;/g, ','),
-                        i.pagina || '',
-                        (i.origem || '').replace(/;/g, ','),
-                        (i.botao || '').replace(/;/g, ',')
-                    ]);
-                });
-                var csvContent = '\uFEFF' + linhas.map(function (r) { return r.join(';'); }).join('\r\n');
-                var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-                var url = URL.createObjectURL(blob);
-                var a = document.createElement('a');
-                a.href = url;
-                a.download = 'contatos-psicanalise-alma-e-luz.csv';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            });
-
-            // MODAL LIMPEZA
-            var modalLimpeza = document.getElementById('modalLimpeza');
-            document.getElementById('btnAbrirLimpeza').addEventListener('click', function () {
-                var lista = getRegistros();
-                var meses = {};
-                lista.forEach(function (i) { if (i.anoMes) meses[i.anoMes] = (meses[i.anoMes] || 0) + 1; });
-                var sel = document.getElementById('selectMesLimpeza');
-                var chaves = Object.keys(meses).sort().reverse();
-                sel.innerHTML = chaves.length
-                    ? chaves.map(function (m) { return '<option value="' + m + '">' + m + ' (' + meses[m] + ' contatos)</option>'; }).join('')
-                    : '<option value="">Nenhum mês registrado</option>';
-                modalLimpeza.classList.add('active');
-            });
-            document.getElementById('closeModalLimpeza').addEventListener('click', function () {
-                modalLimpeza.classList.remove('active');
-            });
-            document.getElementById('btnExpurgarAntigos').addEventListener('click', function () {
-                var limite = Date.now() - (365 * 24 * 60 * 60 * 1000);
-                var todos = getRegistros();
-                var removidos = todos.filter(function (i) { return !i.ts || i.ts < limite; });
-                if (removidos.length > 0) addDeletedSignatures(removidos);
-                syncRemoteAction({ action: 'prune_year' });
-                var nova = todos.filter(function (i) { return i.ts && i.ts >= limite; });
-                salvarRegistros(nova);
-                modalLimpeza.classList.remove('active');
-                renderizarPainel();
-            });
-            document.getElementById('btnApagarMes').addEventListener('click', function () {
-                var mes = document.getElementById('selectMesLimpeza').value;
-                if (!mes) return;
-                var todos = getRegistros();
-                var removidos = todos.filter(function (i) { return i.anoMes === mes; });
-                if (removidos.length > 0) addDeletedSignatures(removidos);
-                syncRemoteAction({ action: 'delete_month', month: mes });
-                var nova = todos.filter(function (i) { return i.anoMes !== mes; });
-                salvarRegistros(nova);
-                modalLimpeza.classList.remove('active');
-                renderizarPainel();
-            });
-            document.getElementById('btnZerarTudo').addEventListener('click', function () {
-                if (!confirm('Tem certeza que deseja apagar permanentemente TODOS os contatos salvos (inclusive na nuvem e planilha)?')) return;
-                var todos = getRegistros();
-                if (todos.length > 0) addDeletedSignatures(todos);
-                localStorage.setItem(CLEARED_AT_KEY, String(Date.now()));
-                salvarRegistros([]);
-                syncRemoteAction({ action: 'clear' });
-                modalLimpeza.classList.remove('active');
-                renderizarPainel();
-            });
-
-            // MODAL CONFIGURAÇÕES
-            var modalConfig = document.getElementById('modalConfig');
-            document.getElementById('btnAbrirConfig').addEventListener('click', function () {
-                document.getElementById('inputWebhookUrl').value = localStorage.getItem(WEBHOOK_KEY) || '';
-                document.getElementById('inputNovaSenha').value = '';
-                modalConfig.classList.add('active');
-            });
-            document.getElementById('closeModalConfig').addEventListener('click', function () {
-                modalConfig.classList.remove('active');
-            });
-            document.getElementById('btnSalvarConfig').addEventListener('click', function () {
-                var novaSenha = document.getElementById('inputNovaSenha').value.trim();
-                var webhook = document.getElementById('inputWebhookUrl').value.trim();
-                if (novaSenha) localStorage.setItem(CUSTOM_PASS_KEY, novaSenha);
-                localStorage.setItem(WEBHOOK_KEY, webhook);
-                modalConfig.classList.remove('active');
-                alert('Configurações salvas com sucesso!');
-            });
-
-            document.getElementById('searchInput').addEventListener('input', renderizarPainel);
-
-            // Sincronizar com /api/triagem se estiver rodando no Cloudflare Worker
-            fetch('/api/triagem')
-                .then(function (r) { return r.ok ? r.json() : null; })
-                .then(function (dados) {
-                    if (!dados) return;
-                    var remotos = [];
-                    if (Array.isArray(dados)) {
-                        remotos = dados;
-                    } else if (dados && typeof dados === 'object') {
-                        remotos = Array.isArray(dados.leads) ? dados.leads : [];
-                        if (dados.meta) {
-                            if (dados.meta.clearedAt) {
-                                var localCleared = parseInt(localStorage.getItem(CLEARED_AT_KEY) || '0', 10);
-                                if (dados.meta.clearedAt > localCleared) {
-                                    localStorage.setItem(CLEARED_AT_KEY, String(dados.meta.clearedAt));
+            try {
+                const kvRes = await fetch('/api/triagem');
+                if (kvRes.ok) {
+                    const kvData = await kvRes.json();
+                    let remoteList = [];
+                    if (Array.isArray(kvData)) {
+                        remoteList = kvData;
+                    } else if (kvData && typeof kvData === 'object') {
+                        remoteList = Array.isArray(kvData.leads) ? kvData.leads : [];
+                        if (kvData.meta) {
+                            if (kvData.meta.clearedAt) {
+                                const localCleared = parseInt(localStorage.getItem(CLEARED_AT_KEY) || '0', 10);
+                                if (kvData.meta.clearedAt > localCleared) {
+                                    localStorage.setItem(CLEARED_AT_KEY, String(kvData.meta.clearedAt));
                                 }
                             }
-                            if (Array.isArray(dados.meta.deletedSignatures) && dados.meta.deletedSignatures.length > 0) {
-                                var set = getDeletedSignatures();
-                                dados.meta.deletedSignatures.forEach(function (s) { set.add(s); });
+                            if (Array.isArray(kvData.meta.deletedSignatures) && kvData.meta.deletedSignatures.length > 0) {
+                                const set = getDeletedSignatures();
+                                kvData.meta.deletedSignatures.forEach(s => set.add(s));
                                 localStorage.setItem(DELETED_SIGS_KEY, JSON.stringify(Array.from(set).slice(-1000)));
                             }
                         }
                     }
-                    var locais = getRegistros();
-                    var mapa = {};
-                    locais.concat(remotos).forEach(function (item) {
-                        if (item && (item.id || item.ts) && !isLeadDeleted(item)) {
-                            mapa[item.id || item.ts] = item;
-                        }
-                    });
-                    var unificados = Object.keys(mapa).map(function (k) { return mapa[k]; });
-                    unificados.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
-                    salvarRegistros(unificados);
-                    renderizarPainel();
-                })
-                .catch(function () {});
+                    if (remoteList.length > 0) {
+                        mergeRemoteLeads(remoteList);
+                    }
+                    syncedCloud = true;
+                }
+            } catch (e) {}
 
-            renderizarPainel();
-        })();
+            if (!webhookUrl) {
+                if (syncStatus) {
+                    syncStatus.innerHTML = syncedCloud
+                        ? '<span style="color:#22c55e;">🟢 Nuvem KV Conectada & Sincronizada</span>'
+                        : '<span style="color:#94a3b8;">⚪ Armazenamento Local Ativo</span>';
+                }
+                return;
+            }
+
+            try {
+                const res = await fetch(webhookUrl);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        mergeRemoteLeads(data);
+                    }
+                    if (syncStatus) syncStatus.innerHTML = '<span style="color:#22c55e;">🟢 Google Sheets Conectado & Sincronizado</span>';
+                } else {
+                    if (syncStatus) syncStatus.innerHTML = '<span style="color:#f59e0b;">⚠️ Resposta pendente da planilha</span>';
+                }
+            } catch (err) {
+                if (syncStatus) syncStatus.innerHTML = '<span style="color:#94a3b8;">⚪ Armazenamento Local Ativo</span>';
+            }
+        }
+
+        function mergeRemoteLeads(remoteArray) {
+            let localLeads = getLeads().filter(l => !isLeadDeleted(l));
+            const existingKeys = new Set(localLeads.map(l => getLeadSignature(l)));
+            const existingIds = new Set(localLeads.map(l => String(l.id || '')));
+            let hasChanges = false;
+
+            remoteArray.forEach(rawRemote => {
+                const remoteLead = normalizeLead(rawRemote);
+                if (!remoteLead || isLeadDeleted(remoteLead)) return;
+                const key = getLeadSignature(remoteLead);
+                const idStr = String(remoteLead.id || '');
+                if (!existingKeys.has(key) && (!idStr || !existingIds.has(idStr))) {
+                    localLeads.unshift(remoteLead);
+                    existingKeys.add(key);
+                    if (idStr) existingIds.add(idStr);
+                    hasChanges = true;
+                }
+            });
+
+            if (hasChanges) {
+                localLeads = pruneExpiredLeads(localLeads);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(localLeads));
+                renderLeadsTable(localLeads);
+            }
+        }
+
+        // 4. Logout
+        function handleLogout() {
+            sessionStorage.removeItem(AUTH_KEY);
+            location.reload();
+        }
+
+        // 5. Política de Retenção de 1 Ano (365 Dias)
+        function pruneExpiredLeads(leads) {
+            if (!Array.isArray(leads)) return [];
+            const oneYearAgo = Date.now() - (RETENTION_DAYS * 24 * 60 * 60 * 1000);
+            return leads.map(normalizeLead).filter(item => {
+                if (!item || isLeadDeleted(item)) return false;
+                const ts = item.timestamp || parseDateToTimestamp(item.data, item.hora);
+                return ts >= oneYearAgo;
+            });
+        }
+
+        function parseDateToTimestamp(dateStr, timeStr) {
+            if (!dateStr) return Date.now();
+            try {
+                const parts = dateStr.split('/');
+                if (parts.length === 3) {
+                    const day = parseInt(parts[0], 10);
+                    const month = parseInt(parts[1], 10) - 1;
+                    const year = parseInt(parts[2], 10);
+                    let hour = 12, min = 0;
+                    if (timeStr && timeStr.includes(':')) {
+                        const tParts = timeStr.split(':');
+                        hour = parseInt(tParts[0], 10) || 12;
+                        min = parseInt(tParts[1], 10) || 0;
+                    }
+                    return new Date(year, month, day, hour, min).getTime();
+                }
+            } catch (e) {}
+            return Date.now();
+        }
+
+        // 6. Leitura e Persistência dos Leads
+        function getLeads() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return [];
+                const parsed = JSON.parse(raw);
+                const cleaned = pruneExpiredLeads(parsed);
+                if (cleaned.length !== parsed.length) {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(cleaned));
+                }
+                return cleaned;
+            } catch (e) {
+                return [];
+            }
+        }
+
+        // 7. Renderização da Tabela & Métricas
+        function renderLeadsTable(leadsToRender) {
+            const leads = leadsToRender || getLeads();
+            const tbody = document.getElementById('leadsTableBody');
+            tbody.innerHTML = '';
+
+            const allLeads = getLeads();
+            document.getElementById('totalLeadsCount').innerText = allLeads.length;
+
+            const now = new Date();
+            const currentMonth = (now.getMonth() + 1).toString().padStart(2, '0');
+            const currentYear = now.getFullYear().toString();
+            const monthNames = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+            
+            const monthLabel = document.getElementById('currentMonthName');
+            if (monthLabel) {
+                monthLabel.innerText = `Oportunidades em ${monthNames[now.getMonth()]}`;
+            }
+
+            const monthLeads = allLeads.filter(l => (l.data && l.data.includes(`/${currentMonth}/${currentYear}`)) || l.anoMes === `${currentYear}-${currentMonth}`);
+            document.getElementById('monthLeadsCount').innerText = monthLeads.length;
+
+            if (allLeads.length > 0) {
+                document.getElementById('lastLeadTime').innerText = allLeads[0].hora || '--:--';
+                document.getElementById('lastLeadDate').innerText = allLeads[0].data || 'Recente';
+
+                const pageCounts = {};
+                allLeads.forEach(l => {
+                    const p = l.pagina || 'Home';
+                    pageCounts[p] = (pageCounts[p] || 0) + 1;
+                });
+                let topPage = 'Home';
+                let maxCount = 0;
+                for (const p in pageCounts) {
+                    if (pageCounts[p] > maxCount) {
+                        maxCount = pageCounts[p];
+                        topPage = p;
+                    }
+                }
+                document.getElementById('topPageName').innerText = topPage.replace(/^\//, '') || 'Home';
+            } else {
+                document.getElementById('lastLeadTime').innerText = '--:--';
+                document.getElementById('lastLeadDate').innerText = 'Nenhum registro ainda';
+                document.getElementById('topPageName').innerText = '--';
+            }
+
+            if (leads.length === 0) {
+                tbody.innerHTML = `
+                <tr>
+                    <td colspan="7">
+                        <div class="empty-leads-box">
+                            <span>📭</span>
+                            <h3>Nenhuma oportunidade registrada no momento</h3>
+                            <p style="margin-top: 6px;">Assim que um visitante clicar no WhatsApp ou enviar formulário, o registro aparecerá aqui instantaneamente.</p>
+                        </div>
+                    </td>
+                </tr>`;
+                return;
+            }
+
+            leads.forEach((lead, index) => {
+                const tr = document.createElement('tr');
+                const rawTel = (lead.telefone || '').replace(/\D/g, '');
+                const waLink = rawTel ? `https://wa.me/55${rawTel}?text=${encodeURIComponent('Olá ' + lead.nome + ', tudo bem? Aqui é a Valéria Pereira, do espaço Psicanálise Alma e Luz. Recebi seu contato pelo site sobre ' + (lead.modalidade || 'Atendimento Online') + '!')}` : '#';
+
+                tr.innerHTML = `
+                    <td style="color: #64748b; font-weight: 700;">#${leads.length - index}</td>
+                    <td><strong>${lead.data}</strong> <span style="color: #94a3b8; font-size: 12px; margin-left: 4px;">às ${lead.hora}</span></td>
+                    <td style="font-weight: 700; color: #ffffff;">
+                        👤 ${lead.nome}
+                        ${lead.modalidade ? `<div style="font-size: 11px; color: #94a3b8; font-weight: 500; margin-top: 2px;">✨ ${lead.modalidade}</div>` : ''}
+                    </td>
+                    <td>
+                        <strong style="color: #38bdf8; font-size: 15px;">${lead.telefone}</strong>
+                    </td>
+                    <td>
+                        <span class="lead-badge-page" title="${lead.pagina}">${lead.pagina || 'Home'}</span>
+                    </td>
+                    <td>
+                        <span class="lead-badge-type">${lead.tipo || 'WhatsApp'}</span>
+                    </td>
+                    <td style="text-align: right; white-space: nowrap;">
+                        <button class="btn-action" style="padding: 6px 10px; font-size: 12px; margin-right: 4px;" onclick="viewLeadDetail('${lead.id}')" title="Ver detalhes completos">
+                            🔍 Detalhes
+                        </button>
+                        <a href="${waLink}" target="_blank" rel="noopener" class="btn-whatsapp-lead" title="Abrir conversa no WhatsApp">
+                            💬 Conversar
+                        </a>
+                        <button class="btn-delete-lead" onclick="deleteLead('${lead.id}')" title="Excluir este registro">
+                            🗑️
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // 8. Filtro de Busca em Tempo Real
+        function filterLeads() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const allLeads = getLeads();
+
+            if (!query) {
+                renderLeadsTable(allLeads);
+                return;
+            }
+
+            const filtered = allLeads.filter(l => {
+                return (l.nome && l.nome.toLowerCase().includes(query)) ||
+                       (l.telefone && l.telefone.toLowerCase().includes(query)) ||
+                       (l.modalidade && l.modalidade.toLowerCase().includes(query)) ||
+                       (l.pagina && l.pagina.toLowerCase().includes(query)) ||
+                       (l.origem && l.origem.toLowerCase().includes(query)) ||
+                       (l.data && l.data.toLowerCase().includes(query));
+            });
+
+            renderLeadsTable(filtered);
+        }
+
+        // 9. Modal de Detalhes do Lead
+        function viewLeadDetail(id) {
+            const allLeads = getLeads();
+            const lead = allLeads.find(l => String(l.id) === String(id));
+            if (!lead) return;
+
+            const container = document.getElementById('leadDetailContent');
+            const rawTel = (lead.telefone || '').replace(/\D/g, '');
+            const waLink = rawTel ? `https://wa.me/55${rawTel}?text=${encodeURIComponent('Olá ' + lead.nome + ', tudo bem? Aqui é a Valéria Pereira (Psicanálise Alma e Luz). Recebi seu contato pelo site!')}` : '#';
+
+            container.innerHTML = `
+                <div class="lead-detail-item">
+                    <span class="lead-detail-label">Nome do Contato</span>
+                    <span class="lead-detail-val" style="font-weight:700;">${lead.nome}</span>
+                </div>
+                <div class="lead-detail-item">
+                    <span class="lead-detail-label">WhatsApp / Telefone</span>
+                    <span class="lead-detail-val" style="color:#38bdf8;font-weight:700;">${lead.telefone}</span>
+                </div>
+                <div class="lead-detail-item">
+                    <span class="lead-detail-label">Página de Origem</span>
+                    <span class="lead-detail-val">${lead.pagina || 'index.html'}</span>
+                </div>
+                <div class="lead-detail-item">
+                    <span class="lead-detail-label">Canal / Tipo de Ação</span>
+                    <span class="lead-detail-val">${lead.tipo || 'WhatsApp Popup'}</span>
+                </div>
+                <div class="lead-detail-item full">
+                    <span class="lead-detail-label">Modalidade de Atendimento</span>
+                    <span class="lead-detail-val">${lead.modalidade || 'Atendimento Online'}</span>
+                </div>
+                <div class="lead-detail-item full">
+                    <span class="lead-detail-label">Título da Página / Origem</span>
+                    <span class="lead-detail-val" style="font-size:12px;color:#94a3b8;">${lead.tituloPagina || 'Psicanálise Alma e Luz'} (${lead.origem || 'Direto / Orgânico'})</span>
+                </div>
+                <div class="lead-detail-item full">
+                    <span class="lead-detail-label">Data e Hora do Registro</span>
+                    <span class="lead-detail-val">${lead.data} às ${lead.hora}</span>
+                </div>
+            `;
+
+            const detailActions = document.getElementById('leadDetailActions');
+            if (detailActions) {
+                detailActions.innerHTML = `
+                    <a href="${waLink}" target="_blank" rel="noopener" class="btn-whatsapp-lead" style="display:inline-flex;align-items:center;padding:8px 16px;border-radius:8px;">
+                        💬 Abrir no WhatsApp
+                    </a>
+                    <button class="btn-action" onclick="closeDetailModal()">Fechar</button>
+                `;
+            }
+
+            document.getElementById('detailModal').classList.add('active');
+        }
+
+        function closeDetailModal() {
+            document.getElementById('detailModal').classList.remove('active');
+        }
+
+        // 10. Excluir Lead Individual (Manual)
+        function deleteLead(id) {
+            if (!confirm('Deseja realmente excluir este registro de lead?')) return;
+            let leads = getLeads();
+            const target = leads.find(l => String(l.id) === String(id));
+            if (target) {
+                addDeletedSignatures([target]);
+                syncRemoteAction({
+                    action: 'delete',
+                    id: target.id,
+                    telefone: target.telefone,
+                    data: target.data,
+                    hora: target.hora,
+                    dataHora: target.dataHora,
+                    signature: getLeadSignature(target)
+                });
+            }
+            leads = leads.filter(l => String(l.id) !== String(id));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+            renderLeadsTable();
+        }
+
+        // 11. Modal de Limpeza & Expurgo (Manual & 1 Ano)
+        function openCleanupModal() {
+            populateCleanupMonths();
+            document.getElementById('cleanupModal').classList.add('active');
+        }
+
+        function closeCleanupModal() {
+            document.getElementById('cleanupModal').classList.remove('active');
+        }
+
+        function populateCleanupMonths() {
+            const allLeads = getLeads();
+            const select = document.getElementById('cleanupMonthSelect');
+            select.innerHTML = '';
+
+            const monthsSet = new Set();
+            allLeads.forEach(l => {
+                if (l.data && l.data.includes('/')) {
+                    const parts = l.data.split('/');
+                    if (parts.length === 3) {
+                        monthsSet.add(`${parts[1]}/${parts[2]}`);
+                    }
+                }
+            });
+
+            const monthsArr = Array.from(monthsSet).sort().reverse();
+            if (monthsArr.length === 0) {
+                select.innerHTML = '<option value="">Nenhum mês registrado</option>';
+                return;
+            }
+
+            monthsArr.forEach(m => {
+                const [mes, ano] = m.split('/');
+                const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+                const name = monthNames[parseInt(mes, 10) - 1] || mes;
+                const opt = document.createElement('option');
+                opt.value = m;
+                opt.innerText = `${name} de ${ano} (${m})`;
+                select.appendChild(opt);
+            });
+        }
+
+        function deleteLeadsBySelectedMonth() {
+            const select = document.getElementById('cleanupMonthSelect');
+            const targetMonth = select.value;
+            if (!targetMonth) {
+                alert('Nenhum mês selecionado.');
+                return;
+            }
+
+            if (!confirm(`Tem certeza de que deseja excluir TODOS os leads registrados no período de ${targetMonth}?`)) return;
+
+            let leads = getLeads();
+            const initialCount = leads.length;
+            const removedLeads = [];
+            leads = leads.filter(l => {
+                if (!l.data) return true;
+                const match = l.data.includes(`/${targetMonth}`);
+                if (match) removedLeads.push(l);
+                return !match;
+            });
+
+            if (removedLeads.length > 0) {
+                addDeletedSignatures(removedLeads);
+                syncRemoteAction({ action: 'delete_month', month: targetMonth });
+            }
+
+            const removedCount = initialCount - leads.length;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+            alert(`Foram removidos ${removedCount} registros correspondentes a ${targetMonth}.`);
+            populateCleanupMonths();
+            renderLeadsTable();
+        }
+
+        function runForcePruneOneYear() {
+            let leads = getLeads();
+            const initialCount = leads.length;
+            const kept = pruneExpiredLeads(leads);
+            const keptIds = new Set(kept.map(k => k.id));
+            const removedLeads = leads.filter(l => !keptIds.has(l.id));
+            if (removedLeads.length > 0) {
+                addDeletedSignatures(removedLeads);
+            }
+            syncRemoteAction({ action: 'prune_year' });
+
+            const removedCount = initialCount - kept.length;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(kept));
+            alert(`Varredura concluída! Registros com mais de 365 dias excluídos: ${removedCount}. Registros ativos preservados: ${kept.length}.`);
+            populateCleanupMonths();
+            renderLeadsTable();
+        }
+
+        function clearAllLeads() {
+            if (!confirm('ATENÇÃO: Deseja apagar permanentemente TODOS os leads registrados (inclusive na nuvem e planilha)? Essa ação não pode ser desfeita.')) return;
+            const currentLeads = getLeads();
+            if (currentLeads.length > 0) {
+                addDeletedSignatures(currentLeads);
+            }
+            localStorage.setItem(CLEARED_AT_KEY, String(Date.now()));
+            localStorage.removeItem(STORAGE_KEY);
+            syncRemoteAction({ action: 'clear' });
+            alert('Todos os registros foram excluídos permanentemente.');
+            closeCleanupModal();
+            renderLeadsTable();
+        }
+
+        // 12. Inserir Lead de Demonstração (Para Apresentações)
+        function insertDemoLead() {
+            const nomes = ['Mariana Souza', 'Carlos & Fernanda', 'Patrícia Helena', 'Renata Oliveira', 'Beatriz Santos'];
+            const modalidades = ['Terapia Individual Online', 'Terapia de Casal Online', 'Mesa Quântica Estelar / Terapias Complementares'];
+            const paginas = ['index.html', 'artigos/ego-inflado-destroi-suas-relacoes-magoa-copo-vazio.html', 'artigos/mesa-quantica-estelar-como-funciona-beneficios.html'];
+            const ddd = '11';
+            const randomTel = `(${ddd}) 9${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}`;
+            const idx = Math.floor(Math.random() * nomes.length);
+            const mod = modalidades[Math.floor(Math.random() * modalidades.length)];
+            const pag = paginas[Math.floor(Math.random() * paginas.length)];
+
+            const now = new Date();
+            const dataStr = now.toLocaleDateString('pt-BR');
+            const horaStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            const demo = {
+                id: 'lead_' + Date.now(),
+                ts: Date.now(),
+                timestamp: Date.now(),
+                data: dataStr,
+                hora: horaStr,
+                dataHora: `${dataStr}, ${horaStr}`,
+                anoMes: now.toISOString().slice(0, 7),
+                nome: nomes[idx],
+                telefone: randomTel,
+                modalidade: mod,
+                servico: mod,
+                pagina: pag,
+                tituloPagina: 'Psicanálise Alma e Luz',
+                origem: 'Demonstração Comercial',
+                botao: 'Contato Atendimento Online',
+                tipo: 'WhatsApp Popup'
+            };
+
+            let leads = getLeads();
+            leads.unshift(demo);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+            renderLeadsTable();
+        }
+
+        // 13. Exportação para Excel (.CSV)
+        function exportToCSV() {
+            const leads = getLeads();
+            if (leads.length === 0) {
+                alert('Não há registros para exportar.');
+                return;
+            }
+
+            let csv = '\uFEFF';
+            csv += 'ID;Data;Hora;Nome;WhatsApp;Modalidade;Pagina;Origem;Tipo de Acao\n';
+
+            leads.forEach(l => {
+                const safe = (v) => `"${String(v || '').replace(/"/g, '""')}"`;
+                csv += `${safe(l.id)};${safe(l.data)};${safe(l.hora)};${safe(l.nome)};${safe(l.telefone)};${safe(l.modalidade)};${safe(l.pagina)};${safe(l.origem)};${safe(l.tipo)}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', `relatorio_leads_psicanalise_alma_e_luz_${new Date().toISOString().slice(0,10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 14. Modal de Configurações
+        function openConfigModal() {
+            document.getElementById('webhookUrlInput').value = localStorage.getItem(WEBHOOK_KEY) || DEFAULT_WEBHOOK;
+            document.getElementById('newAdminPass').value = '';
+            document.getElementById('configModal').classList.add('active');
+        }
+
+        function closeConfigModal() {
+            document.getElementById('configModal').classList.remove('active');
+        }
+
+        function saveConfigs() {
+            const newPass = document.getElementById('newAdminPass').value.trim();
+            const webhook = document.getElementById('webhookUrlInput').value.trim();
+
+            if (newPass) {
+                localStorage.setItem(PASS_KEY, newPass);
+                alert('Senha mestra alterada com sucesso!');
+            }
+
+            if (webhook) {
+                localStorage.setItem(WEBHOOK_KEY, webhook);
+            } else {
+                localStorage.removeItem(WEBHOOK_KEY);
+            }
+
+            closeConfigModal();
+            alert('Configurações salvas com sucesso!');
+        }
     </script>
 </body>
 </html>

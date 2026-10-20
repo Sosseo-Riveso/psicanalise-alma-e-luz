@@ -1950,29 +1950,9 @@ td {
   flex-wrap: wrap;
 }
 
-/* Botão Flutuante de WhatsApp no Canto Inferior Direito */
+/* Botão Flutuante de WhatsApp no Canto Inferior Direito (Removido: já consta no cabeçalho) */
 .whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background-color: var(--whatsapp);
-  color: #ffffff !important;
-  font-weight: 700;
-  padding: 10px 18px;
-  border-radius: 999px;
-  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.4);
-  border: 2px solid #ffffff;
-  font-size: 0.86rem;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.whatsapp-float:hover {
-  background-color: var(--whatsapp-dark);
-  transform: scale(1.04);
+  display: none !important;
 }
 
 /* Rodapé */
