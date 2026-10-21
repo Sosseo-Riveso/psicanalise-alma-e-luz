@@ -243,7 +243,77 @@
     // ─── CRIAÇÃO E CONTROLE DO MODAL ────────────────────────────────────────
     var urlDestinoAtual = '';
     var textoBotaoAtual = '';
+    var modalIsEnglish = false;
     var modalEl = null;
+
+    function aplicarMascaraTelefoneModal(valor) {
+        var raw = String(valor || '');
+        // Se estiver no modo em Inglês ou o usuário digitar "+" de DDI internacional diferente de +55, preserva formato internacional
+        if (modalIsEnglish || (/^\s*\+/.test(raw) && !/^\s*\+55/.test(raw))) {
+            return raw.replace(/[^\d+\-() ]/g, '').substring(0, 22);
+        }
+        return aplicarMascaraTelefone(raw);
+    }
+
+    function configurarIdiomaModal(m, isEn) {
+        modalIsEnglish = !!isEn;
+        var badge = m.querySelector('.almaeluz-modal-badge');
+        var title = m.querySelector('#almaeluz-modal-title');
+        var sub = m.querySelector('.almaeluz-modal-sub');
+        var lblNome = m.querySelector('label[for="almaeluz-input-nome"]');
+        var inputNome = m.querySelector('#almaeluz-input-nome');
+        var lblTel = m.querySelector('label[for="almaeluz-input-tel"]');
+        var inputTel = m.querySelector('#almaeluz-input-tel');
+        var lblMod = m.querySelector('label[for="almaeluz-input-mod"]');
+        var selectMod = m.querySelector('#almaeluz-input-mod');
+        var btnSubmitSpan = m.querySelector('.almaeluz-submit-btn span');
+        var privacy = m.querySelector('.almaeluz-privacy');
+        var btnClose = m.querySelector('#almaeluz-modal-close');
+
+        if (modalIsEnglish) {
+            if (btnClose) btnClose.setAttribute('aria-label', 'Close');
+            if (badge) badge.innerHTML = '<span></span> Online Sessions in English • Valéria Pereira';
+            if (title) title.textContent = "Let's Chat on WhatsApp?";
+            if (sub) sub.textContent = 'Please enter your name and WhatsApp number below to start our private conversation in English:';
+            if (lblNome) lblNome.textContent = 'How would you like to be called? *';
+            if (inputNome) inputNome.setAttribute('placeholder', 'Enter your name');
+            if (lblTel) lblTel.textContent = 'Your WhatsApp Number (with Country/Area Code) *';
+            if (inputTel) inputTel.setAttribute('placeholder', '+1 (555) 000-0000 or +55 (11) 99999-9999');
+            if (lblMod) lblMod.textContent = 'Which online session are you looking for?';
+            if (selectMod) {
+                selectMod.innerHTML =
+                    '<option value="Online Individual Therapy (in English)">Online Individual Therapy (in English)</option>' +
+                    '<option value="Online Couples Therapy (in English)">Online Couples Therapy (in English)</option>' +
+                    '<option value="Stellar Quantum Board / Integrative Therapy (in English)">Stellar Quantum Board / Integrative Therapy</option>' +
+                    '<option value="Questions about Online Sessions in English">Questions about Online Sessions in English</option>';
+            }
+            if (btnSubmitSpan) btnSubmitSpan.textContent = 'Start Conversation with Me on WhatsApp';
+            if (privacy) {
+                privacy.innerHTML = '🔒 Your data is kept strictly confidential and used solely to reply to you (<a href="/politica-de-privacidade.html" style="color:inherit;text-decoration:underline;">Privacy Policy</a>).';
+            }
+        } else {
+            if (btnClose) btnClose.setAttribute('aria-label', 'Fechar');
+            if (badge) badge.innerHTML = '<span></span> Meu Atendimento Online • Valéria Pereira';
+            if (title) title.textContent = 'Vamos Conversar no WhatsApp?';
+            if (sub) sub.textContent = 'Informe seu nome e WhatsApp abaixo para iniciarmos nossa conversa sobre o seu atendimento online particular:';
+            if (lblNome) lblNome.textContent = 'Como você gosta de ser chamado(a)? *';
+            if (inputNome) inputNome.setAttribute('placeholder', 'Digite seu nome');
+            if (lblTel) lblTel.textContent = 'Seu WhatsApp com DDD *';
+            if (inputTel) inputTel.setAttribute('placeholder', '(11) 99999-9999');
+            if (lblMod) lblMod.textContent = 'Qual atendimento você busca comigo?';
+            if (selectMod) {
+                selectMod.innerHTML =
+                    '<option value="Terapia Individual Online">Terapia Individual Online</option>' +
+                    '<option value="Terapia de Casal Online">Terapia de Casal Online</option>' +
+                    '<option value="Mesa Quântica Estelar / Terapias Complementares">Mesa Quântica Estelar / Terapias Complementares</option>' +
+                    '<option value="Dúvidas sobre Atendimento Online">Tirar dúvidas sobre o Atendimento Online</option>';
+            }
+            if (btnSubmitSpan) btnSubmitSpan.textContent = 'Iniciar Conversa Comigo no WhatsApp';
+            if (privacy) {
+                privacy.innerHTML = '🔒 Seus dados são protegidos com sigilo ético e usados apenas para meu retorno (<a href="/politica-de-privacidade.html" style="color:inherit;text-decoration:underline;">Política de Privacidade</a>).';
+            }
+        }
+    }
 
     function criarModal() {
         if (modalEl) return modalEl;
@@ -298,7 +368,7 @@
         var form = backdrop.querySelector('#almaeluz-triagem-form');
 
         inputTel.addEventListener('input', function () {
-            inputTel.value = aplicarMascaraTelefone(inputTel.value);
+            inputTel.value = aplicarMascaraTelefoneModal(inputTel.value);
         });
 
         btnClose.addEventListener('click', fecharModal);
@@ -315,13 +385,14 @@
             ev.preventDefault();
             var nomeVal = (inputNome.value || '').trim();
             var telVal = (inputTel.value || '').trim();
-            var modVal = selectMod ? selectMod.value : 'Atendimento Online';
+            var modVal = selectMod ? selectMod.value : (modalIsEnglish ? 'Online Sessions in English' : 'Atendimento Online');
 
             if (!nomeVal) {
                 inputNome.focus();
                 return;
             }
-            if (telVal.replace(/\D/g, '').length < 10) {
+            var minDigits = modalIsEnglish ? 8 : 10;
+            if (telVal.replace(/\D/g, '').length < minDigits) {
                 inputTel.focus();
                 return;
             }
@@ -333,13 +404,19 @@
                 botao: textoBotaoAtual
             });
 
-            // Personaliza a mensagem do WhatsApp com o nome e modalidade escolhida
+            // Personaliza a mensagem do WhatsApp com o nome e modalidade escolhida (em Inglês ou Português conforme o botão clicado)
             var finalUrl = urlDestinoAtual;
             try {
                 var u = new URL(urlDestinoAtual);
-                var msgOriginal = u.searchParams.get('text') || 'Olá, Valéria! Vim pelo site Psicanálise Alma e Luz.';
-                var msgPersonalizada = 'Olá, Valéria! Meu nome é ' + nomeVal + ' (' + telVal + '). Busco informações sobre ' + modVal + '.\n\n' + msgOriginal;
-                u.searchParams.set('text', msgPersonalizada);
+                if (modalIsEnglish) {
+                    var msgOriginalEn = u.searchParams.get('text') || 'Hello Valéria! I visited the Psicanálise Alma e Luz website and would like information about online sessions in English.';
+                    var msgPersonalizadaEn = 'Hello, Valéria! My name is ' + nomeVal + ' (' + telVal + '). I am looking for information about ' + modVal + '.\n\n' + msgOriginalEn;
+                    u.searchParams.set('text', msgPersonalizadaEn);
+                } else {
+                    var msgOriginal = u.searchParams.get('text') || 'Olá, Valéria! Vim pelo site Psicanálise Alma e Luz.';
+                    var msgPersonalizada = 'Olá, Valéria! Meu nome é ' + nomeVal + ' (' + telVal + '). Busco informações sobre ' + modVal + '.\n\n' + msgOriginal;
+                    u.searchParams.set('text', msgPersonalizada);
+                }
                 finalUrl = u.toString();
             } catch (err) {}
 
@@ -350,14 +427,15 @@
         return modalEl;
     }
 
-    function abrirModal(urlDestino, textoBotao) {
+    function abrirModal(urlDestino, textoBotao, isEnglish) {
         urlDestinoAtual = urlDestino;
-        textoBotaoAtual = textoBotao || 'Contato WhatsApp';
+        textoBotaoAtual = textoBotao || (isEnglish ? 'Online Sessions in English' : 'Contato WhatsApp');
         var m = criarModal();
+        configurarIdiomaModal(m, isEnglish);
 
-        // Pré-seleciona a modalidade no select se o botão indicar Casal ou Mesa Quântica
+        // Pré-seleciona a modalidade no select se o botão em português indicar Casal ou Mesa Quântica
         var selectMod = m.querySelector('#almaeluz-input-mod');
-        if (selectMod && textoBotaoAtual) {
+        if (!isEnglish && selectMod && textoBotaoAtual) {
             var t = textoBotaoAtual.toLowerCase();
             if (t.indexOf('casal') !== -1) {
                 selectMod.value = 'Terapia de Casal Online';
@@ -474,6 +552,18 @@
         inicializarFormularioContato();
 
         document.addEventListener('click', function (ev) {
+            var enTagMobile = ev.target.closest('.brand-en-tag');
+            if (enTagMobile) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                abrirModal(
+                    'https://wa.me/5511926755744?text=Hello%20Val%C3%A9ria!%20I%20visited%20the%20Psican%C3%A1lise%20Alma%20e%20Luz%20website%20and%20would%20like%20information%20about%20online%20sessions%20in%20English.',
+                    'Online Sessions also in English',
+                    true
+                );
+                return;
+            }
+
             var link = ev.target.closest('a[href*="wa.me"], a[href*="whatsapp.com"]');
             if (!link) return;
 
@@ -483,7 +573,8 @@
             ev.preventDefault();
             var href = link.getAttribute('href');
             var label = (link.textContent || link.getAttribute('aria-label') || 'WhatsApp').replace(/\s+/g, ' ').trim();
-            abrirModal(href, label);
+            var isEn = link.classList.contains('header-en-badge') || link.getAttribute('lang') === 'en';
+            abrirModal(href, label, isEn);
         });
     }
 
