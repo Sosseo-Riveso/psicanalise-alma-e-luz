@@ -193,7 +193,17 @@
 
     // ─── MÁSCARA DE TELEFONE ────────────────────────────────────────────────
     function aplicarMascaraTelefone(valor) {
-        var num = valor.replace(/\D/g, '').substring(0, 11);
+        var raw = String(valor || '');
+        var num = raw.replace(/\D/g, '');
+        if (/^\s*\+?55/.test(raw) && num.length >= 12 && num.indexOf('55') === 0) {
+            num = num.substring(2);
+        } else if ((num.length === 12 || num.length === 13) && num.indexOf('55') === 0) {
+            num = num.substring(2);
+        }
+        if (num.length >= 11 && num.charAt(0) === '0') {
+            num = num.substring(1);
+        }
+        num = num.substring(0, 11);
         if (num.length === 0) return '';
         if (num.length <= 2) return '(' + num;
         if (num.length <= 6) return '(' + num.substring(0, 2) + ') ' + num.substring(2);
