@@ -213,24 +213,43 @@ export default {
 
               const htmlBody = `<!DOCTYPE html>
 <html lang="pt-BR">
-<head><meta charset="UTF-8"></head>
-<body style="font-family: Arial, sans-serif; background-color: #eef9fb; margin: 0; padding: 24px; color: #042a37;">
-  <div style="max-width: 620px; margin: 0 auto; background: #ffffff; border-radius: 14px; overflow: hidden; border: 1.5px solid #96cbd6;">
-    <div style="background: linear-gradient(135deg, #042a37 0%, #6347a6 100%); color: #ffffff; padding: 22px 28px;">
-      <h2 style="margin: 0; font-size: 20px;">🌸 Novo Contato — ${escapeHtml(siteName)}</h2>
-      <p style="margin: 6px 0 0; font-size: 13px; opacity: 0.92;">Recebido em ${escapeHtml(brDate)} • Canal: ${escapeHtml(tipoCanal)} (${escapeHtml(pagina)})</p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif; background-color: #eef9fb; margin: 0; padding: 8px 6px; color: #042a37; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
+  <div style="width: 100%; max-width: 560px; margin: 0 auto; background: #ffffff; border-radius: 12px; border: 1.5px solid #96cbd6; box-sizing: border-box;">
+    <div style="background: linear-gradient(135deg, #042a37 0%, #6347a6 100%); color: #ffffff; padding: 16px 16px; border-radius: 10px 10px 0 0; box-sizing: border-box;">
+      <h2 style="margin: 0; font-size: 18px; line-height: 1.35; word-break: break-word;">🌸 Novo Contato — ${escapeHtml(siteName)}</h2>
+      <p style="margin: 6px 0 0; font-size: 12px; line-height: 1.4; opacity: 0.92; word-break: break-word;">Recebido em ${escapeHtml(brDate)} • Canal: ${escapeHtml(tipoCanal)} (${escapeHtml(pagina)})</p>
     </div>
-    <div style="padding: 24px 28px;">
-      <table style="width: 100%; border-collapse: collapse; font-size: 15px;">
-        <tr><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold; width: 175px; color: #295666;">👤 Nome:</td><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold;">${escapeHtml(nome)}</td></tr>
-        <tr><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold; color: #295666;">📱 Telefone / WhatsApp:</td><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold; color: #128c7e;">${escapeHtml(telefone)}</td></tr>
-        <tr><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold; color: #295666;">✉️ E-mail:</td><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb;">${escapeHtml(emailCliente)}</td></tr>
-        <tr><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold; color: #295666;">🌷 Modalidade Buscada:</td><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; color: #6347a6; font-weight: bold;">${escapeHtml(modalidade)}</td></tr>
-        <tr><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb; font-weight: bold; color: #295666;">💬 Retorno Preferido:</td><td style="padding: 10px 0; border-bottom: 1px solid #eef9fb;">${escapeHtml(preferenciaRetorno)}</td></tr>
-        <tr><td style="padding: 10px 0; font-weight: bold; color: #295666; vertical-align: top;">📝 Mensagem / Relato:</td><td style="padding: 10px 0; line-height: 1.55; white-space: pre-wrap;">${escapeHtml(mensagem)}</td></tr>
-      </table>
-      ${rawPhone ? `<div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid #eef9fb; text-align: center;">
-        <a href="https://api.whatsapp.com/send?phone=55${rawPhone}" style="display: inline-block; background-color: #25d366; color: #ffffff; text-decoration: none; font-weight: bold; padding: 12px 24px; border-radius: 999px; font-size: 14px;">💬 Responder no WhatsApp (${escapeHtml(telefone)})</a>
+    <div style="padding: 14px 16px; box-sizing: border-box;">
+      <div style="padding: 10px 0; border-bottom: 1px solid #eef9fb;">
+        <div style="font-size: 12px; font-weight: bold; color: #295666; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 3px;">👤 Nome</div>
+        <div style="font-size: 15px; font-weight: bold; color: #042a37; word-break: break-word; overflow-wrap: anywhere; line-height: 1.4;">${escapeHtml(nome)}</div>
+      </div>
+      <div style="padding: 10px 0; border-bottom: 1px solid #eef9fb;">
+        <div style="font-size: 12px; font-weight: bold; color: #295666; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 3px;">📱 Telefone / WhatsApp</div>
+        <div style="font-size: 15px; font-weight: bold; color: #128c7e; word-break: break-word; overflow-wrap: anywhere; line-height: 1.4;">${escapeHtml(telefone)}</div>
+      </div>
+      <div style="padding: 10px 0; border-bottom: 1px solid #eef9fb;">
+        <div style="font-size: 12px; font-weight: bold; color: #295666; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 3px;">✉️ E-mail</div>
+        <div style="font-size: 15px; color: #042a37; word-break: break-word; overflow-wrap: anywhere; line-height: 1.4;">${escapeHtml(emailCliente)}</div>
+      </div>
+      <div style="padding: 10px 0; border-bottom: 1px solid #eef9fb;">
+        <div style="font-size: 12px; font-weight: bold; color: #295666; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 3px;">🌷 Modalidade Buscada</div>
+        <div style="font-size: 15px; font-weight: bold; color: #6347a6; word-break: break-word; overflow-wrap: anywhere; line-height: 1.4;">${escapeHtml(modalidade)}</div>
+      </div>
+      <div style="padding: 10px 0; border-bottom: 1px solid #eef9fb;">
+        <div style="font-size: 12px; font-weight: bold; color: #295666; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 3px;">💬 Retorno Preferido</div>
+        <div style="font-size: 15px; color: #042a37; word-break: break-word; overflow-wrap: anywhere; line-height: 1.4;">${escapeHtml(preferenciaRetorno)}</div>
+      </div>
+      <div style="padding: 10px 0;">
+        <div style="font-size: 12px; font-weight: bold; color: #295666; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px;">📝 Mensagem / Relato</div>
+        <div style="font-size: 15px; color: #042a37; line-height: 1.55; white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere;">${escapeHtml(mensagem)}</div>
+      </div>
+      ${rawPhone ? `<div style="margin-top: 18px; padding-top: 16px; border-top: 1px solid #eef9fb; text-align: center;">
+        <a href="https://api.whatsapp.com/send?phone=55${rawPhone}" style="display: block; box-sizing: border-box; width: 100%; max-width: 340px; margin: 0 auto; background-color: #25d366; color: #ffffff; text-decoration: none; font-weight: bold; padding: 12px 16px; border-radius: 999px; font-size: 14px; text-align: center; word-break: break-word;">💬 Responder no WhatsApp (${escapeHtml(telefone)})</a>
       </div>` : ''}
     </div>
   </div>
