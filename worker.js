@@ -190,13 +190,12 @@ export default {
           if (stored.length > 500) stored = stored.slice(0, 500);
           await env.LEADS_KV.put(KV_KEY, JSON.stringify(stored));
 
-          // Disparo de E-mail via Cloudflare Email Routing (provisório para testes: riveso@gmail.com)
+          // Disparo de E-mail via Cloudflare Email Routing para a Valéria (valeleca@gmail.com)
           let emailSent = false;
           if (env.SEND_EMAIL) {
             try {
               const siteName = 'Psicanálise Alma e Luz — Valéria Pereira';
-              const fromEmail = 'contato@sosseo.com.br';
-              const toEmail = 'riveso@gmail.com';
+              const toEmail = 'valeleca@gmail.com';
               const nome = dados.nome || 'Visitante pelo Site';
               const telefone = dados.telefone || 'Não informado';
               const emailCliente = dados.email || 'Não informado';
@@ -206,10 +205,8 @@ export default {
               const pagina = dados.pagina || 'contato.html';
               const tipoCanal = dados.tipo || dados.botao || 'Formulário de Contato';
 
-              const fromDisplayHeader = '=?UTF-8?B?' + utf8ToBase64(siteName) + '?= <' + fromEmail + '>';
               const subject = '🌸 Psicanálise Alma e Luz — ' + nome + ' (' + modalidade + ')';
               const subjectHeader = '=?UTF-8?B?' + utf8ToBase64(subject) + '?=';
-              const msgId = '<lead-' + Date.now() + '-' + Math.random().toString(36).slice(2, 9) + '@sosseo.com.br>';
               const dateStr = new Date().toUTCString();
               const brDate = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
               const rawPhone = String(telefone).replace(/\D/g, '');
@@ -241,23 +238,34 @@ export default {
 </html>`;
 
               const bodyB64 = utf8ToBase64(htmlBody).replace(/(.{76})/g, '$1\r\n');
-              const headersList = [
-                'From: ' + fromDisplayHeader,
-                'To: <' + toEmail + '>',
-                'Subject: ' + subjectHeader,
-                'Message-ID: ' + msgId,
-                'Date: ' + dateStr,
-                'MIME-Version: 1.0',
-                'Content-Type: text/html; charset=UTF-8',
-                'Content-Transfer-Encoding: base64'
-              ];
-              if (emailCliente && emailCliente.includes('@')) {
-                headersList.splice(2, 0, 'Reply-To: <' + emailCliente.trim() + '>');
-              }
-              const rawMime = headersList.join('\r\n') + '\r\n\r\n' + bodyB64 + '\r\n';
+              const buildMime = (senderAddr, domainSuffix) => {
+                const fromDisplayHeader = '=?UTF-8?B?' + utf8ToBase64(siteName) + '?= <' + senderAddr + '>';
+                const msgId = '<lead-' + Date.now() + '-' + Math.random().toString(36).slice(2, 9) + '@' + domainSuffix + '>';
+                const headersList = [
+                  'From: ' + fromDisplayHeader,
+                  'To: <' + toEmail + '>',
+                  'Subject: ' + subjectHeader,
+                  'Message-ID: ' + msgId,
+                  'Date: ' + dateStr,
+                  'MIME-Version: 1.0',
+                  'Content-Type: text/html; charset=UTF-8',
+                  'Content-Transfer-Encoding: base64'
+                ];
+                if (emailCliente && emailCliente.includes('@')) {
+                  headersList.splice(2, 0, 'Reply-To: <' + emailCliente.trim() + '>');
+                }
+                return headersList.join('\r\n') + '\r\n\r\n' + bodyB64 + '\r\n';
+              };
 
-              await env.SEND_EMAIL.send(new EmailMessage(fromEmail, toEmail, rawMime));
-              emailSent = true;
+              try {
+                const fromPrimary = 'contato@psicanalisealmaeluz.com.br';
+                await env.SEND_EMAIL.send(new EmailMessage(fromPrimary, toEmail, buildMime(fromPrimary, 'psicanalisealmaeluz.com.br')));
+                emailSent = true;
+              } catch (primaryErr) {
+                const fromFallback = 'contato@sosseo.com.br';
+                await env.SEND_EMAIL.send(new EmailMessage(fromFallback, toEmail, buildMime(fromFallback, 'sosseo.com.br')));
+                emailSent = true;
+              }
             } catch (emailErr) {}
           }
 

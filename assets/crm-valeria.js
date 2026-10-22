@@ -164,7 +164,7 @@
         lista.unshift(novo);
         salvarRegistros(lista);
 
-        // Envio em background para API Cloudflare (/api/triagem) se disponível (grava no KV e envia e-mail para riveso@gmail.com)
+        // Envio em background para API Cloudflare (/api/triagem) se disponível (grava no KV e envia e-mail para valeleca@gmail.com)
         try {
             fetch('/api/triagem', {
                 method: 'POST',
